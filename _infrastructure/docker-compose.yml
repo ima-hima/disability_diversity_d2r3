@@ -5,7 +5,7 @@ services:
     build: .
     volumes:
       - ../:/var/www/html/dbin/project-inclusive/
-      - ../uploads/:/uploads/
+      - ./uploads/:/uploads/
       - ./local-env/:/local-env/
     entrypoint: /local-env/local-entrypoint.sh
     command: ["php-fpm"]
