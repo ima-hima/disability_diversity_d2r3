@@ -96,14 +96,6 @@ define(['managerAPI'], function(Manager) {
             header:     'Welcome',
         }],
 
-        ce_disclaimer: [{
-            inherit:     'instructions',
-            name:        'ce_disclaimer',
-            templateUrl: 'ce_disclaimer.jst?' + Math.random(),
-            title:       'Continuing Education disclaimer',
-            header:      'Continuing Education disclaimer',
-        }],
-
         id_iat_instructions: [{
             inherit:     'instructions',
             name:        'id_iat_instructions',
@@ -358,197 +350,6 @@ define(['managerAPI'], function(Manager) {
             header:      'Fourth Case',
         }],
 
-        ce_test_1_1: [{
-            inherit:   'question',
-            name:      'ce_test_1_1',
-            scriptUrl: 'ce_test_1_1.js?' + Math.random(),
-            title:     'Continuing Education Test',
-        }],
-
-        ce_test_1_2: [{
-            inherit:   'question',
-            name:      'ce_test_1_2',
-            scriptUrl: 'ce_test_1_2.js?' + Math.random(),
-            title:     'Continuing Education Test',
-        }],
-
-        ce_test_1_3: [{
-            inherit:   'question',
-            name:      'ce_test_1_3',
-            scriptUrl: 'ce_test_1_3.js?' + Math.random(),
-            title:     'Continuing Education Test',
-        }],
-
-        ce_test_2_1: [{
-            inherit:   'question',
-            name:      'ce_test_2_1',
-            scriptUrl: 'ce_test_2_1.js?' + Math.random(),
-            title:     'Continuing Education Test',
-        }],
-
-        ce_test_2_2: [{
-            inherit:   'question',
-            name:      'ce_test_2_2',
-            scriptUrl: 'ce_test_2_2.js?' + Math.random(),
-            title:     'Continuing Education Test',
-        }],
-
-        ce_test_2_3: [{
-            inherit:   'question',
-            name:      'ce_test_2_3',
-            scriptUrl: 'ce_test_2_3.js?' + Math.random(),
-            title:     'Continuing Education Test',
-        }],
-
-        ce_test_3_1: [{
-            inherit:   'question',
-            name:      'ce_test_3_1',
-            scriptUrl: 'ce_test_3_1.js?' + Math.random(),
-            title:     'Continuing Education Test',
-        }],
-
-        ce_test_3_2: [{
-            inherit:   'question',
-            name:      'ce_test_3_2',
-            scriptUrl: 'ce_test_3_2.js?' + Math.random(),
-            title:     'Continuing Education Test',
-        }],
-
-        ce_test_3_3: [{
-            inherit:   'question',
-            name:      'ce_test_3_3',
-            scriptUrl: 'ce_test_3_3.js?' + Math.random(),
-            title:     'Continuing Education Test',
-        }],
-
-        ce_test_4_1: [{
-            inherit:   'question',
-            name:      'ce_test_4_1',
-            scriptUrl: 'ce_test_4_1.js?' + Math.random(),
-            title:     'Continuing Education Test',
-        }],
-
-        ce_test_4_2: [{
-            inherit:   'question',
-            name:      'ce_test_4_2',
-            scriptUrl: 'ce_test_4_2.js?' + Math.random(),
-            title:     'Continuing Education Test',
-        }],
-
-        ce_test_4_3: [{
-            inherit:   'question',
-            name:      'ce_test_4_3',
-            scriptUrl: 'ce_test_4_3.js?' + Math.random(),
-            title:     'Continuing Education Test',
-        }],
-
-        ce_test_5_1: [{
-            inherit:   'question',
-            name:      'ce_test_5_1',
-            scriptUrl: 'ce_test_5_1.js?' + Math.random(),
-            title:     'Continuing Education Test',
-        }],
-
-        ce_test_5_2: [{
-            inherit:   'question',
-            name:      'ce_test_5_2',
-            scriptUrl: 'ce_test_5_2.js?' + Math.random(),
-            title:     'Continuing Education Test',
-        }],
-
-        ce_test_5_3: [{
-            inherit:   'question',
-            name:      'ce_test_5_3',
-            scriptUrl: 'ce_test_5_3.js?' + Math.random(),
-            title:     'Continuing Education Test',
-        }],
-
-        ce_test_6_1: [{
-            inherit:   'question',
-            name:      'ce_test_6_1',
-            scriptUrl: 'ce_test_6_1.js?' + Math.random(),
-            title:     'Continuing Education Test',
-        }],
-
-        ce_test_6_2: [{
-            inherit:   'question',
-            name:      'ce_test_6_2',
-            scriptUrl: 'ce_test_6_2.js?' + Math.random(),
-            title:     'Continuing Education Test',
-        }],
-
-        ce_test_6_3: [{
-            inherit:   'question',
-            name:      'ce_test_6_3',
-            scriptUrl: 'ce_test_6_3.js?' + Math.random(),
-            title:     'Continuing Education Test',
-        }],
-
-        ce_test_7_1: [{
-            inherit:   'question',
-            name:      'ce_test_7_1',
-            scriptUrl: 'ce_test_7_1.js?' + Math.random(),
-            title:     'Continuing Education Test',
-        }],
-
-        ce_test_7_2: [{
-            inherit:   'question',
-            name:      'ce_test_7_2',
-            scriptUrl: 'ce_test_7_2.js?' + Math.random(),
-            title:     'Continuing Education Test',
-        }],
-
-        ce_test_7_3: [{
-            inherit:   'question',
-            name:      'ce_test_7_3',
-            scriptUrl: 'ce_test_7_3.js?' + Math.random(),
-            title:     'Continuing Education Test',
-        }],
-
-        ce_test_8_1: [{
-            inherit:   'question',
-            name:      'ce_test_8_1',
-            scriptUrl: 'ce_test_8_1.js?' + Math.random(),
-            title:     'Continuing Education Test',
-        }],
-
-        ce_test_8_2: [{
-            inherit:   'question',
-            name:      'ce_test_8_2',
-            scriptUrl: 'ce_test_8_2.js?' + Math.random(),
-            title:     'Continuing Education Test',
-        }],
-
-        ce_test_8_3: [{
-            inherit:   'question',
-            name:      'ce_test_8_3',
-            scriptUrl: 'ce_test_8_3.js?' + Math.random(),
-            title:     'Continuing Education Test',
-        }],
-
-        ce_test_email: [{
-            inherit:   'question',
-            name:      'ce_test_email',
-            scriptUrl: 'ce_test_email.js?' + Math.random(),
-            title:     'Continuing Education Test',
-        }],
-
-        ce_module_evaluation: [{
-            inherit:    'question',
-            name:       'ce_module_evaluation',
-            scriptUrl:  'ce_module_evaluation.js?' + Math.random(),
-            title:      'Teaching Module Evaluation',
-            header:     'Welcome',
-        }],
-
-        ce_identification: [{
-            inherit:    'question',
-            name:       'ce_identification',
-            scriptUrl:  'ce_identification.js?' + Math.random(),
-            title:      'Your identification',
-            header:     'Welcome',
-        }],
-
         collect_iat_feedback: [{ // Get summarized iat feedback that was given to user, along with uuid.
           type: 'post',
           url:  'iat_feedback_csv.php',
@@ -575,14 +376,6 @@ define(['managerAPI'], function(Manager) {
             header:      'About the IAT'
         }],
 
-        // iat_results_csv: [{
-        //     inherit:     'results',
-        //     name:        'iat_results_csv',
-        //     templateUrl: 'iat_results_csv.jst?' + Math.random(),
-        //     title:       'Final results',
-        //     header:      'You have completed the study'
-        // }],
-
         course_goals: [{
             inherit:     'results',
             name:        'course_goals',
@@ -598,19 +391,11 @@ define(['managerAPI'], function(Manager) {
             title:       'Thank You',
             header:      'Declined',
         }],
-
+        
         thanks: [{
             inherit:     'results',
             name:        'thanks',
             templateUrl: 'thanks.jst?' + Math.random(),
-            title:       'Thank You',
-            header:      'Thank You',
-        }],
-
-        thanks_ce: [{
-            inherit:     'results',
-            name:        'thanks_ce',
-            templateUrl: 'thanks_ce.jst?' + Math.random(),
             title:       'Thank You',
             header:      'Thank You',
         }],
@@ -631,17 +416,7 @@ define(['managerAPI'], function(Manager) {
             {compare: 1, to: 'global.participation.questions.participate.response'} // figuring out that the question was in the question object and that there wasn't a participation object. Also, you can't have a . in the comparison or it won't parse correctly. I didn't try with a variable, maybe that'd fix it.
           ],
           data: [
-            {  // now, continuing ed credit? If so display disclaimer
-              mixer: 'branch',
-              conditions: [
-                {compare: 1, to: 'global.participation.questions.claim_credit.response'} // They're looking for credit
-              ],
-              data: [
-                {inherit: 'ce_disclaimer'}
-              ],
-            },
-
-            // First clinical_scenario_, which is used to track improvement after patient-centered teaching module
+            // clinical scenarios
             {inherit: 'clinical_scenario_1'},
             {inherit: 'clinical_scenario_1_questions'},
 
@@ -651,11 +426,11 @@ define(['managerAPI'], function(Manager) {
             // Demographics
             {inherit: 'demographics'},
 
-            // First IAT, for physical disabilities
+            // // First IAT, for physical disabilities
             {inherit: 'pd_iat_instructions'},
             {inherit: 'pd_iat'},
 
-            // Second IAT, for intellectual disabilities
+            // // Second IAT, for intellectual disabilities
             {inherit: 'id_iat_instructions'},
             {inherit: 'id_iat'},
 
@@ -667,7 +442,7 @@ define(['managerAPI'], function(Manager) {
             {inherit: 'counseling_challenges'},
             {inherit: 'counseling_refs'},
 
-            // Patient-centered counseling scenarios for teaching
+            // Patient-centered counseling cases for teaching
             {inherit: 'case_1_1'},
             {inherit: 'case_1_2'},
             {inherit: 'case_1_3'},
@@ -689,243 +464,17 @@ define(['managerAPI'], function(Manager) {
 
             {inherit: 'clinical_scenario_4'},
             {inherit: 'clinical_scenario_4_questions'},
-            // {inherit: 'console_check'},
             {inherit: 'course_goals'},
-            {inherit: 'iat_explanation'},
-
-            {  // Continuing ed credit? If so display quiz.
-              mixer: 'branch',
-              conditions: [
-                {compare: 1, to: 'global.participation.questions.claim_credit.response'}
-              ],
-              data: [  // now, for each question ask three times, with slightly different text.
-
-                /* Question 1 */
-                {inherit: 'ce_test_1_1'},
-                {
-                  mixer: 'branch',
-                  conditions: [
-                     {compare: 3, to: 'global.ce_test_1_1.questions.ce_autonomous_patient_decisions.response'},
-                  ],
-                  elseData: [
-                    {inherit: 'ce_test_1_2'},
-                  ],
-                },
-                {
-                  mixer: 'branch',
-                  conditions: [{
-                     or: [
-                       {compare: 3, to: 'global.ce_test_1_1.questions.ce_autonomous_patient_decisions.response'},
-                       {compare: 3, to: 'global.ce_test_1_2.questions.ce_autonomous_patient_decisions.response'},
-                     ]
-                  }],
-                  elseData: [
-                    {inherit: 'ce_test_1_3'},
-                  ],
-                },
-
-                /* Question 2 */
-                {inherit: 'ce_test_2_1'},
-                {
-                  mixer: 'branch',
-                  conditions: [
-                     {compare: 2, to: 'global.ce_test_2_1.questions.ce_first_step_pregnant.response'},
-                  ],
-                  elseData: [
-                    {inherit: 'ce_test_2_2'},
-                  ],
-                },
-                {
-                  mixer: 'branch',
-                  conditions: [{
-                     or: [
-                       {compare: 2, to: 'global.ce_test_2_1.questions.ce_first_step_pregnant.response'},
-                       {compare: 2, to: 'global.ce_test_2_2.questions.ce_first_step_pregnant.response'},
-                     ]
-                  }],
-                  elseData: [
-                    {inherit: 'ce_test_2_3'},
-                  ],
-                },
-
-                /* Question 3 */
-                {inherit: 'ce_test_3_1'},
-                {
-                  mixer: 'branch',
-                  conditions: [
-                     {compare: 4, to: 'global.ce_test_3_1.questions.ce_exploring_desires.response'},
-                  ],
-                  elseData: [
-                    {inherit: 'ce_test_3_2'},
-                  ],
-                },
-                {
-                  mixer: 'branch',
-                  conditions: [{
-                     or: [
-                       {compare: 4, to: 'global.ce_test_3_1.questions.ce_exploring_desires.response'},
-                       {compare: 4, to: 'global.ce_test_3_2.questions.ce_exploring_desires.response'},
-                     ]
-                  }],
-                  elseData: [
-                    {inherit: 'ce_test_3_3'},
-                  ],
-                },
-
-                /* Question 4 */
-                {inherit: 'ce_test_4_1'},
-                {
-                  mixer: 'branch',
-                  conditions: [
-                     {compare: 4, to: 'global.ce_test_4_1.questions.ce_pregnant_patient.response'},
-                  ],
-                  elseData: [
-                    {inherit: 'ce_test_4_2'},
-                  ],
-                },
-                {
-                  mixer: 'branch',
-                  conditions: [{
-                     or: [
-                       {compare: 4, to: 'global.ce_test_4_1.questions.ce_pregnant_patient.response'},
-                       {compare: 4, to: 'global.ce_test_4_2.questions.ce_pregnant_patient.response'},
-                     ]
-                  }],
-                  elseData: [
-                    {inherit: 'ce_test_4_3'},
-                  ],
-                },
-
-                /* Question 5 */
-                {inherit: 'ce_test_5_1'},
-                {
-                  mixer: 'branch',
-                  conditions: [
-                     {compare: 2, to: 'global.ce_test_5_1.questions.ce_implicit_bias.response'},
-                  ],
-                  elseData: [
-                    {inherit: 'ce_test_5_2'},
-                  ],
-                },
-                {
-                  mixer: 'branch',
-                  conditions: [{
-                     or: [
-                       {compare: 2, to: 'global.ce_test_5_1.questions.ce_implicit_bias.response'},
-                       {compare: 2, to: 'global.ce_test_5_2.questions.ce_implicit_bias.response'},
-                     ]
-                  }],
-                  elseData: [
-                    {inherit: 'ce_test_5_3'},
-                  ],
-                },
-
-                /* Question 6 */
-                {inherit: 'ce_test_6_1'},
-                {
-                  mixer: 'branch',
-                  conditions: [
-                     {compare: 1, to: 'global.ce_test_6_1.questions.ce_iat_measure.response'},
-                  ],
-                  elseData: [
-                    {inherit: 'ce_test_6_2'},
-                  ],
-                },
-                {
-                  mixer: 'branch',
-                  conditions: [{
-                     or: [
-                       {compare: 1, to: 'global.ce_test_6_1.questions.ce_iat_measure.response'},
-                       {compare: 1, to: 'global.ce_test_6_2.questions.ce_iat_measure.response'},
-                     ]
-                  }],
-                  elseData: [
-                    {inherit: 'ce_test_6_3'},
-                  ],
-                },
-
-                /* Question 7 */
-                {inherit: 'ce_test_7_1'},
-                {
-                  mixer: 'branch',
-                  conditions: [
-                     {compare: 4, to: 'global.ce_test_7_1.questions.ce_not_in_iat.response'},
-                  ],
-                  elseData: [
-                    {inherit: 'ce_test_7_2'},
-                  ],
-                },
-                {
-                  mixer: 'branch',
-                  conditions: [{
-                     or: [
-                       {compare: 4, to: 'global.ce_test_7_1.questions.ce_not_in_iat.response'},
-                       {compare: 4, to: 'global.ce_test_7_2.questions.ce_not_in_iat.response'},
-                     ]
-                  }],
-                  elseData: [
-                    {inherit: 'ce_test_7_3'},
-                  ],
-                },
-
-                /* Question 8 */
-                {inherit: 'ce_test_8_1'},
-                {
-                  mixer: 'branch',
-                  conditions: [
-                     {compare: 3, to: 'global.ce_test_8_1.questions.ce_iat_validated.response'},
-                  ],
-                  elseData: [
-                    {inherit: 'ce_test_8_2'},
-                  ],
-                },
-                {
-                  mixer: 'branch',
-                  conditions: [{
-                     or: [
-                       {compare: 3, to: 'global.ce_test_8_1.questions.ce_iat_validated.response'},
-                       {compare: 3, to: 'global.ce_test_8_2.questions.ce_iat_validated.response'},
-                     ]
-                  }],
-                  elseData: [
-                    {inherit: 'ce_test_8_3'},
-                  ],
-                },
-
-                // {  // CME credit? If so, self-eval
-                //   mixer: 'branch',
-                //   conditions: [ // Need self-eval only for CEU, not CME.
-                //     {compare: 'CEU', to: 'global.participation.questions.which_ce_credit.response'}
-                //   ],
-                //   data: [
-                    {inherit: 'ce_module_evaluation'}, // originally this was just CME, but i'm freaked
-                                                       // that it might be CME, not least because that's
-                                                       // what's writtin in the comments above.
-                                                       
-                //   ]
-                // },
-              ],
-            },
-            // {inherit: 'ce_identification'}, // This is already collected on participation page.
-
             { // Get all answers to everything except summarized iat feedback.
               type: 'postCsv',
               url:  'answers_csv.php',
             },
-            {  // now, which thanks
-              mixer: 'branch',
-              conditions: [
-                {compare: 1, to: 'global.participation.questions.claim_credit.response'} // They're looking for credit
-              ],
-              data: [ // continuing ed thanks
-                { inherit: 'thanks_ce' },
-              ],
-              // No continuing ed, regular thanks
-              elseData: [{inherit: 'thanks'}]
-            },
+            {inherit: 'iat_explanation'},
+
+            {inherit: 'thanks'},
           ],
-          elseData:[{inherit: 'thanks_declined'}], // if they didn't participate
+          elseData: [{inherit: 'thanks_declined'}], // if they didn't participate
         },
-    ]);
+      ]);
     return API.script;
 });
