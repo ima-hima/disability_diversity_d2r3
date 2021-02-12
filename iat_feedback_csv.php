@@ -28,7 +28,7 @@
 
     // reformat string
     // add in line returns
-    // $entityBody = preg_replace('/",/', "\n", $entityBody);
+    $entityBody = preg_replace('/",/', "\n", $entityBody);
     // remove extraneous brackets, then text before colons, then double quotes. Quotes *must* be removed last.
     $entityBody = preg_replace(array('/\{/', '/\}/', '/"[^:]*":"/', '/"/'), '', $entityBody);
 
