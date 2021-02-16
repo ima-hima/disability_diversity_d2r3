@@ -1,0 +1,23 @@
+version: '3.1'
+
+services:
+  phpbin:
+    build: .
+    volumes:
+      - ../:/var/www/html/dbin/project-inclusive/
+      - ./uploads/:/uploads/
+      - ./local-env/:/local-env/
+    entrypoint: /local-env/local-entrypoint.sh
+    command: ["php-fpm"]
+
+  sp:
+    image: bostonuniversity/apache-php-fpm:0.4.3
+    environment:
+      sp_idp: https://shib-test.bu.edu/idp/shibboleth
+      sp_sp: https://phpbin-apps-nonprod.bu.edu/shibboleth-sp
+      SP_HANDLER_URL: /phpbin/dbin-project-inclusive/Shibboleth.sso
+    ports:
+      - 443:443
+    volumes:
+      - ../:/var/www/html/dbin/project-inclusive/:ro
+      - ./secrets/:/run/secrets/
