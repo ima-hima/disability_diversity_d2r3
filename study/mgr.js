@@ -426,11 +426,11 @@ define(['managerAPI'], function(Manager) {
             // Demographics
             {inherit: 'demographics'},
 
-            // // First IAT, for physical disabilities
+            // First IAT, for physical disabilities
             {inherit: 'pd_iat_instructions'},
             {inherit: 'pd_iat'},
 
-            // // Second IAT, for intellectual disabilities
+            // Second IAT, for intellectual disabilities
             {inherit: 'id_iat_instructions'},
             {inherit: 'id_iat'},
 
