@@ -11,7 +11,7 @@
     <meta name="viewport" content="user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1" />
     <meta name="pinterest" content="nopin" />
 
-    <script src="./js/jQuery_3-4-1.js" type="text/javascript"></script>
+    <script src="./js/jQuery_3-6-0.js" type="text/javascript"></script>
     <link rel="stylesheet" href="minno-css/main.css" />
     <link rel="stylesheet" href="minno-css/mine.css" />
     <!-- direct link to glyphicons because CORS is not allowing us to download from PI-->
