@@ -391,7 +391,7 @@ define(['managerAPI'], function(Manager) {
             title:       'Thank You',
             header:      'Declined',
         }],
-        
+
         thanks: [{
             inherit:     'results',
             name:        'thanks',
@@ -430,7 +430,7 @@ define(['managerAPI'], function(Manager) {
             {inherit: 'pd_iat_instructions'},
             {inherit: 'pd_iat'},
 
-            // Second IAT, for intellectual disabilities
+//             // Second IAT, for intellectual disabilities
             {inherit: 'id_iat_instructions'},
             {inherit: 'id_iat'},
 
