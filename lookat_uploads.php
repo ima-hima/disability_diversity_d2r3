@@ -1,31 +1,46 @@
 <?php
 $directory = "/uploads/results";
 
-// Open a directory, and read its contents
+echo "Initial contents:\n";
 if (is_dir($directory)){
-  if ($opendirectory = opendir($directory)){
-    while (($file = readdir($opendirectory)) !== false){
+  if ($opendirectory = opendir($directory)) {
+    while (($file = readdir($opendirectory)) !== false) {
       echo "filename:" . $file . "<br>";
     }
     closedir($opendirectory);
+  } else {
+      echo "$directory is missing!";
   }
 }
 
-// $myfile = fopen("$directory/testfile.txt", "w");
-// $txt = "John Doe\n";
-// fwrite($myfile, $txt);
-// $txt = "Jane Doe\n";
-// fwrite($myfile, $txt);
-// fclose($myfile);
+echo "Now show individual direcory contents.\n"
+$arr = ("initial_participants", "feedback", "answers")
+foreach ($arr as $this_dir) {
+    echo "this_dir:\n"
+    $cur_dir = "$directory/$this_dir";
+    if (is_dir($cur_dir)){
+      if ($opendirectory = opendir($cur_dir)) {
+        while (($file = readdir($opendirectory)) !== false) {
+          echo "filename:" . $file . "<br>";
+        }
+        closedir($opendirectory);
+      } else {
+          echo "$cur_dir is missing!";
+      }
+    }
+}
+unset("$directory/initial_participants");
 
-
-// if (is_dir($directory)){
-//   if ($opendirectory = opendir($directory)){
-//     while (($file = readdir($opendirectory)) !== false){
-//       echo "filename:" . $file . "<br>";
-//     }
-//     closedir($opendirectory);
-//   }
-// }
+echo "\nNow delete initial_participants:\n";
+if (is_dir($directory)){
+  if ($opendirectory = opendir($directory)) {
+    while (($file = readdir($opendirectory)) !== false) {
+      echo "filename:" . $file . "<br>";
+    }
+    closedir($opendirectory);
+  } else {
+      echo "$directory is missing!";
+  }
+}
 
 ?>
