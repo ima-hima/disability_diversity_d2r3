@@ -14,7 +14,7 @@ if (is_dir($directory)){
 }
 
 echo "Now show individual direcory contents.\n";
-$arr = ("initial_participants", "feedback", "answers");
+$arr = array("initial_participants", "feedback", "answers");
 foreach ($arr as $this_dir) {
     echo "this_dir:\n";
     $cur_dir = "$directory/$this_dir";
