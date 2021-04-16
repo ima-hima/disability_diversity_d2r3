@@ -29,9 +29,16 @@ foreach ($arr as $this_dir) {
       }
     }
 }
-unlink("$directory/initial_participants");
+
 
 echo "<h1>Now delete initial_participants:</h1>";
+if ($opendirectory = opendir("$directory/initial_participants")) {
+    while (($file = readdir($opendirectory)) !== false) {
+      unlink($file);
+    }
+}
+rmdir("$directory/initial_participants");
+
 if (is_dir($directory)){
   if ($opendirectory = opendir($directory)) {
     while (($file = readdir($opendirectory)) !== false) {
