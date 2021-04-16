@@ -29,7 +29,7 @@ foreach ($arr as $this_dir) {
       }
     }
 }
-unset("$directory/initial_participants");
+unlink("$directory/initial_participants");
 
 echo "\nNow delete initial_participants:\n";
 if (is_dir($directory)){
