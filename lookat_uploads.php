@@ -1,7 +1,9 @@
 <?php
-$directory = "/uploads/results";
+$version = 'v5';
+$directory = '/uploads/results';
+echo "$version";
 
-echo "<h1>Initial contents:</h1>";
+echo '<h1>Initial contents:</h1>';
 if (is_dir($directory)){
   if ($opendirectory = opendir($directory)) {
     while (($file = readdir($opendirectory)) !== false) {
@@ -13,8 +15,8 @@ if (is_dir($directory)){
   }
 }
 
-echo "<h1>Now show individual directories' contents.</h1>";
-$arr = array("initial_participants", "feedback", "answers");
+echo "<h1>Now show individual directories’ contents.</h1>";
+$arr = array('initial_participants', 'feedback', 'answers');
 foreach ($arr as $this_dir) {
     echo "<h3>$this_dir:</h3>";
     $cur_dir = "$directory/$this_dir";
@@ -30,8 +32,7 @@ foreach ($arr as $this_dir) {
     }
 }
 
-
-echo "<h1>Now delete initial_participants:</h1>";
+echo '<h1>Now delete initial_participants:</h1>';
 // Have to delete individual files, then delete directory.
 if ($opendirectory = opendir("$directory/initial_participants")) {
     while (($file = readdir($opendirectory)) !== false) {
@@ -44,10 +45,10 @@ rmdir("$directory/initial_participants");
 
 // Show contents after deletion of initial participants.
 if ($opendirectory = opendir($directory)) {
-while (($file = readdir($opendirectory)) !== false) {
-  echo "directory: $file<br />";
-}
-closedir($opendirectory);
+    while (($file = readdir($opendirectory)) !== false) {
+      echo "directory: $file<br />";
+    }
+    closedir($opendirectory);
 } else {
   echo "<em><strong>$directory is missing!</strong></em>";
 }
