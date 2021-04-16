@@ -11,20 +11,6 @@ if (is_dir($directory)){
   }
 }
 
-$directory = "/uploads/results";
-
-mkdir("$directory");
-
-if (is_dir($directory)){
-  if ($opendirectory = opendir($directory)){
-    while (($file = readdir($opendirectory)) !== false){
-      echo "filename:" . $file . "<br>";
-    }
-    closedir($opendirectory);
-  }
-}
-
-
 $myfile = fopen("$directory/testfile.txt", "w");
 $txt = "John Doe\n";
 fwrite($myfile, $txt);
