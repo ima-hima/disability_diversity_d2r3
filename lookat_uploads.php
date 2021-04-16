@@ -1,5 +1,5 @@
 <?php
-$version = 'v6';
+$version = 'v7';
 $directory = '/uploads/results';
 echo "$version";
 
