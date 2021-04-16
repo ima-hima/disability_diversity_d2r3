@@ -1,5 +1,5 @@
 <?php
-$version = 'v5';
+$version = 'v6';
 $directory = '/uploads/results';
 echo "$version";
 
@@ -36,7 +36,9 @@ echo '<h1>Now delete initial_participants:</h1>';
 // Have to delete individual files, then delete directory.
 if ($opendirectory = opendir("$directory/initial_participants")) {
     while (($file = readdir($opendirectory)) !== false) {
-      unlink($file);
+      if(!unlink("$directory/initial_participants/$file")) {
+          echo "Couldn’t delete $directory/initial_participants/$file.";
+      }
     }
 } else {
     echo "Couldn't open $directory/initial_participants.";
