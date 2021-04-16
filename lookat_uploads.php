@@ -1,11 +1,11 @@
 <?php
 $directory = "/uploads/results";
 
-echo "Initial contents:\n";
+echo "<h1>Initial contents:</h1>";
 if (is_dir($directory)){
   if ($opendirectory = opendir($directory)) {
     while (($file = readdir($opendirectory)) !== false) {
-      echo "filename:" . $file . "<br>";
+      echo "filename: $file<br />";
     }
     closedir($opendirectory);
   } else {
@@ -13,33 +13,33 @@ if (is_dir($directory)){
   }
 }
 
-echo "Now show individual direcory contents.\n";
+echo "<h1>Now show individual directories' contents.</h1>";
 $arr = array("initial_participants", "feedback", "answers");
 foreach ($arr as $this_dir) {
-    echo "this_dir:\n";
+    echo "<h3>$this_dir:</h3>";
     $cur_dir = "$directory/$this_dir";
     if (is_dir($cur_dir)){
       if ($opendirectory = opendir($cur_dir)) {
         while (($file = readdir($opendirectory)) !== false) {
-          echo "filename:" . $file . "<br>";
+          echo "filename: $file<br />";
         }
         closedir($opendirectory);
       } else {
-          echo "$cur_dir is missing!";
+          echo "<em><strong>$cur_dir is missing!</strong></em>";
       }
     }
 }
 unlink("$directory/initial_participants");
 
-echo "\nNow delete initial_participants:\n";
+echo "<h1>Now delete initial_participants:</h1>";
 if (is_dir($directory)){
   if ($opendirectory = opendir($directory)) {
     while (($file = readdir($opendirectory)) !== false) {
-      echo "filename:" . $file . "<br>";
+      echo "directory: $file<br />";
     }
     closedir($opendirectory);
   } else {
-      echo "$directory is missing!";
+      echo "<em><strong>$directory is missing!</strong></em>";
   }
 }
 
