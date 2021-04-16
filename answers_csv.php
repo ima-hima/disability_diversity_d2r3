@@ -3,7 +3,7 @@
     $_session_id = sha1(microtime().$_SERVER['REMOTE_ADDR']);
     $entityBody  = file_get_contents('php://input')."\n";
 
-    $answers_dir = 'results/answers';
+    $answers_dir = '/uploads/results/answers';
     // make sure results exists and is not accessible from the web
     if (!is_dir($answers_dir)) {
         if (!@mkdir($answers_dir)) {

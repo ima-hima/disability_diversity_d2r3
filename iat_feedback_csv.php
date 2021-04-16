@@ -4,7 +4,7 @@
     $_session_id = sha1(microtime().$_SERVER['REMOTE_ADDR']);
     // $entityBody = '{"header":"uuid, pd iat, id iat","uuid":"0.8662154812092789"}';
     $entityBody = file_get_contents('php://input') . "\n";
-    $feedback_dir = 'results/feedback';
+    $feedback_dir = '/uploads/results/feedback';
 
     // make sure results exists and is not accessible from the web
     if (!is_dir($feedback_dir)) {
