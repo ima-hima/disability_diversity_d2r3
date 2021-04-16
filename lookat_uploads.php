@@ -13,10 +13,10 @@ if (is_dir($directory)){
   }
 }
 
-echo "Now show individual direcory contents.\n"
-$arr = ("initial_participants", "feedback", "answers")
+echo "Now show individual direcory contents.\n";
+$arr = ("initial_participants", "feedback", "answers");
 foreach ($arr as $this_dir) {
-    echo "this_dir:\n"
+    echo "this_dir:\n";
     $cur_dir = "$directory/$this_dir";
     if (is_dir($cur_dir)){
       if ($opendirectory = opendir($cur_dir)) {
