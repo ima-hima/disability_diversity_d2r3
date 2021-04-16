@@ -2,7 +2,7 @@
 // as original csv.php, but no uuid in file, and writes to initial_participants directory
     $_session_id = sha1(microtime().$_SERVER['REMOTE_ADDR']);
     $entityBody  = file_get_contents('php://input')."\n";
-    $participants_dir = 'results/initial_participants';
+    $participants_dir = '/upload/results/initial_participants';
     // make sure results exists and is not accessible from the web
     if (!is_dir($participants_dir)) {
         if (!@mkdir($participants_dir)) {
