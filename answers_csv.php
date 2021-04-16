@@ -4,6 +4,9 @@
     $entityBody  = file_get_contents('php://input')."\n";
 
     $answers_dir = '/uploads/results/answers';
+    if (!is_dir('/uploads/results')) {
+        mkdir('/uploads/results');
+    }
     // make sure results exists and is not accessible from the web
     if (!is_dir($answers_dir)) {
         if (!@mkdir($answers_dir)) {

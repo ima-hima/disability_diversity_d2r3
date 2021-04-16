@@ -5,6 +5,24 @@
     // $entityBody = '{"header":"uuid, pd iat, id iat","uuid":"0.8662154812092789"}';
     $entityBody = file_get_contents('php://input') . "\n";
     $feedback_dir = '/uploads/results/feedback';
+    $results_dir = '/uploads/results';
+    if (!is_dir($results_dir)) {
+        mkdir($results_dir);
+        if (!file_exists("$results_dir/.htaccess")) {
+            file_put_contents("$answers_dir/.htaccess", "
+                # Apache 2.4
+                <IfModule mod_authz_core.c>
+                    Require all denied
+                </IfModule>
+
+                # Apache 2.2
+                <IfModule !mod_authz_core.c>
+                    Order Allow,Deny
+                    Deny from all
+                </IfModule>
+            ");
+        }
+    }
 
     // make sure results exists and is not accessible from the web
     if (!is_dir($feedback_dir)) {

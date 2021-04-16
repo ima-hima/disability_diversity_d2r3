@@ -11,7 +11,7 @@ if (is_dir($directory)){
     }
     closedir($opendirectory);
   } else {
-      echo "$directory is missing!";
+      echo "<strong><em>$directory is missing!</em></strong>";
   }
 }
 
@@ -40,6 +40,7 @@ if ($opendirectory = opendir("$directory/initial_participants")) {
           echo "Couldn’t delete $directory/initial_participants/$file.";
       }
     }
+    closedir($opendirectory);
 } else {
     echo "Couldn't open $directory/initial_participants.";
 }
