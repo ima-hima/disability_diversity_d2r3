@@ -32,22 +32,24 @@ foreach ($arr as $this_dir) {
 
 
 echo "<h1>Now delete initial_participants:</h1>";
+// Have to delete individual files, then delete directory.
 if ($opendirectory = opendir("$directory/initial_participants")) {
     while (($file = readdir($opendirectory)) !== false) {
       unlink($file);
     }
+} else {
+    echo "Couldn't open $directory/initial_participants.";
 }
 rmdir("$directory/initial_participants");
 
-if (is_dir($directory)){
-  if ($opendirectory = opendir($directory)) {
-    while (($file = readdir($opendirectory)) !== false) {
-      echo "directory: $file<br />";
-    }
-    closedir($opendirectory);
-  } else {
-      echo "<em><strong>$directory is missing!</strong></em>";
-  }
+// Show contents after deletion of initial participants.
+if ($opendirectory = opendir($directory)) {
+while (($file = readdir($opendirectory)) !== false) {
+  echo "directory: $file<br />";
+}
+closedir($opendirectory);
+} else {
+  echo "<em><strong>$directory is missing!</strong></em>";
 }
 
 ?>
