@@ -1,19 +1,14 @@
-<?php require('header.php'); ?>
-
-  <form action="download_results.php" method=POST>
-    Enter password to download current results.<br />
-    <label for="pass">Password:</label><br />
-    <input id="pass" name="pass" type="password" /><br /><br />
-    <input type="submit" value="Download" />
-  </form>
-
 <?php
-    // I used password hash to encrypt password.
-  } elseif (password_verify($_POST['pass'], '$2y$10$EuvvcNeKvie1HZcgqDMP6OyQz0yKkBOvViwEZ7VMudZloQFdp.0pu')) {
-    $uploads_dir = 'uploads';
+  require('header.php');
+  $form_action = 'download_results.php';
 
-    // Check the password here. If wrong, bail.
-
+  if (!isset($_POST['pass'])) {
+    $submit_text = 'Download';
+    $form_head = '';
+    $form_text = 'Enter password to download current results.';
+    require('password_form.php');
+          // I used password hash to encrypt password.
+  } elseif (password_verify($_POST['pass'], $password_hash)) {
     $dt = new DateTime('NOW');
     $now = $dt->format('Y-m-d');
     $filename = "project-inclusive_results_$now.zip";
@@ -30,23 +25,10 @@
     // unlink("$uploads_dir/$filename");
 
   } else { // wrong password
-?>
-                  <h3>Password incorrect.</h3>
-                  <form action="download_results.php" method=POST>
-                    Enter password to download current results.<br />
-                    <label for="pass">Password:</label><br />
-                    <input id="pass" name="pass" type="password" /><br /><br />
-                    <input type="submit" value="Download" />
-                  </form>
-<?php
+    $form_head = 'Password incorrect';
+    $form_text = 'Enter password to download current results';
+    $submit_text = 'Download';
+    require('password_form.php');
   }
+  require('footer.php');
 ?>
-                </div>
-              </div>
-            </h3>
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>
-</html>
