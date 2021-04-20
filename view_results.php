@@ -9,9 +9,11 @@
     require('password_form.php');
      // I used password hash to encrypt password.
   } elseif (password_verify($_POST['pass'], $password_hash)) {
-    $sub_dirs = array('initial_participants', 'feedback', 'answers');
-    foreach ($sub_dirs as $sub_dir) {
-      echo "<h3>$sub_dir:</h3>";
+    $sub_dirs = array('initial_participants' => 'Initial Participants',
+                      'feedback' => 'IAT Feedback',
+                      'answers' => 'Final output');
+    foreach ($sub_dirs as $sub_dir -> $description) {
+      echo "<h3>$description:</h3>";
       $cur_dir = "$results_directory/$sub_dir";
       if (is_dir($cur_dir)){
         if ($opendirectory = opendir($cur_dir)) {
