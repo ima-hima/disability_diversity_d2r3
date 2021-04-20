@@ -47,13 +47,6 @@
                     <input id="pass" name="pass" type="password" /><br /><br />
                     <input type="submit" value="Download" />
                   </form>
-                </div>
-              </div>
-            </h3>
-          </div>
-        </div>
-      </div>
-    </div>
 <?php
           // I used password hash to encrypt password.
   } elseif (password_verify($_POST['pass'], '$2y$10$EuvvcNeKvie1HZcgqDMP6OyQz0yKkBOvViwEZ7VMudZloQFdp.0pu')) {
@@ -78,22 +71,22 @@
 
   } else { // wrong password
 ?>
-  <h3>Password incorrect.</h3>
-  <form action="download_results.php" method=POST>
-    Enter password to download current results.<br />
-    <label for="pass">Password:</label><br />
-    <input id="pass" name="pass" type="password" /><br /><br />
-    <input type="submit" value="Download" />
-  </form>
-  </div>
+                  <h3>Password incorrect.</h3>
+                  <form action="download_results.php" method=POST>
+                    Enter password to download current results.<br />
+                    <label for="pass">Password:</label><br />
+                    <input id="pass" name="pass" type="password" /><br /><br />
+                    <input type="submit" value="Download" />
+                  </form>
+<?php
+  }
+?>
+                </div>
               </div>
             </h3>
           </div>
         </div>
       </div>
     </div>
-<?php
-  }
-?>
   </body>
 </html>
