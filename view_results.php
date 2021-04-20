@@ -12,7 +12,7 @@
     $sub_dirs = array('initial_participants' => 'Initial Participants',
                       'feedback' => 'IAT Feedback',
                       'answers' => 'Final output');
-    foreach ($sub_dirs as $sub_dir -> $description) {
+    foreach ($sub_dirs as $sub_dir => $description) {
       echo "<h3>$description:</h3>";
       $cur_dir = "$results_directory/$sub_dir";
       if (is_dir($cur_dir)){
