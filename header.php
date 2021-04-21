@@ -21,7 +21,7 @@
               <div class="panel panel-info">
                 <div class="panel-body">
                   <img src="./study/media/P-I_logo.png" class="p-i-logo" />
-                  <h1>Clinical Decision-Making in the Prenatal Setting v8</h1>
+                  <h1>Clinical Decision-Making in the Prenatal Setting</h1>
 <?php
   function clear_directory($directory, $sub_dir) {
     if ($opendirectory = opendir("$directory/initial_participants")) {

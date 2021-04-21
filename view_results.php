@@ -17,13 +17,14 @@
       $cur_dir = "$results_directory/$sub_dir";
       if (is_dir($cur_dir)){
         if ($opendirectory = opendir($cur_dir)) {
-          echo "<ul>";
+          echo "<table><tr><th>File name</th><th>Creation date</th>";
           while (($file = readdir($opendirectory)) !== false) {
             if (substr($file, 0, 1) != '.') {
-              echo "<li>$file</li>";
+              $creation_time = date("F d Y H:i:s.", filectime("$results_directory/$sub_dir/$file"));
+              echo "<tr><td>$file</td><td><span style=\"font-weight:300; align:right;\">$creation_time</span></td></tr>";
             }
           }
-          echo "</ul>";
+          echo "</table>";
           closedir($opendirectory);
         } else {
           echo "<em><strong>$cur_dir is missing!</strong></em>";
