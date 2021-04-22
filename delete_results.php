@@ -22,7 +22,7 @@
             }
           }
         closedir($opendirectory);
-        echo "<h3>All results in $description have been deleted.</h3>";
+        echo "<h4>All results in $description have been deleted.</h4>";
         }
       }
     }
