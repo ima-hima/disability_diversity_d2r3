@@ -1,0 +1,16 @@
+@charset "UTF-8";
+table {
+  margin: 15px;
+}
+th {
+  border-bottom: 1px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+td {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.time {
+  font-weight: 300;
+}

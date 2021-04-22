@@ -10,6 +10,7 @@
 
     <link rel="stylesheet" href="minno-css/main.css" />
     <link rel="stylesheet" href="minno-css/mine.css" />
+    <link rel="stylesheet" href="results-table.css" />
   </head>
   <body>
     <div class="container ng-scope simple-skin" id="pi-app">
