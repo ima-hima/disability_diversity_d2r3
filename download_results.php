@@ -15,7 +15,7 @@
     echo "<br />Zip file: $filename";
 
     exec("zip -r $results_directory/$filename $results_directory");
-
+    header_remove();
     header('Content-Description: File Transfer');
     header('Content-Type: application/octet-stream');
     header('Content-Disposition: attachment; filename="' . basename($filename) . '"');
@@ -31,23 +31,23 @@
 
     unlink("$results_directory/$filename");
 
-    // Remove old files
-    // $sub_dirs = array('initial_participants' => 'Initial Participants',
-    //                   'feedback' => 'IAT Feedback',
-    //                   'answers' => 'Final output');
-    // foreach ($sub_dirs as $sub_dir => $description) {
-    //   $cur_dir = "$results_directory/$sub_dir";
-    //   if (is_dir($cur_dir)) {
-    //     if ($opendirectory = opendir($cur_dir)) {
-    //       while (($filename = readdir($opendirectory)) !== false) {
-    //         if (substr($file, 0, 1) != '.') {
-    //           unlink("$cur_dir/$filename");
-    //         }
-    //       }
-    //       closedir($opendirectory);
-    //     }
-    //   }
-    // }
+    // Remove files
+    $sub_dirs = array('initial_participants' => 'Initial Participants',
+                      'feedback' => 'IAT Feedback',
+                      'answers' => 'Final output');
+    foreach ($sub_dirs as $sub_dir => $description) {
+      $cur_dir = "$results_directory/$sub_dir";
+      if (is_dir($cur_dir)) {
+        if ($opendirectory = opendir($cur_dir)) {
+          while (($filename = readdir($opendirectory)) !== false) {
+            if (substr($file, 0, 1) != '.') {
+              unlink("$cur_dir/$filename");
+            }
+          }
+          closedir($opendirectory);
+        }
+      }
+    }
 
   } else { // wrong password
     $form_head = 'Password incorrect';
