@@ -14,15 +14,40 @@
     $filename = "project-inclusive_results_$now.zip";
     echo "<br />Zip file: $filename";
 
-    exec("zip -r $uploads_dir/$filename $uploads_dir/results");
+    exec("zip -r $results_directory/$filename $results_directory");
 
-    header("Content-Type: application/zip");
-    header("Content-Transfer-Encoding: Binary");
-    header("Content-Length: " . filesize("$uploads_dir/$filename"));
-    header("Content-Disposition: attachment; filename=$filename");
-    readfile("$uploads_dir/$filename");
+    header('Content-Description: File Transfer');
+    header('Content-Type: application/octet-stream');
+    header('Content-Disposition: attachment; filename="' . basename($filename) . '"');
+    header('Content-Transfer-Encoding: binary');
+    header('Expires: 0');
+    header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+    header('Pragma: public');
+    header('Content-Length: ' . filesize("$results_directory/$filename"));
+    ob_clean();
+    flush();
+    readfile("$results_directory/$filename");
 
-    // unlink("$uploads_dir/$filename");
+
+    unlink("$results_directory/$filename");
+
+    // Remove old files
+    // $sub_dirs = array('initial_participants' => 'Initial Participants',
+    //                   'feedback' => 'IAT Feedback',
+    //                   'answers' => 'Final output');
+    // foreach ($sub_dirs as $sub_dir => $description) {
+    //   $cur_dir = "$results_directory/$sub_dir";
+    //   if (is_dir($cur_dir)) {
+    //     if ($opendirectory = opendir($cur_dir)) {
+    //       while (($filename = readdir($opendirectory)) !== false) {
+    //         if (substr($file, 0, 1) != '.') {
+    //           unlink("$cur_dir/$filename");
+    //         }
+    //       }
+    //       closedir($opendirectory);
+    //     }
+    //   }
+    // }
 
   } else { // wrong password
     $form_head = 'Password incorrect';
