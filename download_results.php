@@ -1,8 +1,8 @@
 <?php
-  require('header.php');
-  $form_action = 'download_results.php';
-
+  require('functions.php');
   if (!isset($_POST['pass'])) {
+    require('header.php');
+    $form_action = 'download_results.php';
     $submit_text = 'Download';
     $form_head = '';
     $form_text = 'Enter password to download current results.';
@@ -12,9 +12,8 @@
     $dt = new DateTime('NOW');
     $now = $dt->format('Y-m-d');
     $filename = "project-inclusive_results_$now.zip";
-    echo "<br />Zip file: $filename";
-
     exec("zip -r $results_directory/$filename $results_directory");
+
     header_remove();
     header('Content-Description: File Transfer');
     header('Content-Type: application/octet-stream');
@@ -27,7 +26,6 @@
     ob_clean();
     flush();
     readfile("$results_directory/$filename");
-
 
     unlink("$results_directory/$filename");
 

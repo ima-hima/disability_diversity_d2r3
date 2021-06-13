@@ -1,5 +1,6 @@
 <?php
   require('header.php');
+  require('functions.php');
   $form_action = 'view_results.php';
 
   if (!isset($_POST['pass'])) {
