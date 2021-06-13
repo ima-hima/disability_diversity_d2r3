@@ -40,7 +40,7 @@
       if (is_dir($cur_dir)) {
         if ($opendirectory = opendir($cur_dir)) {
           while (($filename = readdir($opendirectory)) !== false) {
-            if (substr($file, 0, 1) != '.') {
+            if (substr($filename, 0, 1) != '.') {
               unlink("$cur_dir/$filename");
             }
           }
