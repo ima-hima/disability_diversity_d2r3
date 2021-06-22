@@ -9,30 +9,36 @@
     require('password_form.php');
           // I used password hash to encrypt password.
   } elseif (password_verify($_POST['pass'], $password_hash)) {
+    $sub_dirs = array('initial_participants' => 'Initial Participants',
+                      'feedback' => 'IAT Feedback',
+                      'answers' => 'Final output');
     $dt = new DateTime('NOW');
     $now = $dt->format('Y-m-d');
-    $filename = "project-inclusive_results_$now.zip";
-    exec("zip -r $results_directory/$filename $results_directory");
+    $archive_filename = "project-inclusive_results_$now.tar.gz";
+    exec("mkdir $results_directory/zipped/");
+    foreach ($sub_dirs as $sub_dir => $description) {
+      exec("mv $results_directory/$sub_dir $results_directory/zipped");
+    }
+    exec('mkdir some_thing');
+    exec("tar -zcvf $results_directory/$archive_filename $results_directory/zipped");
 
     header_remove();
     header('Content-Description: File Transfer');
     header('Content-Type: application/octet-stream');
-    header('Content-Disposition: attachment; filename="' . basename($filename) . '"');
+    header('Content-Disposition: attachment; filename="' . "$archive_filename" . '"');
     header('Content-Transfer-Encoding: binary');
     header('Expires: 0');
     header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
     header('Pragma: public');
-    header('Content-Length: ' . filesize("$results_directory/$filename"));
+    header('Content-Length: ' . filesize("$results_directory/$archive_filename"));
     ob_clean();
     flush();
-    readfile("$results_directory/$filename");
+    readfile("$results_directory/$archive_filename");
 
-    unlink("$results_directory/$filename");
+    unlink("$results_directory/$archive_filename");
 
     // Remove files
-    $sub_dirs = array('initial_participants' => 'Initial Participants',
-                      'feedback' => 'IAT Feedback',
-                      'answers' => 'Final output');
+
     foreach ($sub_dirs as $sub_dir => $description) {
       $cur_dir = "$results_directory/$sub_dir";
       if (is_dir($cur_dir)) {
