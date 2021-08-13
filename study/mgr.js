@@ -417,59 +417,59 @@ define(['managerAPI'], function(Manager) {
           ],
           data: [
             // clinical scenarios
-            {inherit: 'clinical_scenario_1'},
-            {inherit: 'clinical_scenario_1_questions'},
-
-            {inherit: 'clinical_scenario_2'},
-            {inherit: 'clinical_scenario_2_questions'},
-
-            // Demographics
-            {inherit: 'demographics'},
-
-            // First IAT, for physical disabilities
-            {inherit: 'pd_iat_instructions'},
-            {inherit: 'pd_iat'},
-
-//             // Second IAT, for intellectual disabilities
-            {inherit: 'id_iat_instructions'},
-            {inherit: 'id_iat'},
-
-            {inherit: 'collect_iat_feedback'}, // Collect this immediately after IATs.
-
-            // Explaining patient-centered counseling
-            {inherit: 'counseling_introduction'},
-            {inherit: 'counseling_what_is_it'},
-            {inherit: 'counseling_challenges'},
-            {inherit: 'counseling_refs'},
-
-            // Patient-centered counseling cases for teaching
-            {inherit: 'case_1_1'},
-            {inherit: 'case_1_2'},
-            {inherit: 'case_1_3'},
-            {inherit: 'case_1_summary'},
-
-            {inherit: 'case_2_1'},
-            {inherit: 'case_2_2'},
-            {inherit: 'case_2_3'},
-            {inherit: 'case_2_summary'},
-
-            {inherit: 'case_3_1'},
-            {inherit: 'case_3_2'},
-            {inherit: 'case_3_3'},
-            {inherit: 'case_3_summary'},
-
-            // Patient-centered counseling scenarios for post–teaching module follow-up testing
-            {inherit: 'clinical_scenario_3'},
-            {inherit: 'clinical_scenario_3_questions'},
-
-            {inherit: 'clinical_scenario_4'},
-            {inherit: 'clinical_scenario_4_questions'},
-            {inherit: 'course_goals'},
-            { // Get all answers to everything except summarized iat feedback.
-              type: 'postCsv',
-              url:  'answers_csv.php',
-            },
-            {inherit: 'iat_explanation'},
+//             {inherit: 'clinical_scenario_1'},
+//             {inherit: 'clinical_scenario_1_questions'},
+//
+//             {inherit: 'clinical_scenario_2'},
+//             {inherit: 'clinical_scenario_2_questions'},
+//
+//             // Demographics
+//             {inherit: 'demographics'},
+//
+//             // First IAT, for physical disabilities
+//             {inherit: 'pd_iat_instructions'},
+//             {inherit: 'pd_iat'},
+//
+// //             // Second IAT, for intellectual disabilities
+//             {inherit: 'id_iat_instructions'},
+//             {inherit: 'id_iat'},
+//
+//             {inherit: 'collect_iat_feedback'}, // Collect this immediately after IATs.
+//
+//             // Explaining patient-centered counseling
+//             {inherit: 'counseling_introduction'},
+//             {inherit: 'counseling_what_is_it'},
+//             {inherit: 'counseling_challenges'},
+//             {inherit: 'counseling_refs'},
+//
+//             // Patient-centered counseling cases for teaching
+//             {inherit: 'case_1_1'},
+//             {inherit: 'case_1_2'},
+//             {inherit: 'case_1_3'},
+//             {inherit: 'case_1_summary'},
+//
+//             {inherit: 'case_2_1'},
+//             {inherit: 'case_2_2'},
+//             {inherit: 'case_2_3'},
+//             {inherit: 'case_2_summary'},
+//
+//             {inherit: 'case_3_1'},
+//             {inherit: 'case_3_2'},
+//             {inherit: 'case_3_3'},
+//             {inherit: 'case_3_summary'},
+//
+//             // Patient-centered counseling scenarios for post–teaching module follow-up testing
+//             {inherit: 'clinical_scenario_3'},
+//             {inherit: 'clinical_scenario_3_questions'},
+//
+//             {inherit: 'clinical_scenario_4'},
+//             {inherit: 'clinical_scenario_4_questions'},
+//             {inherit: 'course_goals'},
+//             { // Get all answers to everything except summarized iat feedback.
+//               type: 'postCsv',
+//               url:  'answers_csv.php',
+//             },
+//             {inherit: 'iat_explanation'},
 
             {inherit: 'thanks'},
           ],
