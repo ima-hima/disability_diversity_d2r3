@@ -2,10 +2,6 @@
   require('header.php');
   require('functions.php');
   $form_action = 'view_results.php';
-  $where = exec("which zip");
-  echo "$where </br>";
-  $where = exec("which gzip");
-  echo "$where </br>";
   if (!isset($_POST['pass'])) {
     $submit_text = 'View';
     $form_head = '';
