@@ -5,9 +5,11 @@
         while (($file_name = readdir($dir)) !== false) {
           $file_path = "$dir_name/$file_name";
           echo "$file_name is current file.";
+          // . & .. can't be cleared, but .htaccess must be, so special
+          // logic here.
           if (is_dir($file_path) and substr($file_name, 0, 1) != '.') {
             clear_directory($file_path);
-          } else {
+          } elseif (!is_dir($file_path)) {
             unlink($file_path);
             echo "$file_name was unlinked.";
           }
