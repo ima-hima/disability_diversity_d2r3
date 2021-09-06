@@ -13,8 +13,17 @@
           // I used password hash to encrypt password.
   } elseif (password_verify($_POST['pass'], $password_hash)) {
     // Remove to_archive directory.
-    if (is_dir("$results_directory/to_archive")) {
-      rmdir("$results_directory/to_archive");
+    $archive_dir_name = "$results_directory/to_archive";
+    if (is_dir($archive_dir_name)) {
+      if ($archive_dir = opendir($archive_dir_name)) {
+        while (($file = readdir($archive_dir)) !== false) {
+          if (substr($file, 0, 1) != '.') {
+            unlink("$archive_dir_name/$file");
+          }
+        }
+        closedir($archive_dir);
+      }
+      rmdir($archive_dir_name);
     }
     $sub_dirs = array('initial_participants' => 'Initial Participants',
                       'feedback' => 'IAT Feedback',
@@ -32,8 +41,8 @@
               }
             }
             closedir($dest_dir);
-            rmdir($dest_dir_name);
           }
+          rmdir($dest_dir_name);
         }
         mkdir($dest_dir_name);
         if ($source_dir = opendir($source_dir_name)) {
