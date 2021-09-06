@@ -20,18 +20,18 @@
       $dest_dir_name = "$results_directory/$sub_dir";
       if (is_dir($source_dir_name)) {
         clear_directory($dest_dir_name);
-        mkdir($dest_dir_name);
-        if ($source_dir = opendir($source_dir_name)) {
-          while (($file = readdir($source_dir)) !== false) {
-            if (substr($file, 0, 1) != '.') {
-              if(!copy("$source_dir_name/$file", "$dest_dir_name/$file")) {
-                echo "<h4>$file failed to copy.</h4>";
-              } else {
-                echo "$file has been copied.<br />";
-              }
-            }
-          }
-        }
+        // mkdir($dest_dir_name);
+        // if ($source_dir = opendir($source_dir_name)) {
+        //   while (($file = readdir($source_dir)) !== false) {
+        //     if (substr($file, 0, 1) != '.') {
+        //       if(!copy("$source_dir_name/$file", "$dest_dir_name/$file")) {
+        //         echo "<h4>$file failed to copy.</h4>";
+        //       } else {
+        //         echo "$file has been copied.<br />";
+        //       }
+        //     }
+        //   }
+        // }
         echo '<em>' . $source_dir_name . ' has been copied.</em><br /><br />';
       } else {
         echo "<h4>$source_dir_name is missing.</h4>";
