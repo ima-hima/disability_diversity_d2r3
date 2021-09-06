@@ -27,7 +27,7 @@
           echo "<em><strong>$cur_results_dir is missing!</strong></em>";
         }
       } else {
-        echo "$cur_results_dir is missing.";
+        echo "$description directory is missing.";
       }
     }
   } else {
