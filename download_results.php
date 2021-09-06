@@ -57,10 +57,10 @@
 
     // Remove files
 
-    foreach ($sub_dirs as $sub_dir => $description) {
-      clear_directory("$results_directory/$sub_dir");
-    }
-    clear_directory($archive_dir);
+    // foreach ($sub_dirs as $sub_dir => $description) {
+    //   clear_directory("$results_directory/$sub_dir");
+    // }
+    // clear_directory($archive_dir);
 
   } else { // wrong password
     require('header.php');
