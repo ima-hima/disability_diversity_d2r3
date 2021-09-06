@@ -13,13 +13,9 @@
           // I used password hash to encrypt password.
   } elseif (password_verify($_POST['pass'], $password_hash)) {
     // Remove to_archive directory.
-    $archive_dir_name = "$results_directory/to_archive";
-    $sub_dirs = array('initial_participants' => 'Initial Participants',
-                      'feedback' => 'IAT Feedback',
-                      'answers' => 'Final output');
+    clear_directory("$results_directory/to_archive");
     // Copy each directory of test results into uploads.
     foreach ($sub_dirs as $sub_dir => $description) {
-      clear_directory("$archive_dir_name/$sub_dir");
       $source_dir_name = 'test_results/' . $sub_dir;
       $dest_dir_name = "$results_directory/$sub_dir";
       if (is_dir($source_dir_name)) {

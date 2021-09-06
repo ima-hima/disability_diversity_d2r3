@@ -11,15 +11,11 @@
   } elseif (password_verify($_POST['pass'], $password_hash)) {
     $archive_dir = "$results_directory/to_archive";
     clear_directory($archive_dir);
-    $sub_dirs = array('initial_participants' => 'Initial Participants',
-                      'feedback' => 'IAT Feedback',
-                      'answers' => 'Final output');
     $dt = new DateTime('NOW');
     $now = $dt->format('Y-m-d');
     if (!is_dir($archive_dir)) {
       mkdir("$archive_dir");
     }
-    // exec("mkdir $results_directory/to_archive/");
     // Copy all of $sub_dirs into single directory to make it easier to archive.
     $errors = '';
     foreach ($sub_dirs as $sub_dir => $description) {
