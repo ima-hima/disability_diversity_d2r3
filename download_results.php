@@ -53,8 +53,9 @@
     header('Content-Length: ' . filesize($archive_path));
     // ob_clean();
     flush();
-    readfile($archive_path);
-    unlink($archive_path);
+    if(readfile($archive_path)) {
+      unlink($archive_path);
+    }
 
     // Remove files
 

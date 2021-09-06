@@ -9,6 +9,17 @@
     require('password_form.php');
      // I used password hash to encrypt password.
   } elseif (password_verify($_POST['pass'], $password_hash)) {
+    $cur_results_dir = $results_directory;
+    $opendirectory = opendir($cur_results_dir);
+    echo "<table><tr><th>File name</th><th>Size</th><th>Creation date</th>";
+    while (($file = readdir($opendirectory)) !== false) {
+      if (!is_dir("$cur_results_dir/$file")) {
+        $creation_time = date("F d, Y H:i", filectime("$cur_results_dir/$file"));
+        $filesize = filesize("$cur_results_dir/$file");
+        echo "<tr><td>$file</td><td>$filesize</td><td><span class=\"time\">$creation_time</span></td></tr>";
+      }
+    }
+    echo "</table>";
     foreach ($sub_dirs as $sub_dir => $description) {
       echo "<h3>$description:</h3>";
       $cur_results_dir = "$results_directory/$sub_dir";
