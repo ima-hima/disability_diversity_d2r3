@@ -16,8 +16,8 @@
       if (!is_dir("$cur_results_dir/$file")) {
         $creation_time = date("F d, Y H:i", filectime("$cur_results_dir/$file"));
         $filesize = filesize("$cur_results_dir/$file");
-        $perms = fileperms("$cur_results_dir/$file");
-        echo "<tr><td>$file</td><td>$filesize</td><td>$perms<td><span class=\"time\">$creation_time</span></td></tr>";
+        $perms = substr(decoct(fileperms("$cur_results_dir/$file")),3);
+        echo "<tr><td>$file</td><td>$perms</td><td>$filesize</td><td><span class=\"time\">$creation_time</span></td></tr>";
       }
     }
     echo "</table>";
