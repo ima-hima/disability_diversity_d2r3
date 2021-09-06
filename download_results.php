@@ -1,9 +1,9 @@
 <?php
   require('functions.php');
-    $form_action = 'download_results.php';
-    $submit_text = 'Download';
-    $form_head = '';
-    $form_text = 'Enter password to download current results.';
+  $form_action = 'download_results.php';
+  $submit_text = 'Download';
+  $form_head = '';
+  $form_text = 'Enter password to download current results.';
   if (!isset($_POST['pass'])) {
     require('header.php');
     require('password_form.php');
@@ -14,18 +14,36 @@
                       'answers' => 'Final output');
     $dt = new DateTime('NOW');
     $now = $dt->format('Y-m-d');
-    $archive_filename = "project-inclusive_results_$now.zip";
-    exec("mkdir $results_directory/zipped/");
+    $archive_dir = "$results_directory/to_archive";
+    if (!is_dir($archive_dir)) {
+      mkdir("$archive_dir");
+    }
+    // exec("mkdir $results_directory/to_archive/");
     // Copy all of $sub_dirs into single directory to make it easier to archive.
+    $errors = '';
     foreach ($sub_dirs as $sub_dir => $description) {
-      if (is_dir("$results_directory/$sub_dir")) {
-        rename("$results_directory/$sub_dir", "$results_directory/zipped/$sub_dir");
+      $cur_archive_dir = "$archive_dir/$sub_dir";
+      $cur_results_dir = "$results_directory/$sub_dir";
+      if (!is_dir($cur_archive_dir)) {
+        if (is_dir($cur_results_dir)) {
+          rename($cur_results_dir, $cur_archive_dir);
+        } else {
+          $errors .= "$cur_results_dir is missing.<br />";
+        }
+      } else {
+        $errors .= "$cur_archive_dir already exists.<br />";
       }
     }
+    if ($errors) {
+      require('header.php');
+      echo $errors;
+      die();
+    }
+    $archive_filename = "project-inclusive_results_$now.zip";
     $phar = new PharData("$results_directory/$archive_filename");
     // add all files in the project
-    $phar->buildFromDirectory("$results_directory/zipped", '/[^\.]$/');
-    // exec("tar -zcvf $results_directory/$archive_filename $results_directory/zipped");
+    $phar->buildFromDirectory("$archive_dir", '/[^\.]$/');
+    // exec("tar -zcvf $results_directory/$archive_filename $results_directory/to_archive");
 
     header_remove();
     header('Content-Description: File Transfer');
