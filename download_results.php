@@ -10,6 +10,7 @@
           // I used password hash to encrypt password.
   } elseif (password_verify($_POST['pass'], $password_hash)) {
     $archive_dir = "$results_directory/to_archive";
+    // I have to do this because I *move* the files when I rename() them below.
     clear_directory($archive_dir);
     $dt = new DateTime('NOW');
     $now = $dt->format('Y-m-d');
@@ -37,30 +38,27 @@
       die();
     }
     $archive_filename = "project-inclusive_results_$now.zip";
-    $archive_path = "$results_directory/$archive_filename";
-    $phar = new PharData($archive_path);
+    $archive_file = "$results_directory/$archive_filename";
+    $phar = new PharData($archive_file);
     // add all files in the project
     $phar->buildFromDirectory("$archive_dir", '/[^\.]$/');
 
-    header_remove();
-    header('Content-Description: File Transfer');
-    header('Content-Type: application/octet-stream');
-    header('Content-Disposition: attachment; filename="' . "$archive_filename" . '"');
-    header('Content-Transfer-Encoding: binary');
-    header('Expires: 0');
-    header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-    header('Pragma: public');
-    header('Content-Length: ' . filesize($archive_path));
-    // ob_clean();
-    flush();
-    readfile($archive_path);
-
-    // Remove files
-
-    // foreach ($sub_dirs as $sub_dir => $description) {
-    //   clear_directory("$results_directory/$sub_dir");
-    // }
-    // clear_directory($archive_dir);
+    if(is_readable($archive_file)) {
+      header_remove();
+      header('Content-Description: File Transfer');
+      header('Content-Type: application/octet-stream');
+      header('Content-Disposition: attachment; filename="' . "$archive_filename" . '"');
+      header('Content-Transfer-Encoding: binary');
+      header('Expires: 0');
+      header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+      header('Pragma: public');
+      header('Content-Length: ' . filesize($archive_file));
+      readfile($archive_file);
+      ob_flush();
+      flush();
+    } else {
+      echo "$archive_file can't be read.<br />";
+    }
 
   } else { // wrong password
     require('header.php');
