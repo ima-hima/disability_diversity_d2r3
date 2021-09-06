@@ -5,7 +5,7 @@
         while (($file_name = readdir($dir)) !== false) {
           $file_path = "$dir_name/$file_name";
           echo "$file_path is current file.<br />";
-          if (!is_dir("$cur_results_dir/$file")) {
+          if (!is_dir("$dir_name/$file")) {
             if (is_dir($file_path)) {
               clear_directory($file_path);
             } else {
