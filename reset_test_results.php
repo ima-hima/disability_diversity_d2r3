@@ -21,30 +21,35 @@
                       'answers' => 'Final output');
     // Copy each directory of test results into uploads.
     foreach ($sub_dirs as $sub_dir => $description) {
-      $source_dir = 'test_results/' . $sub_dir;
-      $dest_dir = "$results_directory/$sub_dir";
-      if (is_dir('test_results/' . $sub_dir)) {
-        $opendirectory = opendir($dest_dir);
-        while (($file = readdir($opendirectory)) !== false) {
-          if (substr($file, 0, 1) != '.') {
-            unlink("$dest_dir/$file");
+      $source_dir_name = 'test_results/' . $sub_dir;
+      $dest_dir_name = "$results_directory/$sub_dir";
+      if (is_dir($source_dir_name)) {
+        if (is_dir($dest_dir_name)) {
+          if ($dest_dir = opendir($dest_dir_name)) {
+            while (($file = readdir($dest_dir)) !== false) {
+              if (substr($file, 0, 1) != '.') {
+                unlink("$dest_dir_name/$file");
+              }
+            }
+            closedir($dest_dir);
+            rmdir($dest_dir_name);
           }
         }
-        rmdir($dest_dir);
-        mkdir($dest_dir);
-        $opendirectory = opendir('test_results/' . $sub_dir);
-        while (($file = readdir($opendirectory)) !== false) {
-          if (substr($file, 0, 1) != '.') {
-            if(!copy("$source_dir/$file", "$dest_dir/$file")) {
-              echo "<h4>$file failed to copy.</h4>";
-            } else {
-              echo "$file has been copied.<br />";
+        mkdir($dest_dir_name);
+        if ($source_dir = opendir($source_dir_name)) {
+          while (($file = readdir($source_dir)) !== false) {
+            if (substr($file, 0, 1) != '.') {
+              if(!copy("$source_dir_name/$file", "$dest_dir_name/$file")) {
+                echo "<h4>$file failed to copy.</h4>";
+              } else {
+                echo "$file has been copied.<br />";
+              }
             }
           }
         }
-        echo '<em>' . $source_dir . ' has been copied.</em><br /><br />';
+        echo '<em>' . $source_dir_name . ' has been copied.</em><br /><br />';
       } else {
-        echo "<h4>test_results is missing.</h4>";
+        echo "<h4>$source_dir_name is missing.</h4>";
       }
     }
     echo 'Test data has been reset.';
