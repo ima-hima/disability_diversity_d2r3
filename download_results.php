@@ -52,8 +52,8 @@
       header('Expires: 0');
       header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
       header('Pragma: public');
-      header('Content-Length: ' . filesize($archive_file));
-      readfile($archive_file);
+      header('Content-Length: ' . filesize("$results_directory/testfile.txt"));
+      readfile("$results_directory/testfile.txt");
       ob_flush();
       flush();
     } else {
