@@ -18,7 +18,9 @@
     exec("mkdir $results_directory/zipped/");
     // Copy all of $sub_dirs into single directory to make it easier to archive.
     foreach ($sub_dirs as $sub_dir => $description) {
-      exec("mv $results_directory/$sub_dir $results_directory/zipped");
+      if (is_dir("$results_directory/$sub_dir")) {
+        rename("$results_directory/$sub_dir", "$results_directory/zipped/$sub_dir");
+      }
     }
     $phar = new PharData("$results_directory/$archive_filename");
     // add all files in the project
