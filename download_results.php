@@ -9,12 +9,13 @@
     require('password_form.php');
           // I used password hash to encrypt password.
   } elseif (password_verify($_POST['pass'], $password_hash)) {
+    $archive_dir = "$results_directory/to_archive";
+    clear_directory($archive_dir);
     $sub_dirs = array('initial_participants' => 'Initial Participants',
                       'feedback' => 'IAT Feedback',
                       'answers' => 'Final output');
     $dt = new DateTime('NOW');
     $now = $dt->format('Y-m-d');
-    $archive_dir = "$results_directory/to_archive";
     if (!is_dir($archive_dir)) {
       mkdir("$archive_dir");
     }
