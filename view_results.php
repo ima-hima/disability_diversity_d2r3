@@ -16,10 +16,10 @@
         if ($opendirectory = opendir($cur_results_dir)) {
           echo "<table><tr><th>File name</th><th>Creation date</th>";
           while (($file = readdir($opendirectory)) !== false) {
-            if (substr($file, 0, 1) != '.') {
+            // if (!is_dir("$cur_results_dir/$file")) {
               $creation_time = date("F d, Y H:i", filectime("$cur_results_dir/$file"));
               echo "<tr><td>$file</td><td><span class=\"time\">$creation_time</span></td></tr>";
-            }
+            // }
           }
           echo "</table>";
           closedir($opendirectory);
