@@ -1,14 +1,19 @@
 <?php
-  function clear_directory($directory, $sub_dir) {
-    if ($opendirectory = opendir("$directory/initial_participants")) {
-      while (($file = readdir($opendirectory)) !== false) {
-        if (!unlink("$directory/initial_participants/$file")) {
-          echo "Couldn’t delete $directory/initial_participants/$file.";
+  function clear_directory($dir_name) {
+    if (is_dir($dir_name)) {
+      if ($dir = opendir($dir_name)) {
+        while (($file_name = readdir($dir)) !== false) {
+          $file_path = "$dir_name/$file_name";
+          if (substr($file_name, 0, 1) != '.') {
+            if (is_dir($file_path)) {
+              clear_directory($file_path);
+            }
+            unlink($file_path);
+          }
         }
+        closedir($dir);
       }
-      closedir($opendirectory);
-    } else {
-      echo "Couldn't open $directory/initial_participants.";
+      rmdir($dir_name);
     }
   }
 

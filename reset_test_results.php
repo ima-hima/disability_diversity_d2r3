@@ -14,36 +14,16 @@
   } elseif (password_verify($_POST['pass'], $password_hash)) {
     // Remove to_archive directory.
     $archive_dir_name = "$results_directory/to_archive";
-    if (is_dir($archive_dir_name)) {
-      if ($archive_dir = opendir($archive_dir_name)) {
-        while (($file = readdir($archive_dir)) !== false) {
-          if (substr($file, 0, 1) != '.') {
-            unlink("$archive_dir_name/$file");
-          }
-        }
-        closedir($archive_dir);
-      }
-      rmdir($archive_dir_name);
-    }
     $sub_dirs = array('initial_participants' => 'Initial Participants',
                       'feedback' => 'IAT Feedback',
                       'answers' => 'Final output');
     // Copy each directory of test results into uploads.
     foreach ($sub_dirs as $sub_dir => $description) {
+      clear_directory("$archive_dir_name/$sub_dir");
       $source_dir_name = 'test_results/' . $sub_dir;
       $dest_dir_name = "$results_directory/$sub_dir";
       if (is_dir($source_dir_name)) {
-        if (is_dir($dest_dir_name)) {
-          if ($dest_dir = opendir($dest_dir_name)) {
-            while (($file = readdir($dest_dir)) !== false) {
-              if (substr($file, 0, 1) != '.') {
-                unlink("$dest_dir_name/$file");
-              }
-            }
-            closedir($dest_dir);
-          }
-          rmdir($dest_dir_name);
-        }
+        clear_directory($dest_dir_name);
         mkdir($dest_dir_name);
         if ($source_dir = opendir($source_dir_name)) {
           while (($file = readdir($source_dir)) !== false) {

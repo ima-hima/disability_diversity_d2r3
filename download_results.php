@@ -40,10 +40,10 @@
       die();
     }
     $archive_filename = "project-inclusive_results_$now.zip";
-    $phar = new PharData("$results_directory/$archive_filename");
+    $archive_path = "$results_directory/$archive_filename";
+    $phar = new PharData($archive_path);
     // add all files in the project
     $phar->buildFromDirectory("$archive_dir", '/[^\.]$/');
-    // exec("tar -zcvf $results_directory/$archive_filename $results_directory/to_archive");
 
     header_remove();
     header('Content-Description: File Transfer');
@@ -53,28 +53,18 @@
     header('Expires: 0');
     header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
     header('Pragma: public');
-    header('Content-Length: ' . filesize("$results_directory/$archive_filename"));
+    header('Content-Length: ' . filesize($archive_path));
     // ob_clean();
     flush();
-    readfile("$results_directory/$archive_filename");
+    readfile($archive_path);
+    unlink($archive_path);
 
-    // unlink("$results_directory/$archive_filename");
+    // Remove files
 
-    // // Remove files
-
-    // foreach ($sub_dirs as $sub_dir => $description) {
-    //   $cur_dir = "$results_directory/$sub_dir";
-    //   if (is_dir($cur_dir)) {
-    //     if ($opendirectory = opendir($cur_dir)) {
-    //       while (($filename = readdir($opendirectory)) !== false) {
-    //         if (substr($filename, 0, 1) != '.') {
-    //           unlink("$cur_dir/$filename");
-    //         }
-    //       }
-    //       closedir($opendirectory);
-    //     }
-    //   }
-    // }
+    foreach ($sub_dirs as $sub_dir => $description) {
+      clear_directory("$results_directory/$sub_dir");
+    }
+    clear_directory($archive_dir);
 
   } else { // wrong password
     require('header.php');
