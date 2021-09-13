@@ -1,4 +1,7 @@
 <?php
+  ini_set('display_errors', 1);
+  ini_set('display_startup_errors', 1);
+  error_reporting(E_ALL);
   require('functions.php');
   $form_action = 'download_results.php';
   $submit_text = 'Download';
@@ -22,14 +25,13 @@
     foreach ($sub_dirs as $sub_dir => $description) {
       $cur_archive_dir = "$archive_dir/$sub_dir";
       $cur_results_dir = "$results_directory/$sub_dir";
-      if (!is_dir($cur_archive_dir)) {
-        if (is_dir($cur_results_dir)) {
-          rename($cur_results_dir, $cur_archive_dir);
-        } else {
-          $errors .= "$cur_results_dir is missing.<br />";
-        }
+      if (is_dir($cur_archive_dir)) {
+        clear_directory($cur_archive_dir);
+      }
+      if (is_dir($cur_results_dir)) {
+        rename($cur_results_dir, $cur_archive_dir);
       } else {
-        $errors .= "$cur_archive_dir already exists.<br />";
+        $errors .= "$cur_results_dir is missing.<br />";
       }
     }
     if ($errors) {
@@ -59,7 +61,7 @@
     } else {
       echo "$archive_file can't be read.<br />";
     }
-
+    unlink($archive_file);
   } else { // wrong password
     require('header.php');
     $form_head = 'Password incorrect';
