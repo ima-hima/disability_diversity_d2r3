@@ -55,7 +55,7 @@
       header('Content-Length: ' . filesize($archive_file));
       readfile($archive_file);
       // ob_flush();
-      flush();
+      // flush();
     } else {
       echo "$archive_file can't be read.<br />";
     }
