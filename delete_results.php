@@ -1,17 +1,30 @@
 <?php
-  require('header.php');
+  require('functions.php');
   $form_action = 'delete_results.php';
-
+  $submit_text = 'Delete';
+  $form_head = '';
+  $form_text = 'Enter password to delete current results.';
   if (!isset($_POST['pass'])) {
-    $submit_text = 'Delete';
-    $form_head = '';
-    $form_text = 'Enter password to remove all results.';
+    require('header.php');
     require('password_form.php');
           // I used password hash to encrypt password.
   } elseif (password_verify($_POST['pass'], $password_hash)) {
-    $sub_dirs = array('initial_participants' => 'Initial Participants',
-                      'feedback' => 'IAT Feedback',
-                      'answers' => 'Final output');
+    require('header.php');
+    $archive_dir = "$results_directory/to_archive";
+    clear_directory($archive_dir);
+    echo "$archive_dir has been deleted.<br />";
+    if ($dir = opendir($results_directory)) {
+      while (($file_name = readdir($dir)) !== false) {
+        $file_path = "$results_directory/$file_name";
+        // . & .. can't be cleared, but .htaccess must be, so special
+        // logic here.
+        if (substr($file_name, -4) == '.zip' or substr($file_name, -4) == '.txt') {
+          unlink($file_path);
+          echo "$file_name has been deleted.<br />";
+        }
+      }
+      closedir($dir);
+    }
     foreach ($sub_dirs as $sub_dir => $description) {
       $cur_dir = "$results_directory/$sub_dir";
       if (is_dir($cur_dir)) {
@@ -22,14 +35,13 @@
             }
           }
         closedir($opendirectory);
-        echo "<h4>All results in $description have been deleted.</h4>";
+        echo "All results in $description have been deleted.<br />";
         }
       }
     }
   } else { // wrong password
+    require('header.php');
     $form_head = 'Password incorrect';
-    $form_text = 'Enter password to remove all results';
-    $submit_text = 'Download';
     require('password_form.php');
   }
   require('footer.php');
