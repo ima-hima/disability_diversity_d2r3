@@ -61,7 +61,7 @@
     } else {
       echo "$archive_file can't be read.<br />";
     }
-    unlink($archive_file);
+    //unlink($archive_file);
   } else { // wrong password
     require('header.php');
     $form_head = 'Password incorrect';
