@@ -1,4 +1,8 @@
 <?php
+  ini_set('display_startup_errors', 1);
+  ini_set('display_errors', 1);
+  error_reporting(E_ALL);
+
   function clear_directory($dir_name) {
     if (is_dir($dir_name)) {
       if ($dir = opendir($dir_name)) {
@@ -22,9 +26,7 @@
                     'feedback' => 'IAT Feedback',
                     'answers' => 'Final output');
   $password_hash = '$2y$10$EuvvcNeKvie1HZcgqDMP6OyQz0yKkBOvViwEZ7VMudZloQFdp.0pu';
-  ini_set('display_startup_errors', 1);
-  ini_set('display_errors', 1);
-  error_reporting(-1);
+
   if ($_SERVER['HTTP_HOST'] == 'localhost') {
     $results_directory = 'uploads/results';
   } else {

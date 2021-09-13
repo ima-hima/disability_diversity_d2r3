@@ -1,16 +1,16 @@
 <?php
   /* Delete uploads/to_archive.
-   * Copy "test results" from ./test_results to uploads.
+   * Copy three "test results" folders from ./test_results to uploads.
    */
-  require('header.php');
   require('functions.php');
   $form_action = 'reset_test_results.php';
-  $submit_text = 'Reset';
   $form_head = '';
   $form_text = 'Enter password to reset all test results.';
+  $submit_text = 'Reset results';
+  require('header.php');
   if (!isset($_POST['pass'])) {
     require('password_form.php');
-          // I used password hash to encrypt password.
+      // I used password hash to encrypt password.
   } elseif (password_verify($_POST['pass'], $password_hash)) {
     // Remove to_archive directory.
     clear_directory("$results_directory/to_archive");

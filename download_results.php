@@ -1,14 +1,17 @@
 <?php
-  ini_set('display_errors', 1);
-  ini_set('display_startup_errors', 1);
-  error_reporting(E_ALL);
+  /* Download all results. Copy everything to to_archive directory, zip
+   * that, then download. Afterwards, delete resulting zip file and all
+   * to_archive and empty subdirectories.
+   */
   require('functions.php');
   $form_action = 'download_results.php';
   $submit_text = 'Download';
   $form_head = '';
   $form_text = 'Enter password to download current results.';
   if (!isset($_POST['pass'])) {
-    require('header.php');
+    require('header.php'); // In this case I can't send header except when
+                           // there's no password; otherwise it'll play havoc
+                           // with the download.
     require('password_form.php');
           // I used password hash to encrypt password.
   } elseif (password_verify($_POST['pass'], $password_hash)) {
@@ -61,7 +64,7 @@
     } else {
       echo "$archive_file can't be read.<br />";
     }
-    //unlink($archive_file);
+    unlink($archive_file);
   } else { // wrong password
     require('header.php');
     $form_head = 'Password incorrect';

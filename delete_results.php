@@ -1,15 +1,15 @@
 <?php
+  /* Delete all files in uploads directory and empty result subdirectories. */
   require('functions.php');
   $form_action = 'delete_results.php';
-  $submit_text = 'Delete';
   $form_head = '';
   $form_text = 'Enter password to delete current results.';
+  $submit_text = 'Delete results';
+  require('header.php');
   if (!isset($_POST['pass'])) {
-    require('header.php');
     require('password_form.php');
           // I used password hash to encrypt password.
   } elseif (password_verify($_POST['pass'], $password_hash)) {
-    require('header.php');
     $archive_dir = "$results_directory/to_archive";
     clear_directory($archive_dir);
     echo "$archive_dir has been deleted.<br />";
