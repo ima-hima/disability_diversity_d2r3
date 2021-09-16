@@ -14,12 +14,9 @@
   </head>
   <body>
     <div class="container ng-scope simple-skin" id="pi-app">
-      <img class="pi-spinner ng-hide" ng-hide="1">
-      <div pi-swap="" ng-class="{'pi-spinner':loading}" pi-manager="study/mgr.js?random=607cef919c0da" class="">
-        <div pi-task="task" class="ng-scope ng-isolate-scope">
-          <div pi-timer="" pi-quest="" class="ng-scope">
-            <h3 ng-if="page.header" ng-bind-html="page.header" ng-style="page.headerStyle" class="ng-binding ng-scope">
-              <div class="panel panel-info">
-                <div class="panel-body">
-                  <img src="./study/media/P-I_logo.png" class="p-i-logo" />
-                  <h1>Clinical Decision-Making in the Prenatal Setting</h1>
+      <div pi-timer="" pi-quest="" class="ng-scope">
+        <h3 ng-if="page.header" ng-bind-html="page.header" ng-style="page.headerStyle" class="ng-binding ng-scope">
+          <div class="panel panel-info">
+            <div class="panel-body">
+              <img src="./study/media/P-I_logo.png" class="p-i-logo" />
+              <h1>Clinical Decision-Making in the Prenatal Setting</h1>
