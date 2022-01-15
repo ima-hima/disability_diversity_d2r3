@@ -19,6 +19,6 @@
   "homepage": "https://github.com/minnojs/minno-gendocs#readme",
   "dependencies": {
     "fs-extra": "^2.0.0",
-    "marked": "^0.3.18"
+    "marked": "^4.0.10"
   }
 }
