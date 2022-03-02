@@ -16,9 +16,5 @@
   ini_set('display_startup_errors', 1);
   ini_set('display_errors', 1);
   error_reporting(-1);
-  if ($_SERVER['HTTP_HOST'] == 'localhost') {
-    $results_directory = 'uploads/results';
-  } else {
-    $results_directory = '/uploads/results';
-  }
+  $results_directory = '/uploads/results';
 ?>

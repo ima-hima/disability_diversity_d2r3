@@ -19,19 +19,17 @@
     foreach ($sub_dirs as $sub_dir => $description) {
       exec("mv $results_directory/$sub_dir $results_directory/zipped");
     }
-    exec('mkdir some_thing');
     exec("tar -zcvf $results_directory/$archive_filename $results_directory/zipped");
 
     header_remove();
     header('Content-Description: File Transfer');
-    header('Content-Type: application/octet-stream');
+    header('Content-Type: application/gzip');
     header('Content-Disposition: attachment; filename="' . "$archive_filename" . '"');
     header('Content-Transfer-Encoding: binary');
     header('Expires: 0');
     header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
     header('Pragma: public');
     header('Content-Length: ' . filesize("$results_directory/$archive_filename"));
-    ob_clean();
     flush();
     readfile("$results_directory/$archive_filename");
 
