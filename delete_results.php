@@ -2,13 +2,13 @@
   require('header.php');
   $form_action = 'delete_results.php';
 
-  if (!isset($_POST['pass'])) {
+  if (!isset($_GET['pass'])) {
     $submit_text = 'Delete';
     $form_head = '';
     $form_text = 'Enter password to remove all results.';
     require('password_form.php');
           // I used password hash to encrypt password.
-  } elseif (password_verify($_POST['pass'], $password_hash)) {
+  } elseif (password_verify($_GET['pass'], $password_hash)) {
     $sub_dirs = array('initial_participants' => 'Initial Participants',
                       'feedback' => 'IAT Feedback',
                       'answers' => 'Final output');

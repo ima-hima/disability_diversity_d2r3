@@ -6,13 +6,13 @@
   echo "$where </br>";
   $where = exec("which gzip");
   echo "$where </br>";
-  if (!isset($_POST['pass'])) {
+  if (!isset($_GET['pass'])) {
     $submit_text = 'View';
     $form_head = '';
     $form_text = 'Enter password to view current results.';
     require('password_form.php');
      // I used password hash to encrypt password.
-  } elseif (password_verify($_POST['pass'], $password_hash)) {
+  } elseif (password_verify($_GET['pass'], $password_hash)) {
     $sub_dirs = array('initial_participants' => 'Initial Participants',
                       'feedback' => 'IAT Feedback',
                       'answers' => 'Final output');
