@@ -9,38 +9,46 @@
   $form_head = '';
   $form_text = 'Enter password to download current results.';
   if (!isset($_GET['pass'])) {
-    require('header.php'); // In this case I can't send header except when
-                           // there's no password; otherwise it'll play havoc
+    require('header.php'); // I can't send header except when there's
+                           // no password; otherwise it'll play havoc
                            // with the download.
     require('password_form.php');
           // I used password hash to encrypt password.
   } elseif (password_verify($_GET['pass'], $password_hash)) {
     $archive_dir = "$results_directory/to_archive";
-    // I have to do this because I *move* the files when I rename() them below.
-    clear_directory($archive_dir);
     $dt = new DateTime('NOW');
     $now = $dt->format('Y-m-d');
+    $archive_filename = "project-inclusive_results_$now.tar.gz";
+    $archive = "$results_directory/$archive_filename";
+    exec("mkdir $results_directory/$archive_dir/");
     if (!is_dir($archive_dir)) {
       mkdir("$archive_dir");
+    } else {
+        // I have to do this because I *move* the files when I rename() them below.
+        clear_directory($archive_dir);
     }
-    exec("tar -zcvf $results_directory/$archive_filename $results_directory/zipped");
+    foreach ($sub_dirs as $sub_dir => $description) {
+      exec("mv $results_directory/$sub_dir $archive_dir");
+    }
+    exec("tar -zcvf $archive $archive_dir");
 
-    header_remove();
-    header('Content-Description: File Transfer');
-    header('Content-Type: application/gzip');
-    header('Content-Disposition: attachment; filename="' . "$archive_filename" . '"');
-    header('Content-Transfer-Encoding: binary');
-    header('Expires: 0');
-    header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-    header('Pragma: public');
-    header('Content-Length: ' . filesize("$results_directory/$archive_filename"));
-    flush();
-    readfile("$results_directory/$archive_filename");
-
-    unlink("$results_directory/$archive_filename");
-
+    if(is_readable($archive)) {
+      header_remove();
+      header('Content-Description: File Transfer');
+      header('Content-Type: application/gzip');
+      header('Content-Disposition: attachment; filename="' . "$archive_filename" . '"');
+      header('Content-Transfer-Encoding: binary');
+      header('Expires: 0');
+      header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+      header('Pragma: public');
+      header('Content-Length: ' . filesize($archive));
+      readfile($archive);
+      flush();
+    } else {
+      echo "$archive_file can't be read.<br />";
+    }
     // Remove files
-
+    unlink($archive);
     foreach ($sub_dirs as $sub_dir => $description) {
       $cur_archive_dir = "$archive_dir/$sub_dir";
       $cur_results_dir = "$results_directory/$sub_dir";
@@ -58,29 +66,7 @@
       echo $errors;
       die();
     }
-    $archive_filename = "project-inclusive_results_$now.zip";
-    $archive_file = "$results_directory/$archive_filename";
-    $phar = new PharData($archive_file);
-    // add all files in the project
-    $phar->buildFromDirectory("$archive_dir", '/[^\.]$/');
 
-    if(is_readable($archive_file)) {
-      header_remove();
-      header('Content-Description: File Transfer');
-      header('Content-Type: application/octet-stream');
-      header('Content-Disposition: attachment; filename="' . "$archive_filename" . '"');
-      header('Content-Transfer-Encoding: binary');
-      header('Expires: 0');
-      header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-      header('Pragma: public');
-      header('Content-Length: ' . filesize($archive_file));
-      readfile($archive_file);
-      // ob_flush();
-      // flush();
-    } else {
-      echo "$archive_file can't be read.<br />";
-    }
-    unlink($archive_file);
   } else { // wrong password
     require('header.php');
     $form_head = 'Password incorrect';
