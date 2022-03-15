@@ -3,9 +3,7 @@
   require('functions.php');
   $form_action = 'view_results.php';
   $where = exec("which zip");
-  echo "$where </br>";
-  $where = exec("which gzip");
-  echo "$where </br>";
+  echo "new file</br";
   if (!isset($_GET['pass'])) {
     $submit_text = 'View';
     $form_head = '';
