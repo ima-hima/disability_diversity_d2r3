@@ -25,20 +25,6 @@
       }
       closedir($dir);
     }
-    foreach ($sub_dirs as $sub_dir => $description) {
-      $cur_dir = "$results_directory/$sub_dir";
-      if (is_dir($cur_dir)) {
-        if ($opendirectory = opendir($cur_dir)) {
-          while (($file = readdir($opendirectory)) !== false) {
-            if (substr($file, 0, 1) != '.') {
-              unlink("$cur_dir/$file");
-            }
-          }
-        closedir($opendirectory);
-        echo "All results in $description have been deleted.<br />";
-        }
-      }
-    }
   } else { // wrong password
     require('header.php');
     $form_head = 'Password incorrect';
