@@ -26,7 +26,6 @@
       closedir($dir);
     }
   } else { // wrong password
-    require('header.php');
     $form_head = 'Password incorrect';
     require('password_form.php');
   }
