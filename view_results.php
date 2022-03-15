@@ -8,10 +8,10 @@
   $form_text = 'Enter password to view current results.';
   $submit_text = 'View results';
   require('header.php');
-  if (!isset($_POST['pass'])) {
+  if (!isset($_GET['pass'])) {
     require('password_form.php');
      // I used password hash to encrypt password.
-  } elseif (password_verify($_POST['pass'], $password_hash)) {
+  } elseif (password_verify($_GET['pass'], $password_hash)) {
     // First view any files that are in top level of uploads directory.
     // Because there are always folders present we need to look specifically
     // for files. Excluding .htaccess.

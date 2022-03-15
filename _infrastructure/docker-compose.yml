@@ -11,7 +11,7 @@ services:
     command: ["php-fpm"]
 
   sp:
-    image: bostonuniversity/apache-php-fpm:0.4.3
+    image: public.ecr.aws/bostonuniversity/apache-php-fpm:0.5.2
     environment:
       sp_idp: https://shib-test.bu.edu/idp/shibboleth
       sp_sp: https://phpbin-apps-nonprod.bu.edu/shibboleth-sp

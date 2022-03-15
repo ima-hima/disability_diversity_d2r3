@@ -1,73 +1,60 @@
 <?php
-  /* Download all results. Copy everything to to_archive directory, zip
-   * that, then download. Afterwards, delete resulting zip file and all
-   * to_archive and empty subdirectories.
-   */
   require('functions.php');
-  $form_action = 'download_results.php';
-  $submit_text = 'Download';
-  $form_head = '';
-  $form_text = 'Enter password to download current results.';
-  if (!isset($_POST['pass'])) {
-    require('header.php'); // In this case I can't send header except when
-                           // there's no password; otherwise it'll play havoc
-                           // with the download.
+  if (!isset($_GET['pass'])) {
+    require('header.php');
+    $form_action = 'download_results.php';
+    $submit_text = 'Download';
+    $form_head = '';
+    $form_text = 'Enter password to download current results.';
     require('password_form.php');
           // I used password hash to encrypt password.
-  } elseif (password_verify($_POST['pass'], $password_hash)) {
-    $archive_dir = "$results_directory/to_archive";
-    // I have to do this because I *move* the files when I rename() them below.
-    clear_directory($archive_dir);
+  } elseif (password_verify($_GET['pass'], $password_hash)) {
+    $sub_dirs = array('initial_participants' => 'Initial Participants',
+                      'feedback' => 'IAT Feedback',
+                      'answers' => 'Final output');
     $dt = new DateTime('NOW');
     $now = $dt->format('Y-m-d');
-    if (!is_dir($archive_dir)) {
-      mkdir("$archive_dir");
-    }
-    // Copy all of $sub_dirs into single directory to make it easier to archive.
-    $errors = '';
+    $archive_filename = "project-inclusive_results_$now.tar.gz";
+    exec("mkdir $results_directory/zipped/");
     foreach ($sub_dirs as $sub_dir => $description) {
-      $cur_archive_dir = "$archive_dir/$sub_dir";
-      $cur_results_dir = "$results_directory/$sub_dir";
-      if (is_dir($cur_archive_dir)) {
-        clear_directory($cur_archive_dir);
-      }
-      if (is_dir($cur_results_dir)) {
-        rename($cur_results_dir, $cur_archive_dir);
-      } else {
-        $errors .= "$cur_results_dir is missing.<br />";
-      }
+      exec("mv $results_directory/$sub_dir $results_directory/zipped");
     }
-    if ($errors) {
-      require('header.php');
-      echo $errors;
-      die();
-    }
-    $archive_filename = "project-inclusive_results_$now.zip";
-    $archive_file = "$results_directory/$archive_filename";
-    $phar = new PharData($archive_file);
-    // add all files in the project
-    $phar->buildFromDirectory("$archive_dir", '/[^\.]$/');
+    exec("tar -zcvf $results_directory/$archive_filename $results_directory/zipped");
 
-    if(is_readable($archive_file)) {
-      header_remove();
-      header('Content-Description: File Transfer');
-      header('Content-Type: application/octet-stream');
-      header('Content-Disposition: attachment; filename="' . "$archive_filename" . '"');
-      header('Content-Transfer-Encoding: binary');
-      header('Expires: 0');
-      header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-      header('Pragma: public');
-      header('Content-Length: ' . filesize($archive_file));
-      readfile($archive_file);
-      // ob_flush();
-      // flush();
-    } else {
-      echo "$archive_file can't be read.<br />";
+    header_remove();
+    header('Content-Description: File Transfer');
+    header('Content-Type: application/gzip');
+    header('Content-Disposition: attachment; filename="' . "$archive_filename" . '"');
+    header('Content-Transfer-Encoding: binary');
+    header('Expires: 0');
+    header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+    header('Pragma: public');
+    header('Content-Length: ' . filesize("$results_directory/$archive_filename"));
+    flush();
+    readfile("$results_directory/$archive_filename");
+
+    unlink("$results_directory/$archive_filename");
+
+    // Remove files
+
+    foreach ($sub_dirs as $sub_dir => $description) {
+      $cur_dir = "$results_directory/$sub_dir";
+      if (is_dir($cur_dir)) {
+        if ($opendirectory = opendir($cur_dir)) {
+          while (($filename = readdir($opendirectory)) !== false) {
+            if (substr($filename, 0, 1) != '.') {
+              unlink("$cur_dir/$filename");
+            }
+          }
+          closedir($opendirectory);
+        }
+      }
     }
-    unlink($archive_file);
+
   } else { // wrong password
-    require('header.php');
     $form_head = 'Password incorrect';
+    $form_text = 'Enter password to download current results';
+    $submit_text = 'Download';
     require('password_form.php');
   }
   require('footer.php');

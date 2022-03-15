@@ -6,10 +6,10 @@
   $form_text = 'Enter password to delete current results.';
   $submit_text = 'Delete results';
   require('header.php');
-  if (!isset($_POST['pass'])) {
+  if (!isset($_GET['pass'])) {
     require('password_form.php');
           // I used password hash to encrypt password.
-  } elseif (password_verify($_POST['pass'], $password_hash)) {
+  } elseif (password_verify($_GET['pass'], $password_hash)) {
     $archive_dir = "$results_directory/to_archive";
     clear_directory($archive_dir);
     echo "$archive_dir has been deleted.<br />";
