@@ -61,7 +61,6 @@
           echo "<em><strong>$cur_dir is missing!</strong></em>";
         }
       }
-    }
   } else {
     $form_head = 'Password incorrect';
     $form_text = 'Enter password to view current results';
