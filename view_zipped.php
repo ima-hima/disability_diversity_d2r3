@@ -1,7 +1,7 @@
 <?php
   require('header.php');
   require('functions.php');
-  $cur_dir = "$results_directory/zipped"
+  $cur_dir = "$results_directory/zipped";
   if (!isset($_GET['pass'])) {
     $submit_text = 'View';
     $form_head = '';
