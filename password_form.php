@@ -7,10 +7,10 @@
     <?php echo $form_text; ?><br />
     <input id="pass" name="pass" autofocus="autofocus" type="password" /><br /><br />
     Deleting these results is permanent. You must positively affirm that you wish to do
-    that by typing "delete" below.<br /><br />
+    that by typing “delete” below.<br /><br />
     <input id="delete" name="delete"><br /><br />
 <?php else: ?>
-  <form action="<?php echo $form_action; ?>" method="post">
+  <form action="<?php echo $form_action; ?>" method="get">
     <?php echo $form_text; ?><br />
     <input id="pass" name="pass" autofocus="autofocus" type="password" /><br /><br />
 <?php endif; ?>
