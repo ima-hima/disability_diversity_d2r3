@@ -5,11 +5,14 @@
   $form_head = '';
   $form_text = 'Enter password to delete current results.';
   $submit_text = 'Delete results';
+  $delete = 'delete';
   require('header.php');
-  if (!isset($_GET['pass'])) {
+  if (!isset($_POST['variable']['pass'])) {
     require('password_form.php');
           // I used password hash to encrypt password.
-  } elseif (password_verify($_GET['pass'], $password_hash)) {
+  } elseif (password_verify($_POST['pass'], $password_hash)
+            and isset($_POST['agree'])
+            and strcomp($_POST['agree'], 'delete') {
     $archive_dir = "$results_directory/to_archive";
     clear_directory($archive_dir);
     echo "$archive_dir has been deleted.<br />";
@@ -25,8 +28,11 @@
       }
       closedir($dir);
     }
-  } else { // wrong password
+  } elseif (!password_verify($_POST['pass'], $password_hash)) { // wrong password
     $form_head = 'Password incorrect';
+    require('password_form.php');
+  } else { // Must not have affirmatively agreed to delete.
+    $form_head = 'You must provide affirmative consent to delete all the files.';
     require('password_form.php');
   }
   require('footer.php');

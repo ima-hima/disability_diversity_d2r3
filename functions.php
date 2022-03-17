@@ -26,11 +26,11 @@
                     'feedback' => 'IAT Feedback',
                     'answers' => 'Final output');
   $password_hash = '$2y$10$EuvvcNeKvie1HZcgqDMP6OyQz0yKkBOvViwEZ7VMudZloQFdp.0pu';
-  $results_directory = '/uploads/results';
-
+  $delete = 'no';
   // if ($_SERVER['HTTP_HOST'] == 'localhost') {
   //   $results_directory = 'uploads/results';
   // } else {
   //   $results_directory = '/uploads/results';
   // }
+  $results_directory = '/uploads/results';
 ?>

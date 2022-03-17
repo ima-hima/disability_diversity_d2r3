@@ -35,24 +35,6 @@
     flush();
     readfile($archive_file);
 
-    // Remove files
-
-//     unlink($archive_file);
-
-    // foreach ($sub_dirs as $sub_dir => $description) {
-//       $cur_dir = "$results_directory/$sub_dir";
-//       if (is_dir($cur_dir)) {
-//         if ($opendirectory = opendir($cur_dir)) {
-//           while (($filename = readdir($opendirectory)) !== false) {
-//             if (substr($filename, 0, 1) != '.') {
-//               unlink("$cur_dir/$filename");
-//             }
-//           }
-//           closedir($opendirectory);
-//         }
-//       }
-//     }
-
   } else { // wrong password
     $form_head = 'Password incorrect';
     $form_text = 'Enter password to download current results';
