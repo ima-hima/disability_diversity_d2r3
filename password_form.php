@@ -4,7 +4,7 @@
   // do a get with the delete form because of autocomplete in the url bar.
 ?>
   <form action="<?php echo $form_action; ?>" method="post">
-    <?php echo $form_text; ?><br />
+    <?php echo $form_text; ?><br /><br />
     <input id="pass" name="pass" autofocus="autofocus" type="password" /><br /><br />
     Deleting these results is permanent. You must positively affirm that you wish to do
     that by typing “delete” below.<br /><br />

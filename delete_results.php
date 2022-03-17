@@ -7,7 +7,7 @@
   $submit_text = 'Delete results';
   $delete = true;
   require('header.php');
-  if (!isset($_POST['variable']['pass'])) {
+  if (!isset($_POST['pass'])) {
     require('password_form.php');
           // I used password hash to encrypt password.
   } elseif (password_verify($_POST['pass'], $password_hash)
