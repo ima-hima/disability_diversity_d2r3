@@ -12,7 +12,7 @@
           // I used password hash to encrypt password.
   } elseif (password_verify($_POST['pass'], $password_hash)
             and isset($_POST['agree'])
-            and strcomp($_POST['agree'], 'delete')) { // All conditions are met.
+            and strcmp($_POST['agree'], 'delete')) { // All conditions are met.
     $archive_dir = "$results_directory/to_archive";
     clear_directory($archive_dir);
     echo "$archive_dir has been deleted.<br />";

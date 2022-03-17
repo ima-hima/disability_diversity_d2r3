@@ -1,5 +1,5 @@
 <h3><?php echo $form_head; ?></h3>
-<?php if (strcomp($delete, 'delete')): ?>
+<?php if (strcmp($delete, 'delete')): ?>
   // Delete page only gets two fields and is a get. I didn't want to
   // do a get with the delete form because of autocomplete in the url bar.
   <form action="<?php echo $form_action; ?>" method="post">
