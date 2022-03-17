@@ -5,7 +5,7 @@
   $form_head = '';
   $form_text = 'Enter password to delete current results.';
   $submit_text = 'Delete results';
-  $delete = 'delete';
+  $delete = true;
   require('header.php');
   if (!isset($_POST['variable']['pass'])) {
     require('password_form.php');

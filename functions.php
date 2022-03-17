@@ -26,7 +26,7 @@
                     'feedback' => 'IAT Feedback',
                     'answers' => 'Final output');
   $password_hash = '$2y$10$EuvvcNeKvie1HZcgqDMP6OyQz0yKkBOvViwEZ7VMudZloQFdp.0pu';
-  $delete = 'no';
+  $delete = false;
   // if ($_SERVER['HTTP_HOST'] == 'localhost') {
   //   $results_directory = 'uploads/results';
   // } else {
