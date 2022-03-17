@@ -16,7 +16,7 @@
     $dt = new DateTime('NOW');
     $now = $dt->format('Y-m-d');
     $archive_filename = "project-inclusive_results_$now.tar.gz";
-    $archive_file = $results_directory/$archive_filename;
+    $archive_file = "$results_directory/$archive_filename";
     exec("mkdir $results_directory/zipped/");
     foreach ($sub_dirs as $sub_dir => $description) {
       exec("cp $results_directory/$sub_dir $results_directory/zipped");
