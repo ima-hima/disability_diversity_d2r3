@@ -8,8 +8,8 @@
   $submit_text = 'Download';
   $form_head = '';
   $form_text = 'Enter password to download current results.';
-  require('header.php');
   if (!isset($_GET['pass'])) {
+    require('header.php');
     require('password_form.php');
           // I used password hash to encrypt password.
   } elseif (password_verify($_GET['pass'], $password_hash)) {
