@@ -9,10 +9,17 @@
   $form_head = '';
   $form_text = 'Enter password to download current results.';
   if (!isset($_GET['pass'])) {
+    // Missing password
     require('header.php');
     require('password_form.php');
           // I used password hash to encrypt password.
-  } elseif (password_verify($_GET['pass'], $password_hash)) {
+  } elseif (!password_verify($_GET['pass'], $password_hash)) {
+    // Wrong password
+    $form_head = 'Password incorrect';
+    $form_text = 'Enter password to download current results';
+    $submit_text = 'Download';
+    require('password_form.php');
+  } else {
     $dt = new DateTime('NOW');
     $now = $dt->format('Y-m-d');
     $archive_filename = "project-inclusive_results_$now.tar.gz";
@@ -34,12 +41,6 @@
     header('Content-Length: ' . filesize($archive_file));
     flush();
     readfile($archive_file);
-
-  } else { // wrong password
-    $form_head = 'Password incorrect';
-    $form_text = 'Enter password to download current results';
-    $submit_text = 'Download';
-    require('password_form.php');
   }
   require('footer.php');
 ?>

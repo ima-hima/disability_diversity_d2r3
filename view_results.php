@@ -9,9 +9,16 @@
   $form_text = 'Enter password to view current results.';
   $submit_text = 'View results';
   if (!isset($_GET['pass'])) {
+    // Missing password
     require('password_form.php');
      // I used password hash to encrypt password.
-  } elseif (password_verify($_GET['pass'], $password_hash)) {
+  } elseif (!password_verify($_GET['pass'], $password_hash)) {
+    # Wrong password
+    $form_head = 'Password incorrect';
+    $form_text = 'Enter password to view current results';
+    $submit_text = 'View';
+    require('password_form.php');
+  } else {
     // First view any files that are in top level of uploads directory.
     // Because there are always folders present we need to look specifically
     // for files. Excluding .htaccess.
@@ -63,11 +70,6 @@
         echo "$description directory is missing.";
       }
     }
-  } else {
-    $form_head = 'Password incorrect';
-    $form_text = 'Enter password to view current results';
-    $submit_text = 'View';
-    require('password_form.php');
   }
   require('footer.php');
 ?>
