@@ -22,8 +22,8 @@
     require('password_form.php');
   } else {
     $archive_dir = "$results_directory/to_archive";
-    clear_directory($archive_dir);
-    echo "$archive_dir has been deleted.<br />";
+    // clear_directory($archive_dir);
+    // echo "$archive_dir has been deleted.<br />";
     if ($dir = opendir($results_directory)) {
       while (($file_name = readdir($dir)) !== false) {
         $file_path = "$results_directory/$file_name";
