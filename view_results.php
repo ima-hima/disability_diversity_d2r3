@@ -2,12 +2,12 @@
   /* Prints all files. Any files other than .htaccess in uploads directory
    * are shown. Individual results subdirectories get their own tables.
    */
+  require('header.php');
   require('functions.php');
   $form_action = 'view_results.php';
   $form_head = '';
   $form_text = 'Enter password to view current results.';
   $submit_text = 'View results';
-  require('header.php');
   if (!isset($_GET['pass'])) {
     require('password_form.php');
      // I used password hash to encrypt password.
@@ -49,8 +49,8 @@
         if ($opendirectory = opendir($cur_results_dir)) {
           echo "<table><tr><th>File name</th><th>Creation date</th>";
           while (($file = readdir($opendirectory)) !== false) {
-            if (!is_dir("$cur_results_dir/$file")) {
-              $creation_time = date("F d, Y H:i", filectime("$cur_results_dir/$file"));
+            if (substr($file, 0, 1) != '.') {
+              $creation_time = date("F d, Y H:i", filectime("$results_directory/$sub_dir/$file"));
               echo "<tr><td>$file</td><td><span class=\"time\">$creation_time</span></td></tr>";
             }
           }
