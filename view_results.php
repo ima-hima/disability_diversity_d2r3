@@ -3,7 +3,6 @@
   require('functions.php');
   $form_action = 'view_results.php';
   $where = exec("which zip");
-  echo "new file</br";
   if (!isset($_GET['pass'])) {
     $submit_text = 'View';
     $form_head = '';
@@ -43,7 +42,8 @@
     } else {
       echo '<p>There are no .zip files to download.</p>';
     }
-    // Now display file info for all results from studies.    foreach ($sub_dirs as $sub_dir => $description) {
+    // Now display file info for all results from studies.
+    foreach ($sub_dirs as $sub_dir => $description) {
       echo "<h3>$description:</h3>";
       $cur_dir = "$results_directory/$sub_dir";
       if (is_dir($cur_dir)){
