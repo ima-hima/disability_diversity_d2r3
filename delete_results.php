@@ -22,7 +22,7 @@
     $form_head = 'You spelled “delete” wrong: ' . $_POST['delete'];
     require('password_form.php');
   } else {
-    $archive_dir = "$results_directory/to_archive";
+    $archive_dir = "$results_directory";
     clear_directory($archive_dir);
     // echo "$archive_dir has been deleted.<br />";
     // if ($dir = opendir($results_directory)) {
@@ -37,7 +37,7 @@
     //   }
     //   closedir($dir);
     // }
+    echo "All files have been deleted.";
   }
-  echo "<h3>Zip files:</h3>";
   require('footer.php');
 ?>
