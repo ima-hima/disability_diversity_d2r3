@@ -23,20 +23,21 @@
     require('password_form.php');
   } else {
     $archive_dir = "$results_directory/to_archive";
-    // clear_directory($archive_dir);
+    clear_directory($archive_dir);
     // echo "$archive_dir has been deleted.<br />";
-    if ($dir = opendir($results_directory)) {
-      while (($file_name = readdir($dir)) !== false) {
-        $file_path = "$results_directory/$file_name";
-        // . & .. can't be cleared, but .htaccess must be, so special
-        // logic here.
-        if (substr($file_name, -4) == '.zip' or substr($file_name, -4) == '.txt') {
-          unlink($file_path);
-          echo "$file_name has been deleted.<br />";
-        }
-      }
-      closedir($dir);
-    }
+    // if ($dir = opendir($results_directory)) {
+    //   while (($file_name = readdir($dir)) !== false) {
+    //     $file_path = "$results_directory/$file_name";
+    //     // . & .. can't be cleared, but .htaccess must be, so special
+    //     // logic here.
+    //     if (substr($file_name, -4) == '.zip' or substr($file_name, -4) == '.txt') {
+    //       unlink($file_path);
+    //       echo "$file_name has been deleted.<br />";
+    //     }
+    //   }
+    //   closedir($dir);
+    // }
   }
+  echo "<h3>Zip files:</h3>";
   require('footer.php');
 ?>
