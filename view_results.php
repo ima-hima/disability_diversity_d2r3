@@ -33,7 +33,7 @@
     closedir($opendirectory);
     if ($not_empty) {
       $opendirectory = opendir($results_directory);
-      echo "<h3>Uploads:</h3>";
+      echo "<h3>Zip files:</h3>";
       echo "<table><tr><th>File name</th><th>Permissions</th><th>Size</th><th>Creation date</th>";
       while (($file = readdir($opendirectory)) !== false) {
         if (!is_dir("$results_directory/$file")) {
