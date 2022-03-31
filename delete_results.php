@@ -15,7 +15,7 @@
     // Wrong password
     $form_head = 'Password incorrect';
     require('password_form.php');
-  } elseif (!isset($_POST['delete']) {
+  } elseif (!isset($_POST['delete'])) {
     $form_head = 'You left the delete line blank.';
   } elseif (!strcmp($_POST['delete'], 'delete')) {
     // Affirmative consent missing
