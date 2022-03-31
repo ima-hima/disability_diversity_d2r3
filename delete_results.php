@@ -17,9 +17,9 @@
     require('password_form.php');
   } elseif (!isset($_POST['delete'])) {
     $form_head = 'You left the delete line blank.';
-  } elseif (!strcmp($_POST['delete'], 'delete')) {
+  } elseif (strcmp($_POST['delete'], 'delete') !== 0) {
     // Affirmative consent missing
-    $form_head = 'You spelled "delete" wrong: ' . $_POST['delete'];
+    $form_head = 'You spelled “delete” wrong: ' . $_POST['delete'];
     require('password_form.php');
   } else {
     $archive_dir = "$results_directory/to_archive";
