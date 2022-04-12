@@ -24,10 +24,10 @@
   } else {
     foreach ($sub_dirs as $sub_dir => $description) {
       clear_directory("$results_directory/$sub_dir");
+      echo "$results_directory/$sub_dir has been deleted.<br />";
     }
     // $archive_dir = "$results_directory";
     // clear_directory($archive_dir);
-    echo "$results_directory/$sub_dir has been deleted.<br />";
     // if ($dir = opendir($results_directory)) {
     //   while (($file_name = readdir($dir)) !== false) {
     //     $file_path = "$results_directory/$file_name";
