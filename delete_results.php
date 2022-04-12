@@ -22,6 +22,9 @@
     $form_head = 'You spelled “delete” wrong: ' . $_POST['delete'];
     require('password_form.php');
   } else {
+    foreach ($sub_dirs as $sub_dir => $description) {
+      clear_directory("$results_directory/$sub_dir");
+    }
     $archive_dir = "$results_directory";
     clear_directory($archive_dir);
     // echo "$archive_dir has been deleted.<br />";

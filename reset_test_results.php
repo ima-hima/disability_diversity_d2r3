@@ -13,6 +13,9 @@
       // I used password hash to encrypt password.
   } elseif (password_verify($_GET['pass'], $password_hash)) {
     // Remove to_archive directory.
+    if (!is_dir($results_directory)) {
+      mkdir($results_directory);
+    }
     clear_directory("$results_directory/to_archive");
     // Copy each directory of test results into uploads.
     // First, remove copy already in uploads.
