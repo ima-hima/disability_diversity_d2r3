@@ -27,7 +27,7 @@
   $archive_file = "$results_directory/$archive_filename";
   exec("mkdir $results_directory/zipped/");
   foreach ($sub_dirs as $sub_dir => $description) {
-    exec("cp $results_directory/$sub_dir $results_directory/zipped");
+    exec("cp -r $results_directory/$sub_dir $results_directory/zipped");
   }
   exec("tar -zcvf $archive_file $results_directory/zipped");
 
