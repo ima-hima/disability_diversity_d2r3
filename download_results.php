@@ -8,18 +8,27 @@
   $submit_text = 'Download';
   $form_head = '';
   $form_text = 'Enter password to download current results.';
-  require('header.php');
   if (!isset($_GET['pass'])) {
+    // Missing password
+    require('header.php');
     require('password_form.php');
-          // I used password hash to encrypt password.
-  } elseif (password_verify($_GET['pass'], $password_hash)) {
+    require('footer.php');
+  } elseif (!password_verify($_GET['pass'], $password_hash)) {
+    // Wrong password
+    $form_head = 'Password incorrect';
+    $form_text = 'Enter password to download current results';
+    $submit_text = 'Download';
+    require('header.php');
+    require('password_form.php');
+    require('footer.php');
+  } else {
     $dt = new DateTime('NOW');
     $now = $dt->format('Y-m-d');
     $archive_filename = "project-inclusive_results_$now.tar.gz";
-    $archive_file = $results_directory/$archive_filename;
+    $archive_file = "$results_directory/$archive_filename";
     exec("mkdir $results_directory/zipped/");
     foreach ($sub_dirs as $sub_dir => $description) {
-      exec("cp $results_directory/$sub_dir $results_directory/zipped");
+      exec("cp -r $results_directory/$sub_dir $results_directory/zipped");
     }
     exec("tar -zcvf $archive_file $results_directory/zipped");
 
@@ -34,12 +43,5 @@
     header('Content-Length: ' . filesize($archive_file));
     flush();
     readfile($archive_file);
-
-  } else { // wrong password
-    $form_head = 'Password incorrect';
-    $form_text = 'Enter password to download current results';
-    $submit_text = 'Download';
-    require('password_form.php');
   }
-  require('footer.php');
 ?>

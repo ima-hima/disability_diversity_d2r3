@@ -1,18 +1,24 @@
 <?php
+  /* Prints all files. Any files other than .htaccess in uploads directory
+   * are shown. Individual results subdirectories get their own tables.
+   */
   require('header.php');
   require('functions.php');
   $form_action = 'view_results.php';
-  $where = exec("which zip");
+  $form_head = '';
+  $form_text = 'Enter password to view current results.';
+  $submit_text = 'View results';
   if (!isset($_GET['pass'])) {
-    $submit_text = 'View';
-    $form_head = '';
-    $form_text = 'Enter password to view current results.';
+    // Missing password
     require('password_form.php');
      // I used password hash to encrypt password.
-  } elseif (password_verify($_GET['pass'], $password_hash)) {
-    $sub_dirs = array('initial_participants' => 'Initial Participants',
-                      'feedback' => 'IAT Feedback',
-                      'answers' => 'Final output');
+  } elseif (!password_verify($_GET['pass'], $password_hash)) {
+    # Wrong password
+    $form_head = 'Password incorrect';
+    $form_text = 'Enter password to view current results';
+    $submit_text = 'View';
+    require('password_form.php');
+  } else {
     // First view any files that are in top level of uploads directory.
     // Because there are always folders present we need to look specifically
     // for files. Excluding .htaccess.
@@ -27,7 +33,7 @@
     closedir($opendirectory);
     if ($not_empty) {
       $opendirectory = opendir($results_directory);
-      echo "<h3>Uploads:</h3>";
+      echo "<h3>Zip files:</h3>";
       echo "<table><tr><th>File name</th><th>Permissions</th><th>Size</th><th>Creation date</th>";
       while (($file = readdir($opendirectory)) !== false) {
         if (!is_dir("$results_directory/$file")) {
@@ -45,9 +51,9 @@
     // Now display file info for all results from studies.
     foreach ($sub_dirs as $sub_dir => $description) {
       echo "<h3>$description:</h3>";
-      $cur_dir = "$results_directory/$sub_dir";
-      if (is_dir($cur_dir)){
-        if ($opendirectory = opendir($cur_dir)) {
+      $cur_results_dir = "$results_directory/$sub_dir";
+      if (is_dir($cur_results_dir)) {
+        if ($opendirectory = opendir($cur_results_dir)) {
           echo "<table><tr><th>File name</th><th>Creation date</th>";
           while (($file = readdir($opendirectory)) !== false) {
             if (substr($file, 0, 1) != '.') {
@@ -58,14 +64,12 @@
           echo "</table>";
           closedir($opendirectory);
         } else {
-          echo "<em><strong>$cur_dir is missing!</strong></em>";
+          echo "<em><strong>$cur_results_dir is missing!</strong></em>";
         }
+      } else {
+        echo "$description directory is missing.";
       }
-  } else {
-    $form_head = 'Password incorrect';
-    $form_text = 'Enter password to view current results';
-    $submit_text = 'View';
-    require('password_form.php');
+    }
   }
   require('footer.php');
 ?>
