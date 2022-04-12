@@ -29,7 +29,7 @@
         unlink("$results_directory/$file");
       }
     }
-    closedir($results_directory);
+    closedir($opendirectory);
     foreach ($sub_dirs as $sub_dir => $description) {
       clear_directory("$results_directory/$sub_dir");
       echo "$results_directory/$sub_dir has been deleted.<br />";
