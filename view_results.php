@@ -30,13 +30,27 @@
         break;
       }
     }
-    echo "<h3>Files copied to archive directory</h3>";
-    echo "<table><tr><th>File name</th><th>Permissions</th><th>Size</th><th>Creation date</th>";
     if (is_dir("$results_directory/zipped/")) {
-      while (($file = readdir("$results_directory/zipped/")) !== false) {
-        if (substr($file, 0, 1) != '.') {
-          $creation_time = date("F d, Y H:i", filectime("$results_directory/zipped/$file"));
-          echo "<tr><td>$file</td><td><span class=\"time\">$creation_time</span></td></tr>";
+      echo "<h3>Files copied to zipped directory:</h3>";
+      foreach ($sub_dirs as $sub_dir => $description) {
+        echo "<h4>$description:</h4>";
+        $cur_results_dir = "$results_directory/zipped/$sub_dir";
+        if (is_dir($cur_results_dir)) {
+          if ($opendirectory = opendir($cur_results_dir)) {
+            echo "<table><tr><th>File name</th><th>Creation date</th>";
+            while (($file = readdir($opendirectory)) !== false) {
+              if (substr($file, 0, 1) != '.') {
+                $creation_time = date("F d, Y H:i", filectime("$results_directory/$file"));
+                echo "<tr><td>$file</td><td><span class=\"time\">$creation_time</span></td></tr>";
+              }
+            }
+            echo "</table>";
+            closedir($opendirectory);
+          } else {
+            echo "<em><strong>$cur_results_dir is missing!</strong></em>";
+          }
+        } else {
+          echo "$description directory is missing.";
         }
       }
     }
