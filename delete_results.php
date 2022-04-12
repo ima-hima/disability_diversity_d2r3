@@ -30,24 +30,15 @@
       }
     }
     closedir($opendirectory);
+    // Clear subdirectories
     foreach ($sub_dirs as $sub_dir => $description) {
       clear_directory("$results_directory/$sub_dir");
       echo "$results_directory/$sub_dir has been deleted.<br />";
     }
-    // $archive_dir = "$results_directory";
-    // clear_directory($archive_dir);
-    // if ($dir = opendir($results_directory)) {
-    //   while (($file_name = readdir($dir)) !== false) {
-    //     $file_path = "$results_directory/$file_name";
-    //     // . & .. can't be cleared, but .htaccess must be, so special
-    //     // logic here.
-    //     if (substr($file_name, -4) == '.zip' or substr($file_name, -4) == '.txt') {
-    //       unlink($file_path);
-    //       echo "$file_name has been deleted.<br />";
-    //     }
-    //   }
-    //   closedir($dir);
-    // }
+    // Clear zipped directory, where files are held before being compressed
+    // and downloaded.
+    clear_directory("$results_directory/zipped");
+
     echo "All files have been deleted.";
   }
   require('footer.php');
