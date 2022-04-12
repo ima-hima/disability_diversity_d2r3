@@ -30,6 +30,17 @@
         break;
       }
     }
+    echo "<h3>Files copied to archive directory</h3>";
+    echo "<table><tr><th>File name</th><th>Permissions</th><th>Size</th><th>Creation date</th>";
+    if (is_dir("$results_directory/zipped/")) {
+      while (($file = readdir("$results_directory/zipped/")) !== false) {
+        if (substr($file, 0, 1) != '.') {
+          $creation_time = date("F d, Y H:i", filectime("$results_directory/zipped/$file"));
+          echo "<tr><td>$file</td><td><span class=\"time\">$creation_time</span></td></tr>";
+        }
+      }
+    }
+    echo "</table>";
     closedir($opendirectory);
     if ($not_empty) {
       $opendirectory = opendir($results_directory);
