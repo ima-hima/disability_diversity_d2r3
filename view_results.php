@@ -32,7 +32,7 @@
     }
     closedir($opendirectory);
     if (is_dir("$results_directory/zipped/")) {
-      echo "<h3>Files copied to zipped directory:</h3>";
+      echo "<h3>Files already copied to zipped directory:</h3>";
       foreach ($sub_dirs as $sub_dir => $description) {
         echo "<h4>$description:</h4>";
         $cur_results_dir = "$results_directory/zipped/$sub_dir";
