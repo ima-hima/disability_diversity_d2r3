@@ -39,5 +39,6 @@
     header('Content-Length: ' . filesize($archive_file));
     flush();
     readfile($archive_file);
+    unlink($archive_file);
   }
 ?>
