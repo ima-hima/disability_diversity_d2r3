@@ -42,5 +42,4 @@
   header('Content-Length: ' . filesize($archive_file));
   flush();
   readfile($archive_file);
-  // require('footer.php');
 ?>
