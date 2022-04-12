@@ -22,6 +22,14 @@
     $form_head = 'You spelled “delete” wrong: ' . $_POST['delete'];
     require('password_form.php');
   } else {
+    // First, delete old zip files.
+    $opendirectory = opendir($results_directory);
+    while (($file = readdir($opendirectory)) !== false) {
+      if (!is_dir("$results_directory/$file")) {
+        unlink("$results_directory/$file");
+      }
+    }
+    closedir($results_directory);
     foreach ($sub_dirs as $sub_dir => $description) {
       clear_directory("$results_directory/$sub_dir");
       echo "$results_directory/$sub_dir has been deleted.<br />";
