@@ -92,7 +92,7 @@ define(['questAPI', 'underscore'], function(Quest, _){
         inherit: 'singleChoicedrop',
         name:    'age',
         stem:    'What is your age?',
-        answers: _.range(100, 15, -1), // use underscore to create an array of years from ten years ago back to 1910
+        answers: _.range(18, 80, 1), // use underscore to create an array of years
     });
 
     API.addQuestionsSet('genderIdentity', {
