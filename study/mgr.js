@@ -428,11 +428,11 @@ define(['managerAPI'], function(Manager) {
 
         // First IAT, for physical disabilities
         {inherit: 'pd_iat_instructions'},
-        // {inherit: 'pd_iat'},
+        {inherit: 'pd_iat'},
 
 //             // Second IAT, for intellectual disabilities
         {inherit: 'id_iat_instructions'},
-        // {inherit: 'id_iat'},
+        {inherit: 'id_iat'},
 
         {inherit: 'collect_iat_feedback'}, // Collect this immediately after IATs.
 
