@@ -88,13 +88,13 @@ define(['managerAPI'], function(Manager) {
            last:        true,
         }],
 
-        participation: [{
-            inherit:    'question',
-            name:       'participation',
-            scriptUrl:  'participation.js?' + Math.random(),
-            title:      'Project Inclusive Genetics',
-            header:     'Welcome',
-        }],
+        // participation: [{
+        //     inherit:    'question',
+        //     name:       'participation',
+        //     scriptUrl:  'participation.js?' + Math.random(),
+        //     title:      'Project Inclusive Genetics',
+        //     header:     'Welcome',
+        // }],
 
         id_iat_instructions: [{
             inherit:     'instructions',
@@ -157,13 +157,13 @@ define(['managerAPI'], function(Manager) {
             header:      'Patient-Centered Counseling Challenges',
         }],
 
-        demographics: [{
-            inherit:    'question',
-            name:       'demographics',
-            scriptUrl:  'demographics.js?' + Math.random(),
-            title:      'Demographic Questions',
-            header:     'Demographic Questions',
-        }],
+        // demographics: [{
+        //     inherit:    'question',
+        //     name:       'demographics',
+        //     scriptUrl:  'demographics.js?' + Math.random(),
+        //     title:      'Demographic Questions',
+        //     header:     'Demographic Questions',
+        // }],
 
         clinical_scenario_1: [{
             inherit:     'instructions',
@@ -350,15 +350,15 @@ define(['managerAPI'], function(Manager) {
             header:      'Fourth Case',
         }],
 
-        collect_iat_feedback: [{ // Get summarized iat feedback that was given to user, along with uuid.
-          type: 'post',
-          url:  'iat_feedback_csv.php',
-          data: { header: 'uuid, pd_iat, id_iat',
-                  uuid: '<%= global.participation.questions.uuid.response %>',
-                  pd_iat: '<%= global.pd_iat.feedback %>',
-                  id_iat: '<%= global.id_iat.feedback %>',
-                },
-        }],
+        // collect_iat_feedback: [{ // Get summarized iat feedback that was given to user, along with uuid.
+        //   type: 'post',
+        //   url:  'iat_feedback_csv.php',
+        //   data: { header: 'uuid, pd_iat, id_iat',
+        //           uuid: '<%= global.participation.questions.uuid.response %>',
+        //           pd_iat: '<%= global.pd_iat.feedback %>',
+        //           id_iat: '<%= global.id_iat.feedback %>',
+        //         },
+        // }],
 
         iat_results: [{
             inherit:     'results',
@@ -384,13 +384,13 @@ define(['managerAPI'], function(Manager) {
             header:      'You have completed the study'
         }],
 
-        thanks_declined: [{
-            inherit:     'results',
-            name:        'thanks_declined',
-            templateUrl: 'thanks_declined.jst?' + Math.random(),
-            title:       'Thank You',
-            header:      'Declined',
-        }],
+        // thanks_declined: [{
+        //     inherit:     'results',
+        //     name:        'thanks_declined',
+        //     templateUrl: 'thanks_declined.jst?' + Math.random(),
+        //     title:       'Thank You',
+        //     header:      'Declined',
+        // }],
 
         thanks: [{
             inherit:     'results',
@@ -404,77 +404,77 @@ define(['managerAPI'], function(Manager) {
 
     API.addSequence([
         // Each set of curly braces is a page.
-        {inherit: 'participation'},
-        { // Write out whether to recontact and other info from first page, uuid.
-          type: 'postCsv',
-          url:  'participants_csv.php',
-        },
-        { // If they choose to participate, start the module here.
-          // If they decline to participate sends them to thanks anyway.
-          mixer: 'branch',
-          conditions: [
-            {compare: 1, to: 'global.participation.questions.participate.response'} // figuring out that the question was in the question object and that there wasn't a participation object. Also, you can't have a . in the comparison or it won't parse correctly. I didn't try with a variable, maybe that'd fix it.
-          ],
-          data: [
+        // {inherit: 'participation'},
+        // { // Write out whether to recontact and other info from first page, uuid.
+        //   type: 'postCsv',
+        //   url:  'participants_csv.php',
+        // },
+        // { // If they choose to participate, start the module here.
+        //   // If they decline to participate sends them to thanks anyway.
+        //   mixer: 'branch',
+        //   conditions: [
+        //     {compare: 1, to: 'global.participation.questions.participate.response'} // figuring out that the question was in the question object and that there wasn't a participation object. Also, you can't have a . in the comparison or it won't parse correctly. I didn't try with a variable, maybe that'd fix it.
+        //   ],
+        //   data: [
             // clinical scenarios
-            {inherit: 'clinical_scenario_1'},
-            {inherit: 'clinical_scenario_1_questions'},
+        {inherit: 'clinical_scenario_1'},
+        {inherit: 'clinical_scenario_1_questions'},
 
-            {inherit: 'clinical_scenario_2'},
-            {inherit: 'clinical_scenario_2_questions'},
+        {inherit: 'clinical_scenario_2'},
+        {inherit: 'clinical_scenario_2_questions'},
 
-            // Demographics
-            {inherit: 'demographics'},
+        // Demographics
+        // {inherit: 'demographics'},
 
-            // First IAT, for physical disabilities
-            {inherit: 'pd_iat_instructions'},
-            {inherit: 'pd_iat'},
+        // First IAT, for physical disabilities
+        {inherit: 'pd_iat_instructions'},
+        {inherit: 'pd_iat'},
 
 //             // Second IAT, for intellectual disabilities
-            {inherit: 'id_iat_instructions'},
-            {inherit: 'id_iat'},
+        {inherit: 'id_iat_instructions'},
+        {inherit: 'id_iat'},
 
-            {inherit: 'collect_iat_feedback'}, // Collect this immediately after IATs.
+        {inherit: 'collect_iat_feedback'}, // Collect this immediately after IATs.
 
-            // Explaining patient-centered counseling
-            {inherit: 'counseling_introduction'},
-            {inherit: 'counseling_what_is_it'},
-            {inherit: 'counseling_challenges'},
-            {inherit: 'counseling_refs'},
+        // Explaining patient-centered counseling
+        {inherit: 'counseling_introduction'},
+        {inherit: 'counseling_what_is_it'},
+        {inherit: 'counseling_challenges'},
+        {inherit: 'counseling_refs'},
 
-            // Patient-centered counseling cases for teaching
-            {inherit: 'case_1_1'},
-            {inherit: 'case_1_2'},
-            {inherit: 'case_1_3'},
-            {inherit: 'case_1_summary'},
+        // Patient-centered counseling cases for teaching
+        {inherit: 'case_1_1'},
+        {inherit: 'case_1_2'},
+        {inherit: 'case_1_3'},
+        {inherit: 'case_1_summary'},
 
-            {inherit: 'case_2_1'},
-            {inherit: 'case_2_2'},
-            {inherit: 'case_2_3'},
-            {inherit: 'case_2_summary'},
+        {inherit: 'case_2_1'},
+        {inherit: 'case_2_2'},
+        {inherit: 'case_2_3'},
+        {inherit: 'case_2_summary'},
 
-            {inherit: 'case_3_1'},
-            {inherit: 'case_3_2'},
-            {inherit: 'case_3_3'},
-            {inherit: 'case_3_summary'},
+        {inherit: 'case_3_1'},
+        {inherit: 'case_3_2'},
+        {inherit: 'case_3_3'},
+        {inherit: 'case_3_summary'},
 
-            // Patient-centered counseling scenarios for post–teaching module follow-up testing
-            {inherit: 'clinical_scenario_3'},
-            {inherit: 'clinical_scenario_3_questions'},
+        // Patient-centered counseling scenarios for post–teaching module follow-up testing
+        {inherit: 'clinical_scenario_3'},
+        {inherit: 'clinical_scenario_3_questions'},
 
-            {inherit: 'clinical_scenario_4'},
-            {inherit: 'clinical_scenario_4_questions'},
-            {inherit: 'course_goals'},
-            { // Get all answers to everything except summarized iat feedback.
-              type: 'postCsv',
-              url:  'answers_csv.php',
-            },
-            {inherit: 'iat_explanation'},
+        {inherit: 'clinical_scenario_4'},
+        {inherit: 'clinical_scenario_4_questions'},
+        {inherit: 'course_goals'},
+        // { // Get all answers to everything except summarized iat feedback.
+        //   type: 'postCsv',
+        //   url:  'answers_csv.php',
+        // },
+        {inherit: 'iat_explanation'},
 
-            {inherit: 'thanks'},
-          ],
-          elseData: [{inherit: 'thanks_declined'}], // if they didn't participate
-        },
+        {inherit: 'thanks'},
+        //   ],
+        //   elseData: [{inherit: 'thanks_declined'}], // if they didn't participate
+        // },
       ]);
     return API.script;
 });
