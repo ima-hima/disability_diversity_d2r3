@@ -350,15 +350,15 @@ define(['managerAPI'], function(Manager) {
             header:      'Fourth Case',
         }],
 
-        // collect_iat_feedback: [{ // Get summarized iat feedback that was given to user, along with uuid.
-        //   type: 'post',
-        //   url:  'iat_feedback_csv.php',
-        //   data: { header: 'uuid, pd_iat, id_iat',
-        //           uuid: '<%= global.participation.questions.uuid.response %>',
-        //           pd_iat: '<%= global.pd_iat.feedback %>',
-        //           id_iat: '<%= global.id_iat.feedback %>',
-        //         },
-        // }],
+        collect_iat_feedback: [{ // Get summarized iat feedback that was given to user, along with uuid.
+          type: 'post',
+          url:  'iat_feedback_csv.php',
+          data: { header: 'uuid, pd_iat, id_iat',
+                  uuid: '<%= global.participation.questions.uuid.response %>',
+                  pd_iat: '<%= global.pd_iat.feedback %>',
+                  id_iat: '<%= global.id_iat.feedback %>',
+                },
+        }],
 
         iat_results: [{
             inherit:     'results',
