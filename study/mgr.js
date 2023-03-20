@@ -354,7 +354,7 @@ define(['managerAPI'], function(Manager) {
           type: 'post',
           url:  'iat_feedback_csv.php',
           data: { header: 'uuid, pd_iat, id_iat',
-                  uuid: '<%= global.participation.questions.uuid.response %>',
+                  // uuid: '<%= global.participation.questions.uuid.response %>',
                   pd_iat: '<%= global.pd_iat.feedback %>',
                   id_iat: '<%= global.id_iat.feedback %>',
                 },
@@ -428,11 +428,11 @@ define(['managerAPI'], function(Manager) {
 
         // First IAT, for physical disabilities
         {inherit: 'pd_iat_instructions'},
-        {inherit: 'pd_iat'},
+        // {inherit: 'pd_iat'},
 
 //             // Second IAT, for intellectual disabilities
         {inherit: 'id_iat_instructions'},
-        {inherit: 'id_iat'},
+        // {inherit: 'id_iat'},
 
         {inherit: 'collect_iat_feedback'}, // Collect this immediately after IATs.
 
