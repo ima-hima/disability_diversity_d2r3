@@ -30,7 +30,7 @@
     "http-server": "^14.1.1",
     "marked": "~4.0.10",
     "minno-gendocs": "^1.0.2",
-    "node-sass": "^7.0.0",
+    "node-sass": "^7.0.3",
     "requirejs": "^2.1.17"
   }
 }
