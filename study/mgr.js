@@ -399,6 +399,14 @@ define(['managerAPI'], function(Manager) {
             title:       'Thank You',
             header:      'Thank You',
         }],
+
+        welcome: [{
+            inherit:     'instructions',
+            name:        'welcom',
+            templateUrl: 'welcome.jst?' + Math.random(),
+            title:       'Welcome to Inclusive Genetics',
+            header:      'Welcome to Inclusive Genetics',
+        }],
     });
 
 
