@@ -1,0 +1,26 @@
+=IF(A2=1, "Strongly recommend prenatal testing", IF(A2=2, "Recommend prenatal testing", IF(A2=3,"Offer but neither recommend nor discourage prenatal testing", IF(A2=4,"Discourage prenatal testing", IF(A2=5,"Strongly discourage prenatal testing","Error")))))
+
+=IF(E2=1, "Yes", IF(E2=2, "Most likely", IF(E2=3,"Unsure", IF(E2=4,"Probably not", IF(E2=5,"No","Error")))))
+
+=IF(S2=1, "Great influence", IF(S2=2, "Moderate influence", IF(S2=3,"Neutral", IF(S2=4,"Little influence", IF(S2=5,"No influence", "Decline to answer")))))
+
+=IF(AP2=1, "Male", IF(AP2=2, "Female", IF(AP2=3,"Nonbinary", IF(AP2=4,"Prefer not to answer", "Decline to answer""))))
+
+=IF(W2=1, "Clinical laboratory", IF(W2=2, "Clinical patient-facing", IF(W2=3,"Research", IF(W2=4,"Other", "Decline to answer""))))
+
+=IF(X2=1, "N/A", IF(X2=2, "MD (medical geneticist)", IF(X2=3,"MD (other)", IF(X2=4,"Genetic counselor", IF(X2=5,"Nurse", IF(X2=6,"Other allied health professional", IF(X2=7,"Resident", IF(X2=8,"Medical student (preclinical)", IF(X2=9,"Medical student (clinical)", IF(X2=10,"Fellow", IF(X2=11,"GC student", IF(X2=12,"Educator", IF(X2=13,"Other", "Decline to answer")))))))))))))
+
+=IF('Sheet 1'!Y2=1, "Very religious", IF('Sheet 1'!Y2=2, "Somewhat religious", IF('Sheet 1'!Y2=3,"Not very religious", IF('Sheet 1'!Y2=4,"Not at all religious", "Decline to answer""))))
+
+IF(AX2=1, "Very Conservative", IF(AX2=2, "Conservative", IF(AX2=3,"Moderate", IF(AX2=4,"Liberal", IF(AX2=5,"Very Liberal", "Decline to answer")))))
+
+IF(AZ2=1, "Very Pro Choice (termination is acceptable for any reason)", IF(AZ2=2, "Somewhat Pro Choice (termination is acceptable for some reasons)", IF(AZ2=3,"Neutral (not pro-choice or pro-life)", IF(AZ2=4,"Somewhat Pro-Life (termination is not acceptable except in rare exceptions)", IF(AZ2=5,"Very Pro-Life (termination is not acceptable for any reason)", "Decline to answer")))))
+
+IF(BB2=1, "Very experienced", IF(BB2=2, "Somewhat experienced", IF(BB2=3,"Not very experienced", IF(BB2=4,"Not at all experienced", "Error"))))
+
+IF(BF2=1, "Strongly disagree", IF(BF2=2, "Disagree", IF(BF2=3,"Neutral", IF(BF2=4,"Agree", IF(BF2=5,"Strongly agree", "Error")))))
+
+=IF(BZ2=1, "Your data suggest a strong automatic preference for Physically disabled over Abled persons.", IF(BZ2=2, "Your data suggest a moderate automatic preference for Physically disabled over Abled persons.", IF(BZ2=3,"Your data suggest a weak automatic preference for Physically disabled over Abled persons.", IF(BZ2=4,"Your data suggest a slight automatic preference for Physically disabled over Abled persons.", IF(BZ2=5,"Your data suggest no automatic preference between Abled persons and Physically disabled.", IF(BZ2=6,"Your data suggest a slight automatic preference for Abled persons over Physically disabled.", IF(BZ2=7,"Your data suggest a weak automatic preference for Abled persons over Physically disabled.", IF(BZ2=8,"Your data suggest a moderate automatic preference for Abled persons over Physically disabled.", IF(BZ2=9,"Your data suggest a strong automatic preference for Abled persons over Physically disabled.", "Bad data")))))))))
+
+
+=IF(CB2=1, "Your data suggest a strong positive automatic attitude toward Intellectually disabled.", IF(CB2=2, "Your data suggest a moderate positive automatic attitude toward Intellectually disabled.", IF(CB2=3,"Your data suggest a weak positive automatic attitude toward Intellectually disabled.", IF(CB2=4,"Your data suggest a slight positive automatic attitude toward Intellectually disabled.", IF(CB2=5,"Your data suggest a neutral automatic attitude toward Intellectually disabled.", IF(CB2=6,"Your data suggest a slight negative automatic attitude toward Intellectually disabled", IF(CB2=7,"Your data suggest a weak negative automatic attitude toward Intellectually disabled", IF(CB2=8,"Your data suggest a moderate negative automatic attitude toward Intellectually disabled", IF(CB2=9,"Your data suggest a strong negative automatic attitude toward Intellectually disabled", "Bad data")))))))))
