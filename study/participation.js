@@ -1,6 +1,5 @@
 define(['questAPI'], function(Quest){
     var API  = new Quest();
-    var uuid = Math.random();
 
     API.addQuestionsSet({
       email: [{

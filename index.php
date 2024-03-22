@@ -47,40 +47,11 @@
           document.getElementById('reveal_btn').style.display = 'block';
       }
 
-      // $( document ).ready( function() {
-      //     // $(document).click(function(){
-      //     //     console.log('clicked at all')
-      //     // });
-      //   console.log('ready');
-      //   // One of answer buttons must be clicked before "reveal all" button appears.
-      //   $( ".answer" ).click(function() {
-      //       console.log('clicked answer');
-      //     console.log( $(this).children(":first").css("display") );
-      //     // $(this).next().css( "display", "block" );
-      //     // $( "#reveal_btn" ).css( "display", "block" );
-      //   });
-
-      //   $( ".panel-body" ).click(function() {
-      //       console.log('clicked body');
-      //     // console.log( $(this).next().css("display") );
-      //     // $(this).next().css( "display", "block" );
-      //     // $( "#reveal_btn" ).css( "display", "block" );
-      //   });
-
-      //   // When "reveal all" button is clicked all answers are revealed, as is "continue" button.
-      //   $( "#reveal_btn" ).click(function() {
-      //       console.log('clicked reveal');
-      //       $( ".guidance" ).each(function() {
-      //           $( this ).css( "display", "block" );
-      //       });
-      //       $( "#continue_button" ).css( "display", "block" );
-      //       // document.getElementsByClassName('guidance');
-      //       // for (i = 0; i < elems.length; i++) {
-      //       //   elems[i].style.display = 'block';
-      //       // }
-      //       // document.getElementById('button').style.display = 'block';
-      //   });
-      // });
+<?php
+  if $_GET['uuid'] {
+    echo "val redcap_uuid = $_GET['uuid']";
+  }
+?>
     </script>
 
   </head>
