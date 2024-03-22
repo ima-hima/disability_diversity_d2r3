@@ -121,14 +121,6 @@ define(['managerAPI'], function(Manager) {
             scriptUrl: 'pd_iat.js?' + Math.random(),
         }],
 
-        console_check: [{
-            inherit:    'question',
-            name:       'console_check',
-            scriptUrl:  'console_check.js?' + Math.random(),
-            title:      'Scenario Four Questions',
-            header:     'Scenario Four Questions',
-        }],
-
         collect_iat_feedback: [{ // Get summarized iat feedback that was given to user, along with uuid.
           type: 'post',
           url:  'iat_feedback_csv.php',

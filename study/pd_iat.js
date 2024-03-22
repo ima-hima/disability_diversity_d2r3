@@ -1,5 +1,5 @@
 define(['pipAPI','minno-tasks/IAT/iat6.js'], function(APIConstructor, iatExtension){
-    var API    = new APIConstructor();
+    var API = new APIConstructor();
     var global = API.getGlobal();
 
     return iatExtension({
