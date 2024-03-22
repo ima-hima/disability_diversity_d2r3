@@ -122,6 +122,11 @@ ul {
 .thanks {
   width: 75%;
   margin: 0 auto;
+  text-align: center;
+}
+
+.thanks img {
+  max-width: 500px;
 }
 
 
