@@ -49,7 +49,7 @@
 
 <?php
   if (isset($_GET['uuid'])) {
-    echo "var redcap_uuid = $_GET['uuid']";
+    echo "var redcap_uuid = " . $_GET['uuid'] . ";";
   }
 ?>
     </script>
