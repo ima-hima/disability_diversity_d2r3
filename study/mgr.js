@@ -58,14 +58,9 @@ define(['managerAPI'], function(Manager) {
         ]),
         intellectually_disabled_words : API.shuffle([
           'Impairment ',
-          'Neurodivergent',
-          'Learning Difference',
           'Learning Disability',
           'Developmental Disability',
-          'Developmental Difference',
           'Special Needs',
-          'Social Skills',
-          'Adaptative Technology ',
           'Autism',
         ]),
     });
