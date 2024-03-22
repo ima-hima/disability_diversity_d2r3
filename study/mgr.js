@@ -147,14 +147,6 @@ define(['managerAPI'], function(Manager) {
             header:      'About the IAT'
         }],
 
-        thanks: [{
-            inherit:     'results',
-            name:        'thanks',
-            templateUrl: 'thanks.jst?' + Math.random(),
-            title:       'Thank You',
-            header:      'Thank You',
-        }],
-
         welcome: [{
             inherit:     'instructions',
             name:        'welcom',
@@ -179,16 +171,9 @@ define(['managerAPI'], function(Manager) {
 
         {inherit: 'collect_iat_feedback'}, // Collect this immediately after IATs.
 
-        // { // Get all answers to everything except summarized iat feedback.
-        //   type: 'postCsv',
-        //   url:  'answers_csv.php',
-        // },
         {inherit: 'iat_explanation'},
 
-        {inherit: 'thanks'},
-        //   ],
-        //   elseData: [{inherit: 'thanks_declined'}], // if they didn't participate
-        // },
+        // {inherit: 'thanks'},
       ]);
     return API.script;
 });
