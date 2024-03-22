@@ -48,8 +48,8 @@
       }
 
 <?php
-  if $_GET['uuid'] {
-    echo "val redcap_uuid = $_GET['uuid']";
+  if (isset($_GET['uuid'])) {
+    echo "var redcap_uuid = $_GET['uuid']";
   }
 ?>
     </script>
