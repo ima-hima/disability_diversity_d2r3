@@ -15,6 +15,8 @@ define(['pipAPI','minno-tasks/IAT/iat6.js'], function(APIConstructor, iatExtensi
                 {image: global.abledImages[1]},
                 {image: global.abledImages[2]},
                 {image: global.abledImages[3]},
+                {image: global.abledImages[4]},
+                {image: global.abledImages[5]},
             ],
             //Stimulus css (style)
             stimulusCss : {color:'#31940F','font-size':'2.3em'}
@@ -31,6 +33,8 @@ define(['pipAPI','minno-tasks/IAT/iat6.js'], function(APIConstructor, iatExtensi
                 {image: global.disabledImages[1]},
                 {image: global.disabledImages[2]},
                 {image: global.disabledImages[3]},
+                {image: global.disabledImages[4]},
+                {image: global.disabledImages[5]},
             ],
             //Stimulus css (style)
             stimulusCss : {
