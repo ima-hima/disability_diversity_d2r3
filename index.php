@@ -50,6 +50,9 @@
 <?php
   if (isset($_GET['uuid'])) {
     echo "var redcap_uuid = " . $_GET['uuid'] . ";";
+  } else {
+    $uuid = uniqid();
+    echo "var redcap_uuid = " . $uuid . ";";
   }
 ?>
     </script>
