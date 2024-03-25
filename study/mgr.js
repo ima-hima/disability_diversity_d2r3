@@ -123,15 +123,21 @@ define(['managerAPI'], function(Manager) {
 
         collect_iat_feedback: [{ // Get summarized iat feedback that was given to user, along with uuid.
           type: 'post',
-          url:  'iat_feedback_csv.php',
-          data: { header: 'uuid, pd_iat, id_iat',
-                  uuid: '<%= redcap_uuid %>',
-                  pd_iat: '<%= global.pd_iat.feedback %>',
-                  id_iat: '<%= global.id_iat.feedback %>',
+          url:  'iat_feedback.php',
+          data: { header: 'uuid, pd_iat',
+                  contents: '<%= redcap_uuid %>, <%= global.pd_iat.feedback %>'
                 },
         }],
 
-        iat_results: [{
+        pd_iat_results: [{
+            inherit:     'results',
+            name:        'iat_results',
+            templateUrl: 'iat_results.jst?' + Math.random(),
+            title:       'Final results',
+            header:      'You have completed the study'
+        }],
+
+        id_iat_results: [{
             inherit:     'results',
             name:        'iat_results',
             templateUrl: 'iat_results.jst?' + Math.random(),
@@ -160,19 +166,25 @@ define(['managerAPI'], function(Manager) {
     API.addSequence([
         // Each set of curly braces is a page.
         {inherit: 'welcome'},
-
-        // First IAT, for physical disabilities
-        {inherit: 'pd_iat_instructions'},
-        {inherit: 'pd_iat'},
-
-        // Second IAT, for intellectual disabilities
-        {inherit: 'id_iat_instructions'},
-        {inherit: 'id_iat'},
-
-        {inherit: 'collect_iat_feedback'}, // Collect this immediately after IATs.
-
-        {inherit: 'iat_explanation'},
-
+        { // 50% chance of PD, 50% chance of ID.
+          mixer: 'choose',
+          data: [
+            [
+              // IAT for physical disabilities
+              {inherit: 'pd_iat_instructions'},
+              {inherit: 'pd_iat'},
+              {inherit: 'collect_pd_iat_feedback'},
+              {inherit: 'pd_iat_explanation'},
+            ],
+            [
+              // IAT for intellectual disabilities
+              {inherit: 'id_iat_instructions'},
+              {inherit: 'id_iat'},
+              {inherit: 'collect_id_iat_feedback'},
+              {inherit: 'id_iat_explanation'},
+            ]
+          ]
+        }
         // {inherit: 'thanks'},
       ]);
     return API.script;
