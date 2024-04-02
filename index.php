@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>MinnoJS</title>
+    <title>D2R3</title>
     <meta name="description" content="MinnoJS">
     <meta name="viewport" content="width=device-width">
     <meta name="viewport" content="user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1" />
@@ -48,11 +48,22 @@
       }
 
 <?php
-  if (isset($_GET['uuid'])) {
-    echo "var redcap_uuid = " . $_GET['uuid'] . ";";
-  } else {
-    $uuid = uniqid();
-    echo "var redcap_uuid = " . $uuid . ";";
+  if (isset($_POST)) {
+    if (isset($_POST['project_id'])
+        && $_POST['project_id'] == '2601'
+        && isset($_POST['instrument'])
+        && $_POST['instrument'] == 'kabp'
+        && isset($_POST['kabp_complete'])
+        && $_POST['kabp_complete'] == 2
+    ) {
+      // Ignore $_POST['project_url'].
+      if (isset($_POST['record'])) {
+        echo 'var redcap_uuid = ' . $_POST['record'] . ';';
+      }
+      if (isset($_POST['redcap_url'])) {
+        echo 'var redcap_url = ' . $_POST['redcap_url'] . ';';
+      }
+    }
   }
 ?>
     </script>
