@@ -35,8 +35,11 @@
 
 <?php
   require('get_token.php');
-  if (isset($_POST)) {
-    if (isset($_POST['project_id'])
+  if (!isset($_POST['variable'])) {
+    http_response_code(500);
+    echo '500 Internal Server Error. Please contact the administrator.';
+    exit();
+  } elsif (isset($_POST['project_id'])
         && $_POST['project_id'] == '2601'
         && isset($_POST['instrument'])
         && $_POST['instrument'] == 'kabp'
@@ -48,7 +51,7 @@
         echo 'var redcap_uuid = ' . $_POST['record_id'] . ';';
       }
       if (isset($_POST['redcap_url'])) {
-        echo 'var redcap_url = ' . $_POST['redcap_url'] . ';';
+        echo 'var redcap_url = ' . $_POST['redcap_url'] . ';'; // Do I need this?
       }
       // Now figure out which IAT they're taking. It's stored in `randomize`
       // and 1 = Physical Disability IAT and 2 = Developmental Disability IAT.
@@ -84,6 +87,11 @@
       $obj = json_decode($json);
       $which_iat = $obj->{'randomize'};
       curl_close($request);
+    } else {
+      // $_POST was incorrect.
+      http_response_code(401);
+    echo '401. You are forbiddenn from accessing this resource.';
+    exit();
     }
     if (!isset($which_iat)) {
       $which_iat = 1;
@@ -97,7 +105,8 @@
 
   <body>
     <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser.
+      Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <div class="container" id="pi-app">

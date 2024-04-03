@@ -2,8 +2,9 @@
   $env_file_path = realpath(__DIR__."/.env");
   //Check .env file exists and is readable.
   if (!is_file($env_file_path) || !is_readable($env_file_path)) {
-      http_response_code(500);
-      header('Location: 500.html');
+    http_response_code(500);
+    echo 'Token not available. Please contact the server administrator with this message.';
+    exit();
   }
   $API_TOKEN = '';
   // Open the .en file using the reading mode
