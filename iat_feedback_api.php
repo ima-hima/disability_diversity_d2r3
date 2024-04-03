@@ -57,7 +57,8 @@
       'type' => 'flat',
       'overwriteBehavior' => 'normal',
       'forceAutoNumber' => 'false',
-      'data' => "[{'record_id': 1, 'iat_scor': '5', 'iat_verbal': 'test_feedback'}]",
+      // 'data' => "[{'record_id': 1, 'iat_scor': $iat_score, 'iat_verbal': $iat_feedback}]",
+      'data' => "[{'record_id': 1, 'iat_scor': 5, 'iat_verbal': 'test_feedback'}]",
       'returnContent' => 'count',
       'returnFormat' => 'json'
     );
