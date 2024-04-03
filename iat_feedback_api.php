@@ -57,7 +57,7 @@
       'type' => 'flat',
       'overwriteBehavior' => 'normal',
       'forceAutoNumber' => 'false',
-      'data' => "[{'record_id': 1, 'iat_scor': $iat_score, 'iat_verbal': $iat_feedback}]",
+      'data' => "[{'record_id': 1, 'iat_scor': '5', 'iat_verbal': 'test_feedback'}]",
       'returnContent' => 'count',
       'returnFormat' => 'json'
     );
@@ -74,4 +74,30 @@
     curl_setopt($request, CURLOPT_POSTFIELDS, http_build_query($data, '', '&'));
     curl_close($request);
 
+?>
+
+<?php
+$data = array(
+    'token' => 'F817EAB4C7F28935AF6DA4B6BA690316',
+    'content' => 'surveyLink',
+    'format' => 'json',
+    'instrument' => 'results',
+    'event' => '',
+    'record' => '',
+    'returnFormat' => 'json'
+);
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, 'https://redcap.einsteinmed.org/api/');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($ch, CURLOPT_VERBOSE, 0);
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+curl_setopt($ch, CURLOPT_AUTOREFERER, true);
+curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+curl_setopt($ch, CURLOPT_FRESH_CONNECT, 1);
+curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data, '', '&'));
+$output = curl_exec($ch);
+print $output;
+curl_close($ch);
 ?>
