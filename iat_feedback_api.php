@@ -57,7 +57,7 @@
       'type' => 'flat',
       'overwriteBehavior' => 'normal',
       'forceAutoNumber' => 'false',
-      'data' => "[{'record_id': $redcap_uid, 'iat_scor': $iat_score, 'iat_verbal': $iat_feedback}]",
+      'data' => "[{'record_id': 1, 'iat_scor': $iat_score, 'iat_verbal': $iat_feedback}]",
       'returnContent' => 'count',
       'returnFormat' => 'json'
     );
