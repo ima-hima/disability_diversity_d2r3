@@ -37,7 +37,10 @@
   require('get_token.php');
   if (!isset($_POST['variable'])) {
     http_response_code(500);
-    echo '500 Internal Server Error. Please contact the administrator.';
+    echo json_encode([
+      'success' => false ,
+      'message' => '500 Forbidden',
+    ]);
     exit();
   } elsif (isset($_POST['project_id'])
         && $_POST['project_id'] == '2601'
