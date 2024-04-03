@@ -8,14 +8,12 @@
     $redcap_uid = $_GET['uuid'];
   } else {
     http_response_code(401);
-    echo '401. You are forbidden from accessing this resource because bad $_GET:';
-    print_r($_GET);
+    echo '401. You are forbidden from accessing this resource.';
     exit();
   }
   if ($_GET['code'] != $VALIDATION_CODE) {
     http_response_code(401);
-    echo '401. You are forbidden from accessing this resource because bad code: ';
-    echo $_GET['code'] . " from .env $VALIDATION_CODE";
+    echo '401. You are forbidden from accessing this resource.';
     exit();
   }
   // Now figure out which IAT they're taking. It's stored in `randomize`
