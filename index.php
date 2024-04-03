@@ -99,6 +99,9 @@
       $which_iat = $obj->{'randomize'};
       curl_close($request);
     }
+    if (!isset($which_iat)) {
+      $which_iat = 1;
+    }
     echo "var which_iat = $which_iat;";
   }
 ?>

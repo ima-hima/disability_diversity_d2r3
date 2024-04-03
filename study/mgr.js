@@ -150,22 +150,24 @@ define(['managerAPI'], function(Manager) {
     API.addSequence([
         // Each set of curly braces is a page.
         {inherit: 'welcome'},
-        mixer: 'branch',
-            conditions: [
-               {compare: 1, to: 'which_iat'},
-            ],
-            data: [
-              // IAT for physical disabilities
-              {inherit: 'pd_iat_instructions'},
-              {inherit: 'pd_iat'},
-              {inherit: 'collect_pd_iat_feedback'},
-            ]
-            elseData: [
-              // IAT for intellectual disabilities
-              {inherit: 'dd_iat_instructions'},
-              {inherit: 'dd_iat'},
-              {inherit: 'collect_dd_iat_feedback'},
-            ]
+        {
+          mixer: 'branch',
+          conditions: [
+             {compare: 1, to: 'which_iat'},
+          ],
+          data: [
+            // IAT for physical disabilities
+            {inherit: 'pd_iat_instructions'},
+            {inherit: 'pd_iat'},
+            {inherit: 'collect_pd_iat_feedback'},
+          ]
+          elseData: [
+            // IAT for intellectual disabilities
+            {inherit: 'dd_iat_instructions'},
+            {inherit: 'dd_iat'},
+            {inherit: 'collect_dd_iat_feedback'},
+          ]
+        }
       ]);
     return API.script;
 });
