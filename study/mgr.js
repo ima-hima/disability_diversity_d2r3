@@ -136,24 +136,15 @@ define(['managerAPI'], function(Manager) {
                   contents: '<%= redcap_uid %>, dd_iat, <%= global.dd_iat.feedback %>'
                 },
         }],
-
-        welcome: [{
-            inherit:     'instructions',
-            name:        'welcom',
-            templateUrl: 'welcome.jst?' + Math.random(),
-            title:       'Welcome to D2R3',
-            header:      'Welcome to D2R3',
-        }],
     });
 
 
     API.addSequence([
         // Each set of curly braces is a page.
-        {inherit: 'welcome'},
         {
           mixer: 'branch',
           conditions: [
-             {compare: 1, to: which_iat},
+             {compare: "1", to: which_iat},
           ],
           data: [
             // IAT for physical disabilities
