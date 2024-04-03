@@ -4,67 +4,58 @@
 <!--[if gt IE 8]><!--> <html class="no-js" > <!--<![endif]-->
 <?php
   require('get_token.php');
-  if (!isset($_POST)) {
-    http_response_code(401);
-    echo '401. You are forbidden from accessing this resource.';
-    exit();
-  } elseif (
-      isset($_POST['project_id'])
-      && $_POST['project_id'] == '2601'
-      && isset($_POST['instrument'])
-      && $_POST['instrument'] == 'kabp'
-      && isset($_POST['kabp_complete'])
-      && $_POST['kabp_complete'] == 2
-      && isset($_POST['record_id'])
-      && isset($_POST['redcap_url'])
-      // Ignore $_POST['project_url'].
-    )
-  {
-      $uid = $_POST['record_id'];
-      $redcap_url = $_POST['redcap_url'];
-      // Now figure out which IAT they're taking. It's stored in `randomize`
-      // and 1 = Physical Disability IAT and 2 = Developmental Disability IAT.
-      $data = array(
-          'token' => $API_TOKEN,
-          'content' => 'record',
-          'action' => 'export',
-          'format' => 'json',
-          'type' => 'flat',
-          'csvDelimiter' => '',
-          'records' => array($_POST['record_id']),
-          'fields' => array('randomize'),
-          'rawOrLabel' => 'raw',
-          'rawOrLabelHeaders' => 'raw',
-          'exportCheckboxLabel' => 'false',
-          'exportSurveyFields' => 'false',
-          'exportDataAccessGroups' => 'false',
-          'returnFormat' => 'json'
-      );
-
-      $request = curl_init();
-      curl_setopt($request, CURLOPT_URL, 'https://redcap.einsteinmed.org/api/');
-      curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
-      curl_setopt($request, CURLOPT_SSL_VERIFYPEER, false);
-      curl_setopt($request, CURLOPT_VERBOSE, 0);
-      curl_setopt($request, CURLOPT_FOLLOWLOCATION, true);
-      curl_setopt($request, CURLOPT_AUTOREFERER, true);
-      curl_setopt($request, CURLOPT_MAXREDIRS, 10);
-      curl_setopt($request, CURLOPT_CUSTOMREQUEST, 'POST');
-      curl_setopt($request, CURLOPT_FRESH_CONNECT, 1);
-      curl_setopt($request, CURLOPT_POSTFIELDS, http_build_query($data, '', '&'));
-      $json = curl_exec($request);
-      $obj = json_decode($json);
-      $which_iat = $obj->{'randomize'};
-      curl_close($request);
-      if (!isset($which_iat)) {
-        $which_iat = 1;
-      }
+  if (isset($_GET) and $_GET['uuid'] and $_GET['code']) {
+    $redcap_uid = $_GET['uuid'];
   } else {
-    // $_POST values were incorrect.
     http_response_code(401);
-    echo '401. You are forbidden from accessing this resource.';
+    echo '401. You are forbidden from accessing this resource because bad $_GET:';
+    print_r($_GET);
     exit();
   }
+  if ($_GET['code'] != $VALIDATION_CODE) {
+    http_response_code(401);
+    echo '401. You are forbidden from accessing this resource because bad code: ';
+    echo $_GET['code'] . " from .env $VALIDATION_CODE";
+    exit();
+  }
+  // Now figure out which IAT they're taking. It's stored in `randomize`
+  // and 1 = Physical Disability IAT and 2 = Developmental Disability IAT.
+  $data = array(
+      'token' => $API_TOKEN,
+      'content' => 'record',
+      'action' => 'export',
+      'format' => 'json',
+      'type' => 'flat',
+      'csvDelimiter' => '',
+      'records' => array($redcap_uid),
+      'fields' => array('randomize'),
+      'rawOrLabel' => 'raw',
+      'rawOrLabelHeaders' => 'raw',
+      'exportCheckboxLabel' => 'false',
+      'exportSurveyFields' => 'false',
+      'exportDataAccessGroups' => 'false',
+      'returnFormat' => 'json'
+  );
+
+  $request = curl_init();
+  curl_setopt($request, CURLOPT_URL, 'https://redcap.einsteinmed.org/api/');
+  curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($request, CURLOPT_SSL_VERIFYPEER, false);
+  curl_setopt($request, CURLOPT_VERBOSE, 0);
+  curl_setopt($request, CURLOPT_FOLLOWLOCATION, true);
+  curl_setopt($request, CURLOPT_AUTOREFERER, true);
+  curl_setopt($request, CURLOPT_MAXREDIRS, 10);
+  curl_setopt($request, CURLOPT_CUSTOMREQUEST, 'POST');
+  curl_setopt($request, CURLOPT_FRESH_CONNECT, 1);
+  curl_setopt($request, CURLOPT_POSTFIELDS, http_build_query($data, '', '&'));
+  $json = curl_exec($request);
+  $obj = json_decode($json);
+  $which_iat = $obj->{'randomize'};
+  curl_close($request);
+  if (!isset($which_iat)) {
+    $which_iat = 1;
+  }
+
 
 ?>
 
@@ -100,8 +91,7 @@
     <script type="text/javascript">
 <?php
     echo "var which_iat = $which_iat;";
-    echo "var redcap_uid = $uid;";
-    echo "var redcap_url = $redcap_url;";
+    echo "var redcap_uid = $redcap_uid;";
  ?>
 
     </script>
