@@ -160,13 +160,13 @@ define(['managerAPI'], function(Manager) {
             {inherit: 'pd_iat_instructions'},
             {inherit: 'pd_iat'},
             {inherit: 'collect_pd_iat_feedback'},
-          ]
+          ],
           elseData: [
             // IAT for intellectual disabilities
             {inherit: 'dd_iat_instructions'},
             {inherit: 'dd_iat'},
             {inherit: 'collect_dd_iat_feedback'},
-          ]
+          ],
         }
       ]);
     return API.script;
