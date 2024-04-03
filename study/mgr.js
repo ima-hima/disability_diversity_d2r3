@@ -15,7 +15,7 @@ define(['managerAPI'], function(Manager) {
         pd_iat: {},
 
         mediaURL:     mediaURL,
-        idLabel:      'Intellectually disabled',
+        idLabel:      'Developmentally disabled',
         pdLabel:      'Physically disabled',
         ableLabel:    'Abled persons',
         disableLabel: 'Disabled persons',
@@ -57,7 +57,7 @@ define(['managerAPI'], function(Manager) {
            mediaURL + 'abled6.png',
         ]),
         intellectually_disabled_words : API.shuffle([
-          'Impairment ',
+          'Impairment',
           'Learning Disability',
           'Developmental Disability',
           'Special Needs',
@@ -153,7 +153,7 @@ define(['managerAPI'], function(Manager) {
         {
           mixer: 'branch',
           conditions: [
-             {compare: 1, to: 'which_iat'},
+             {compare: 1, to: which_iat},
           ],
           data: [
             // IAT for physical disabilities

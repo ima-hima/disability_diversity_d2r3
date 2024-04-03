@@ -32,20 +32,6 @@
     </style>
 
     <script type="text/javascript">
-      // for "reveal all" buttons on individual case pages
-      function revealAll() {
-        var elems = document.getElementsByClassName('guidance');
-        for (i = 0; i < elems.length; i++) {
-          elems[i].style.display = 'block';
-        }
-        document.getElementById('continue_btn').style.display = 'block';
-      }
-
-      function showGuidance(exampleElement) {
-          console.log(exampleElement.lastChild); // = 'block';
-          exampleElement.lastChild.style.display = "block";
-          document.getElementById('reveal_btn').style.display = 'block';
-      }
 
 <?php
   require('get_token.php');
