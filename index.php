@@ -48,6 +48,7 @@
       }
 
 <?php
+  require('get_token.php');
   if (isset($_POST)) {
     if (isset($_POST['project_id'])
         && $_POST['project_id'] == '2601'
@@ -58,12 +59,47 @@
     ) {
       // Ignore $_POST['project_url'].
       if (isset($_POST['record'])) {
-        echo 'var redcap_uuid = ' . $_POST['record'] . ';';
+        echo 'var redcap_uuid = ' . $_POST['record_id'] . ';';
       }
       if (isset($_POST['redcap_url'])) {
         echo 'var redcap_url = ' . $_POST['redcap_url'] . ';';
       }
+      // Now figure out which IAT they're taking. It's stored in `randomize`
+      // and 1 = Physical Disability IAT and 2 = Developmental Disability IAT.
+      $data = array(
+          'token' => $API_TOKEN,
+          'content' => 'record',
+          'action' => 'export',
+          'format' => 'json',
+          'type' => 'flat',
+          'csvDelimiter' => '',
+          'records' => array($_POST['record_id']),
+          'fields' => array('randomize'),
+          'rawOrLabel' => 'raw',
+          'rawOrLabelHeaders' => 'raw',
+          'exportCheckboxLabel' => 'false',
+          'exportSurveyFields' => 'false',
+          'exportDataAccessGroups' => 'false',
+          'returnFormat' => 'json'
+      );
+
+      $request = curl_init();
+      curl_setopt($request, CURLOPT_URL, 'https://redcap.einsteinmed.org/api/');
+      curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
+      curl_setopt($request, CURLOPT_SSL_VERIFYPEER, false);
+      curl_setopt($request, CURLOPT_VERBOSE, 0);
+      curl_setopt($request, CURLOPT_FOLLOWLOCATION, true);
+      curl_setopt($request, CURLOPT_AUTOREFERER, true);
+      curl_setopt($request, CURLOPT_MAXREDIRS, 10);
+      curl_setopt($request, CURLOPT_CUSTOMREQUEST, 'POST');
+      curl_setopt($request, CURLOPT_FRESH_CONNECT, 1);
+      curl_setopt($request, CURLOPT_POSTFIELDS, http_build_query($data, '', '&'));
+      $json = curl_exec($request);
+      $obj = json_decode($json);
+      $which_iat = $obj->{'randomize'};
+      curl_close($request);
     }
+    echo "var which_iat = $which_iat;";
   }
 ?>
     </script>

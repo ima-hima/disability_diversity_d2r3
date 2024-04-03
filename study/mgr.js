@@ -11,7 +11,7 @@ define(['managerAPI'], function(Manager) {
     var timeURL  = 'minno-time/dist/js';
 
     API.addGlobal({
-        id_iat: {},
+        dd_iat: {},
         pd_iat: {},
 
         mediaURL:     mediaURL,
@@ -92,18 +92,18 @@ define(['managerAPI'], function(Manager) {
            last:        true,
         }],
 
-        id_iat_instructions: [{
+        dd_iat_instructions: [{
             inherit:     'instructions',
-            name:        'id_iat_instructions',
-            templateUrl: 'id_iat_instructions.jst?' + Math.random(),
+            name:        'dd_iat_instructions',
+            templateUrl: 'dd_iat_instructions.jst?' + Math.random(),
             title:       'The Implicit Association Test',
             header:      'The Implicit Association Test',
         }],
 
-        id_iat: [{
+        dd_iat: [{
             inherit:   'iat',
-            name:      'id_iat',
-            scriptUrl: 'id_iat.js?' + Math.random(),
+            name:      'dd_iat',
+            scriptUrl: 'dd_iat.js?' + Math.random(),
         }],
 
         pd_iat_instructions: [{
@@ -121,44 +121,28 @@ define(['managerAPI'], function(Manager) {
             scriptUrl: 'pd_iat.js?' + Math.random(),
         }],
 
-        collect_iat_feedback: [{ // Get summarized iat feedback that was given to user, along with uuid.
+        collect_pd_iat_feedback: [{ // Get summarized iat feedback that was given to user, along with uid.
           type: 'post',
-          url:  'iat_feedback.php',
-          data: { header: 'uuid, pd_iat',
-                  contents: '<%= redcap_uuid %>, <%= global.pd_iat.feedback %>'
+          url:  'iat_feedback_api.php',
+          data: { header: 'uid, which_iat, iat_feedback',
+                  contents: '<%= redcap_uid %>, pd_iat, <%= global.pd_iat.feedback %>'
                 },
         }],
 
-        pd_iat_results: [{
-            inherit:     'results',
-            name:        'iat_results',
-            templateUrl: 'iat_results.jst?' + Math.random(),
-            title:       'Final results',
-            header:      'You have completed the study'
-        }],
-
-        id_iat_results: [{
-            inherit:     'results',
-            name:        'iat_results',
-            templateUrl: 'iat_results.jst?' + Math.random(),
-            title:       'Final results',
-            header:      'You have completed the study'
-        }],
-
-        iat_explanation: [{
-            inherit:     'results',
-            name:        'iat_explanation',
-            templateUrl: 'iat_explanation.jst?' + Math.random(),
-            title:       'About the IAT',
-            header:      'About the IAT'
+        collect_dd_iat_feedback: [{ // Get summarized iat feedback that was given to user, along with uid.
+          type: 'post',
+          url:  'iat_feedback_api.php',
+          data: { header: 'uid, which_iat, iat_feedback',
+                  contents: '<%= redcap_uid %>, dd_iat, <%= global.dd_iat.feedback %>'
+                },
         }],
 
         welcome: [{
             inherit:     'instructions',
             name:        'welcom',
             templateUrl: 'welcome.jst?' + Math.random(),
-            title:       'Welcome to Inclusive Genetics',
-            header:      'Welcome to Inclusive Genetics',
+            title:       'Welcome to D2R3',
+            header:      'Welcome to D2R3',
         }],
     });
 
@@ -166,26 +150,22 @@ define(['managerAPI'], function(Manager) {
     API.addSequence([
         // Each set of curly braces is a page.
         {inherit: 'welcome'},
-        { // 50% chance of PD, 50% chance of ID.
-          mixer: 'choose',
-          data: [
-            [
+        mixer: 'branch',
+            conditions: [
+               {compare: 1, to: 'which_iat'},
+            ],
+            data: [
               // IAT for physical disabilities
               {inherit: 'pd_iat_instructions'},
               {inherit: 'pd_iat'},
               {inherit: 'collect_pd_iat_feedback'},
-              {inherit: 'pd_iat_explanation'},
-            ],
-            [
-              // IAT for intellectual disabilities
-              {inherit: 'id_iat_instructions'},
-              {inherit: 'id_iat'},
-              {inherit: 'collect_id_iat_feedback'},
-              {inherit: 'id_iat_explanation'},
             ]
-          ]
-        }
-        // {inherit: 'thanks'},
+            elseData: [
+              // IAT for intellectual disabilities
+              {inherit: 'dd_iat_instructions'},
+              {inherit: 'dd_iat'},
+              {inherit: 'collect_dd_iat_feedback'},
+            ]
       ]);
     return API.script;
 });
