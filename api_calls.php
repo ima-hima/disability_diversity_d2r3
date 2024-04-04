@@ -65,11 +65,8 @@
       curl_setopt($request, CURLOPT_CUSTOMREQUEST, 'POST');
       curl_setopt($request, CURLOPT_FRESH_CONNECT, 1);
       curl_setopt($request, CURLOPT_POSTFIELDS, http_build_query($data, '', '&'));
-      $json = curl_exec($request);
-      $obj = json_decode($json);
-      $redirect_url = $obj->{'instrument'};
-      curl_close($request);
-      return $redirect_url;
+      $result = curl_exec($request);
+      return $result;
   }
 
   function send_data($API_TOKEN, $redcap_uid, $iat_score)

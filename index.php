@@ -54,7 +54,7 @@
 <?php
     echo "var which_iat = $which_iat;";
     echo "var redcap_uid = $redcap_uid;";
-    echo "var redirect_url = $redirect_url";
+    echo "var redirect_url = \"$redirect_url\"";
  ?>
 
     </script>
