@@ -1,6 +1,6 @@
 <?php
     require("get_token.php");
-    require("api_calls.php")
+    require("api_calls.php");
     // Just for outputting iat feedback results.
     // Reformats output from script into cleaner array.
     // Now do API call.
