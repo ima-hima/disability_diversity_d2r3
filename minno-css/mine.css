@@ -129,6 +129,9 @@ ul {
   max-width: 500px;
 }
 
-
+.e_or_i {
+  font-weight: 700;
+  color: darkred;
+}
 
 
