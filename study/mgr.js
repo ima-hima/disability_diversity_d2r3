@@ -16,9 +16,9 @@ define(['managerAPI'], function(Manager) {
 
         mediaURL:     mediaURL,
         idLabel:      'Developmentally disabled',
-        pdLabel:      'Physically disabled',
-        ableLabel:    'Abled persons',
-        disableLabel: 'Disabled persons',
+        pdLabel:      'Disabled person',
+        ableLabel:    'Abled person',
+        disableLabel: 'Disabled person',
 
         posWords:  API.shuffle([
             'Lovely',
@@ -59,7 +59,7 @@ define(['managerAPI'], function(Manager) {
         intellectually_disabled_words : API.shuffle([
           'Impairment',
           'Learning Disability',
-          'Developmental Disability',
+          'Neurodivergent',
           'Special Needs',
           'Autism',
         ]),

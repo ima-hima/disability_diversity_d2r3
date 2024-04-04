@@ -4,7 +4,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" > <!--<![endif]-->
 <?php
   require('get_token.php');
-  if (isset($_GET) and $_GET['uuid'] and $_GET['code']) {
+  if (isset($_GET) and isset($_GET['uuid']) and isset($_GET['code'])) {
     $redcap_uid = $_GET['uuid'];
   } else {
     http_response_code(401);
