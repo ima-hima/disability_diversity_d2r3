@@ -67,7 +67,7 @@
       curl_setopt($request, CURLOPT_POSTFIELDS, http_build_query($data, '', '&'));
       $json = curl_exec($request);
       $obj = json_decode($json);
-      $redirect_url = $obj->['instrument'];
+      $redirect_url = $obj->{'instrument'};
       curl_close($request);
       return $redirect_url;
   }
