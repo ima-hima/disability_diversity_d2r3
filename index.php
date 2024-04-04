@@ -4,6 +4,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" > <!--<![endif]-->
 <?php
   require('get_token.php');
+  require('api_calls.php');
   if (isset($_GET) and isset($_GET['uuid']) and isset($_GET['code'])) {
     $redcap_uid = $_GET['uuid'];
   } else {
@@ -16,45 +17,8 @@
     echo '401. You are forbidden from accessing this resource.';
     exit();
   }
-  // Now figure out which IAT they're taking. It's stored in `randomize`
-  // and 1 = Physical Disability IAT and 2 = Developmental Disability IAT.
-  $data = array(
-      'token' => $API_TOKEN,
-      'content' => 'record',
-      'action' => 'export',
-      'format' => 'json',
-      'type' => 'flat',
-      'csvDelimiter' => '',
-      'records' => array($redcap_uid),
-      'fields' => array('randomize'),
-      'rawOrLabel' => 'raw',
-      'rawOrLabelHeaders' => 'raw',
-      'exportCheckboxLabel' => 'false',
-      'exportSurveyFields' => 'false',
-      'exportDataAccessGroups' => 'false',
-      'returnFormat' => 'json'
-  );
-
-  $request = curl_init();
-  curl_setopt($request, CURLOPT_URL, 'https://redcap.einsteinmed.org/api/');
-  curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
-  curl_setopt($request, CURLOPT_SSL_VERIFYPEER, false);
-  curl_setopt($request, CURLOPT_VERBOSE, 0);
-  curl_setopt($request, CURLOPT_FOLLOWLOCATION, true);
-  curl_setopt($request, CURLOPT_AUTOREFERER, true);
-  curl_setopt($request, CURLOPT_MAXREDIRS, 10);
-  curl_setopt($request, CURLOPT_CUSTOMREQUEST, 'POST');
-  curl_setopt($request, CURLOPT_FRESH_CONNECT, 1);
-  curl_setopt($request, CURLOPT_POSTFIELDS, http_build_query($data, '', '&'));
-  $json = curl_exec($request);
-  $obj = json_decode($json);
-  $which_iat = $obj->{'randomize'};
-  curl_close($request);
-  if (!isset($which_iat)) {
-    $which_iat = 1;
-  }
-
-
+  $redirect_url = get_redirect_url($API_TOKEN, $redcap_uid);
+  $which_iat = get_iat_choice($API_TOKEN, $redcap_uid);
 ?>
 
 <head>
@@ -90,6 +54,7 @@
 <?php
     echo "var which_iat = $which_iat;";
     echo "var redcap_uid = $redcap_uid;";
+    echo "var redirect_url = $redirect_url";
  ?>
 
     </script>

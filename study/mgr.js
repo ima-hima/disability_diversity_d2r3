@@ -136,6 +136,11 @@ define(['managerAPI'], function(Manager) {
                   contents: '<%= redcap_uid %>, dd_iat, <%= global.dd_iat.feedback %>'
                 },
         }],
+
+        redirect_script: [{
+          type:'redirect',
+          url: redirect_url
+        }]
     });
 
 
@@ -158,7 +163,8 @@ define(['managerAPI'], function(Manager) {
             {inherit: 'dd_iat'},
             {inherit: 'collect_dd_iat_feedback'},
           ],
-        }
+        },
+        {inherit: 'redirect_script'}
       ]);
     return API.script;
 });
