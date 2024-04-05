@@ -315,11 +315,10 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 			fb_moderate_Att1WithCatA_Att2WithCatB : 'Your responses suggested a moderate automatic preference for categoryB over categoryA.',
 			fb_slight_Att1WithCatA_Att2WithCatB : 'Your responses suggested a slight automatic preference for categoryB over categoryA.',
 			fb_equal_CatAvsCatB : 'Your responses suggested no automatic preference between categoryA and categoryB.',
-
 			//Error messages in the feedback
-			manyErrors: 'There were too many errors made to determine a result.',
-			tooFast: 'There were too many fast trials to determine a result.',
-			notEnough: 'There were not enough trials to determine a result.'
+			manyErrors: '9',
+			tooFast: '10',
+			notEnough: '11'
 		};
 
 		// extend the "current" object with the default
@@ -1167,13 +1166,13 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 
 		//Set the feedback messages.
 		var messageDef = [
-				{ cut:'-0.65', message : getFB(piCurrent.fb_strong_Att1WithCatA_Att2WithCatB, cat1.name, cat2.name) },
-				{ cut:'-0.35', message : getFB(piCurrent.fb_moderate_Att1WithCatA_Att2WithCatB, cat1.name, cat2.name) },
-				{ cut:'-0.15', message : getFB(piCurrent.fb_slight_Att1WithCatA_Att2WithCatB, cat1.name, cat2.name) },
-				{ cut:'0.15', message : getFB(piCurrent.fb_equal_CatAvsCatB, cat1.name, cat2.name) },
-				{ cut:'0.35', message : getFB(piCurrent.fb_slight_Att1WithCatA_Att2WithCatB, cat2.name, cat1.name) },
-				{ cut:'0.65', message : getFB(piCurrent.fb_moderate_Att1WithCatA_Att2WithCatB, cat2.name, cat1.name) },
-				{ cut:'5', message : getFB(piCurrent.fb_strong_Att1WithCatA_Att2WithCatB, cat2.name, cat1.name) }
+				{ cut:'-0.65', message : '1' },
+				{ cut:'-0.35', message : '2'},
+				{ cut:'-0.15', message : '3'},
+				{ cut:'0.15', message : '4'},
+				{ cut:'0.35', message : '5'},
+				{ cut:'0.65', message : '6'},
+				{ cut:'5', message : '7'}
 		];
 		var scoreMessageObject = { MessageDef : messageDef };
 		if (piCurrent.manyErrors !== '')

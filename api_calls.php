@@ -69,7 +69,7 @@
       return $result;
   }
 
-  function send_data($API_TOKEN, $redcap_uid, $iat_score)
+  function send_data($API_TOKEN, $redcap_uid, $iat_score, $iat_verbal)
   {
     $data = array(
       'token' => $API_TOKEN,
@@ -79,8 +79,7 @@
       'type' => 'flat',
       'overwriteBehavior' => 'normal',
       'forceAutoNumber' => 'false',
-      // 'data' => "[{'record_id': 1, 'iat_scor': $iat_score, 'iat_verbal': $iat_feedback}]",
-      'data' => "[{'record_id': $redcap_uid, 'iat_scor': $iat_score}]",
+      'data' => "[{\"record_id\": $redcap_uid, \"iat_scor\": $iat_score, \"iat_verbal\": \"$iat_verbal\"}]",
       'returnContent' => 'count',
       'returnFormat' => 'json'
     );

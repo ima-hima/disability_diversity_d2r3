@@ -1,4 +1,4 @@
-define(['pipAPI','minno-tasks/IAT/iat6.js'], function(APIConstructor, iatExtension){
+define(['pipAPI','minno-tasks/IAT/iat8.js'], function(APIConstructor, iatExtension){
     var API = new APIConstructor();
     var global = API.getGlobal();
 

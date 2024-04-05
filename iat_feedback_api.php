@@ -17,38 +17,44 @@
     $iat_feedback = $input_arr[2];
 
     $pd_feedback_sextiles = array(
-      "There were not enough trials to determine a result." => 0,  // 'No result',
-      "There were too many fast trials to determine a result." => 0,  // 'No result',
-      "Your data suggest a strong automatic preference for Disabled person over Abled person." => 1,  // 'Strong disabled',
-      "Your data suggest a moderate automatic preference for Disabled person over Abled person." => 2,  // 'Moderate disabled',
-      "Your data suggest a weak automatic preference for Disabled person over Abled person." => 3,  // 'Weak disabled',
-      "Your data suggest a slight automatic preference for Disabled person over Abled person." => 3,  // 'Slight disabled',
-      "Your data suggest no automatic preference between Abled person and Disabled person." => 4,  // 'No preference',
-      "Your data suggest a slight automatic preference for Abled person over Disabled person." => 5,  // 'Slight abled',
-      "Your data suggest a weak automatic preference for Abled person over Disabled person." => 5,  // 'Weak abled',
-      "Your data suggest a moderate automatic preference for Abled person over Disabled person." => 6,  // 'Moderate abled',
-      "Your data suggest a strong automatic preference for Abled person over Disabled person." => 7,  // 'Strong abled',
+      '1' => 'Your result: 1 = Strong preference: persons with physical disability',
+      '2' => 'Your result: 2 = Moderate preference: persons with physical disability',
+      '3' => 'Your result: 3 = Slight preference: persons with physical disability',
+      '4' => 'Your result: 4 = No preference',
+      '5' => 'Your result: 5 = Slight preference: persons without physical disability',
+      '6' => 'Your result: 6 = Moderate preference: persons without physical disability',
+      '7' => 'Your result: 7 = Strong preference: persons without physical disability',
+      '9' => 'Your result: There were too many errors made to determine a result.',
+      '10' => 'Your result: There were too many fast trials to determine a result.',
+      '11' => 'Your result: There were not enough trials to determine a result.',
     );
 
     $dd_feedback_sextiles = array(
-      "There were not enough trials to determine a result." => 0,  // 'No result',
-      "There were too many fast trials to determine a result." => 0,  // 'No result',
-      "Your data suggest a strong positive automatic attitude toward Developmentally disabled." => 1,  // 'Strong disabled',
-      "Your data suggest a moderate positive automatic attitude toward Developmentally disabled." => 2,  // 'Moderate disabled',
-      "Your data suggest a weak positive automatic attitude toward Developmentally disabled." => 3,  // 'Weak preference',
-      'Your data suggest a slight positive automatic attitude toward Developmentally disabled.' => 3, // 'Slight disabled',
-      "Your data suggest a neutral automatic attitude toward Developmentally disabled." => 4,  // 'No preference',
-      'Your data suggest a slight negative automatic attitude toward Developmentally disabled.' => 5, // 'Slight abled',
-      "Your data suggest a weak negative automatic attitude toward Developmentally disabled." => 5,  // 'Weak abled',
-      "Your data suggest a moderate negative automatic attitude toward Developmentally disabled." => 6,  // 'Moderate abled',
-      "Your data suggest a strong negative automatic attitude toward Developmentally disabled." => 7,  // 'Strong abled',
+      '1' => 'Your result: 1 = Strongly positive towards persons with DD',
+      '2' => 'Your result: 2 = Moderately positive towards persons with DD',
+      '3' => 'Your result: 3 = Slightly positive towards persons with DD',
+      '4' => 'Your result: 4 = Neutral',
+      '5' => 'Your result: 5 = Slightly negative towards persons with DD',
+      '6' => 'Your result: 6 = Moderately negative towards persons with DD',
+      '7' => 'Your result: 7 = Strongly negative towards persons with DD',
+      '9' => 'Your result: There were too many errors made to determine a result.',
+      '10' => 'Your result: There were too many fast trials to determine a result.',
+      '11' => 'Your result: There were not enough trials to determine a result.',
     );
 
     if ($which_iat == 1) {
-      $iat_score = $pd_feedback_sextiles[$iat_feedback];
+      $explanation =
+          'Physical Disability IAT scores range from:'
+          . ' 1 = “Strongly prefer persons with physical disability”'
+          . ' to 7 = “Strongly prefer persons without physical disability.”';
+      $iat_text = $explanation . '\n\n' . $pd_feedback_sextiles[$iat_feedback];
     } else {
-      $iat_score = $dd_feedback_sextiles[$iat_feedback];
+      // Developmental disability
+      $explanation =
+          'Developmental Disability (DD) IAT scores range from:'
+          . ' 1 = “Strongly positive towards persons with DD”'
+          . ' to 7 = “Strongly negative towards persons with DD.”';
+      $iat_text = $explanation . '\n\n' . $dd_feedback_sextiles[$iat_feedback];
     }
-    echo "IAT feedback: $iat_feedback<br>IAT score: $iat_score";
-    send_data($API_TOKEN, $redcap_uid, $iat_score);
+    send_data($API_TOKEN, $redcap_uid, $iat_score, $iat_text);
 ?>

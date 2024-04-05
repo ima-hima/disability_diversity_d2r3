@@ -200,18 +200,18 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 			//The default feedback messages for each cutoff. 
 			//If you put attribute1, attribute2 and category here, 
 			//these will be replaced with the names of attribute1, attribute2 and category.
-			fb_strongAssociationWithAttribute2 : 'Your data suggest a strong positive automatic attitude toward thecategory.',
-			fb_moderateAssociationWithAttribute2 : 'Your data suggest a moderate positive automatic attitude toward thecategory.',
-			fb_weakAssociationWithAttribute2 : 'Your data suggest a weak positive automatic attitude toward thecategory.',
-			fb_neutralAssociation : 'Your data suggest a neutral automatic attitude toward thecategory.',
-			fb_weakAssociationWithAttribute1 : 'Your data suggest a weak negative automatic attitude toward thecategory.' ,
-			fb_moderateAssociationWithAttribute1 : 'Your data suggest a moderate negative automatic attitude toward thecategory.' ,
-			fb_strongAssociationWithAttribute1 : 'Your data suggest a strong negative automatic attitude toward thecategory.', 
+			fb_strongAssociationWithAttribute2 : '1',
+			fb_moderateAssociationWithAttribute2 : '2',
+			fb_weakAssociationWithAttribute2 : '3',
+			fb_neutralAssociation : '4',
+			fb_weakAssociationWithAttribute1 : '5' ,
+			fb_moderateAssociationWithAttribute1 : '6' ,
+			fb_strongAssociationWithAttribute1 : '7',
 			
 			//Error messages in the scorer. If empty then we use the scorer's default messages.
-			manyErrors: '',
-			tooFast: '',
-			notEnough: '' //Usually relevant only if skipped the task.
+			manyErrors: '9',
+			tooFast: '10',
+			notEnough: '11' //Usually relevant only if skipped the task.
 		};
 
 		// extend the current object with the default
