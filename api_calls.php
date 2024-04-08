@@ -32,12 +32,9 @@
     curl_setopt($request, CURLOPT_FRESH_CONNECT, 1);
     curl_setopt($request, CURLOPT_POSTFIELDS, http_build_query($data, '', '&'));
     $json = curl_exec($request);
-    $obj = json_decode($json);
-    $which_iat = $obj->{'randomize'};
     curl_close($request);
-    if (!isset($which_iat)) {
-      $which_iat = 1;
-    }
+    $arr = json_decode($json, true);
+    $which_iat = $arr[0]['randomize'];
     return $which_iat;
   }
 
@@ -69,7 +66,7 @@
       return $result;
   }
 
-  function send_data($API_TOKEN, $redcap_uid, $iat_score, $iat_verbal)
+  function send_data($API_TOKEN, $redcap_uid, $iat_score)
   {
     $data = array(
       'token' => $API_TOKEN,
@@ -79,7 +76,7 @@
       'type' => 'flat',
       'overwriteBehavior' => 'normal',
       'forceAutoNumber' => 'false',
-      'data' => "[{\"record_id\": $redcap_uid, \"iat_scor\": $iat_score, \"iat_verbal\": \"$iat_verbal\"}]",
+      'data' => "[{\"record_id\": $redcap_uid, \"iat_scor\": $iat_score}]",
       'returnContent' => 'count',
       'returnFormat' => 'json'
     );
@@ -94,6 +91,7 @@
     curl_setopt($request, CURLOPT_CUSTOMREQUEST, 'POST');
     curl_setopt($request, CURLOPT_FRESH_CONNECT, 1);
     curl_setopt($request, CURLOPT_POSTFIELDS, http_build_query($data, '', '&'));
+    $output = curl_exec($request);
     curl_close($request);
   }
 

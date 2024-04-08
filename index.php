@@ -52,13 +52,11 @@
 
     <script type="text/javascript">
 <?php
-    echo "var which_iat = $which_iat;";
-    echo "var redcap_uid = $redcap_uid;";
-    echo "var redirect_url = \"$redirect_url\"";
+    echo "      var which_iat = $which_iat;\n";
+    echo "      var redcap_uid = $redcap_uid;\n";
+    echo "      var redirect_url = \"$redirect_url\";\n";
  ?>
-
     </script>
-
   </head>
 
   <body>
