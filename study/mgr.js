@@ -124,16 +124,16 @@ define(['managerAPI'], function(Manager) {
         collect_pd_iat_feedback: [{ // Get summarized iat feedback that was given to user, along with uid.
           type: 'post',
           url:  'iat_feedback_api.php',
-          data: { header: 'uid, which_iat, iat_feedback',
-                  contents: '<%= redcap_uid %>, pd_iat, <%= global.pd_iat.feedback %>'
+          data: { header: 'uid, iat_feedback',
+                  contents: '<%= redcap_uid %>, <%= global.pd_iat.feedback %>'
                 },
         }],
 
         collect_dd_iat_feedback: [{ // Get summarized iat feedback that was given to user, along with uid.
           type: 'post',
           url:  'iat_feedback_api.php',
-          data: { header: 'uid, which_iat, iat_feedback',
-                  contents: '<%= redcap_uid %>, dd_iat, <%= global.dd_iat.feedback %>'
+          data: { header: 'uid, iat_feedback',
+                  contents: '<%= redcap_uid %>, <%= global.dd_iat.feedback %>'
                 },
         }],
 
