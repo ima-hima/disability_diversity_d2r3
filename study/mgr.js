@@ -149,7 +149,7 @@ define(['managerAPI'], function(Manager) {
         {
           mixer: 'branch',
           conditions: [
-             {compare: "1", to: which_iat},
+             {compare: 1, to: which_iat},
           ],
           data: [
             // IAT for physical disabilities
