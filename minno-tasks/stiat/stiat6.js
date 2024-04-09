@@ -655,12 +655,10 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 			data: {blockStart:true},
 			layout : [{media:{word:''}}], 
 			stimuli : [
-				{ 
-					inherit : 'instructions', 
-					css : {color:piCurrent.fontColor}, 
-					media:{html:'<div><p style="font-size:28px"><color="#000000">' + 
-					piCurrent.finalText + '</p></div>'}
-				},
+				{
+          inherit : 'Default',
+          media : {word : (isTouch ? piCurrent.finalTouchText : piCurrent.finalText)}
+        },
 				{
 					data : {handle:'dummy', alias:'dummy'},
 					media : {word:' '}, 
