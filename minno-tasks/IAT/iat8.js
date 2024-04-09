@@ -113,17 +113,17 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 			//nBlocks : 7, This is not-supported anymore. If you want a 5-block IAT, change blockSecondCombined_nTrials to 0.
 			
 			////In each block, we can include a number of mini-blocks, to reduce repetition of same group/response.
-			////If you set the number of trials in any block to 0, that block will be skipped.
-			blockAttributes_nTrials : 20,
-			blockAttributes_nMiniBlocks : 5,
-			blockCategories_nTrials : 20,
-			blockCategories_nMiniBlocks : 5,
-			blockFirstCombined_nTrials : 20,
-			blockFirstCombined_nMiniBlocks : 5,
-			blockSecondCombined_nTrials : 40, //Change to 0 if you want 5 blocks (you would probably want to increase blockFirstCombined_nTrials).
-			blockSecondCombined_nMiniBlocks : 10, 
-			blockSwitch_nTrials : 28,
-			blockSwitch_nMiniBlocks : 7,
+      ////If you set the number of trials in any block to 0, that block will be skipped.
+      blockAttributes_nTrials : 20,
+      blockAttributes_nMiniBlocks : 5,
+      blockCategories_nTrials : 20,
+      blockCategories_nMiniBlocks : 5,
+      blockFirstCombined_nTrials : 20,
+      blockFirstCombined_nMiniBlocks : 5,
+      blockSecondCombined_nTrials : 40, //Change to 0 if you want 5 blocks (you would probably want to increase blockFirstCombined_nTrials).
+      blockSecondCombined_nMiniBlocks : 10,
+      blockSwitch_nTrials : 28,
+      blockSwitch_nMiniBlocks : 7,
 
 			//Should we randomize which attribute is on the right, and which on the left?
 			randomAttSide : false, // Accepts 'true' and 'false'. If false, then attribute2 on the right.
@@ -160,7 +160,7 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 			
 			instWidth : 99, //The width of the instructions stimulus
 			
-			finalText : 'You have completed the IAT.<br/><br/>Press SPACE to see your results.',
+			finalText : '<p style="font-size:28px; color: #000;">You have completed the IAT.<br/><br/>Press SPACE to see your results.</p></div>',
 			finalTouchText : 'Touch the bottom green area to continue to the next task',
 
 			touchMaxStimulusWidth : '50%', 
@@ -1117,9 +1117,9 @@ define(['pipAPI','pipScorer','underscore'], function(APIConstructor, Scorer, _) 
 			layout : [{media:{word:''}}],
 			stimuli : [
 				{
-					inherit : 'Default',
-					media : {word : (isTouch ? piCurrent.finalTouchText : piCurrent.finalText)}
-				}
+          inherit : 'Default',
+          media:{html: piCurrent.finalText}
+        }
 			]
 		});
 
