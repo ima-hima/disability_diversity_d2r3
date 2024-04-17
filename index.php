@@ -24,7 +24,7 @@
     echo '<h3>500 Internal Server Error.</h3>';
     echo '<p>We’re sorry, but we cannot accomodate any more participants from your institution.<br />';
     echo 'If you think you’re getting this message in error, please ';
-    echo '<a href="patrick.georgeiii@einsteinmed.edu">contact Patrick</a> and tell him you got this message.</p>';
+    echo '<a href="mailto:patrick.georgeiii@einsteinmed.edu">contact Patrick</a> and tell him you got this message.</p>';
     exit();
   }
 ?>
