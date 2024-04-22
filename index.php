@@ -20,11 +20,13 @@
   $redirect_url = get_redirect_url($API_TOKEN, $redcap_uid);
   $which_iat = get_iat_choice($API_TOKEN, $redcap_uid);
   if (!isset($which_iat) || empty($which_iat)) {
+      // If REDCap's allocation table for this location gets entirely consumed, then
+      // it won't assign an IAT for the participant, in which case there will be an error.
     http_response_code(500);
-    echo '<h3>500 Internal Server Error.</h3>';
     echo '<p>We’re sorry, but we cannot accomodate any more participants from your institution.<br />';
     echo 'If you think you’re getting this message in error, please ';
-    echo '<a href="mailto:patrick.georgeiii@einsteinmed.edu">contact Patrick</a> and tell him you got this message.</p>';
+    echo '<a href="mailto:patrick.georgeiii@einsteinmed.edu">contact Patrick George</a> and tell ';
+    echo 'him you got this message. and the name of your institution.</p>';
     exit();
   }
 ?>
