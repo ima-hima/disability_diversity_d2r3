@@ -74,6 +74,12 @@ define(['managerAPI'], function(Manager) {
             buttonText: 'Continue',
         }],
 
+        touch_warning: [{
+          inherit: 'instructions',
+          scriptUrl: 'touch_warning.js?' + Math.random(),
+          title: 'D2R3',
+        }],
+
         question: [{
           type:       'quest',
           piTemplate: true,
@@ -146,6 +152,7 @@ define(['managerAPI'], function(Manager) {
 
     API.addSequence([
         // Each set of curly braces is a page.
+        { inherit: 'touch_warning'},
         {
           mixer: 'branch',
           conditions: [
