@@ -14,10 +14,10 @@ define(['managerAPI'], function(Manager) {
         dd_iat: {},
         pd_iat: {},
 
-        mediaURL:     mediaURL,
-        idLabel:      'Developmentally disabled',
-        pdLabel:      'Disabled person',
-        ableLabel:    'Abled person',
+        mediaURL: mediaURL,
+        idLabel: 'Developmentally disabled',
+        pdLabel: 'Disabled person',
+        ableLabel: 'Abled person',
         disableLabel: 'Disabled person',
 
         posWords:  API.shuffle([
@@ -70,18 +70,18 @@ define(['managerAPI'], function(Manager) {
         name: 'myTasks',
 
         instructions: [{
-            type:       'message',
+            type: 'message',
             buttonText: 'Continue',
         }],
 
         touch_warning: [{
-          inherit: 'instructions',
-          scriptUrl: 'touch_warning.js?' + Math.random(),
+          type: 'message',
+          templateUrl: 'touch_warning.jst?' + Math.random(),
           title: 'D2R3',
         }],
 
         question: [{
-          type:       'quest',
+          type: 'quest',
           piTemplate: true,
         }],
 
