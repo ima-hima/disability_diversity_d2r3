@@ -18,6 +18,7 @@
     exit();
   }
   $redirect_url = get_redirect_url($API_TOKEN, $redcap_uid);
+  $touch_fail_url = "https://redcap.einsteinmed.org/d2r3/index.php?uuid=$redcap_uid&code=$VALIDATION_CODE";
   $which_iat = get_iat_choice($API_TOKEN, $redcap_uid);
   if (!isset($which_iat) || empty($which_iat)) {
       // If REDCap's allocation table for this location gets entirely consumed, then
@@ -25,8 +26,8 @@
     http_response_code(500);
     echo '<p>We’re sorry, but we cannot accomodate any more participants from your institution.<br />';
     echo 'If you think you’re getting this message in error, please ';
-    echo '<a href="mailto:patrick.georgeiii@einsteinmed.edu">contact Patrick George</a> and tell ';
-    echo 'him you got this message. and the name of your institution.</p>';
+    echo '<a href="mailto:patrick.georgeiii@einsteinmed.edu">contact Patrick George</a> and explain ';
+    echo 'that you received this message. Please include the name of your institution.</p>';
     exit();
   }
 ?>
@@ -65,6 +66,7 @@
     echo "      var which_iat = $which_iat;\n";
     echo "      var redcap_uid = $redcap_uid;\n";
     echo "      var redirect_url = \"$redirect_url\";\n";
+    echo "      var touch_fail_url = \"$touch_fail_url\";\n";
  ?>
     </script>
   </head>
