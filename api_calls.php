@@ -1,8 +1,9 @@
 <?php
-  function get_iat_choice($API_TOKEN, $redcap_uid)
+  function get_iat_choice_and_ip_address($API_TOKEN, $redcap_uid)
   {
-    // Figure out which IAT they're taking. It's stored in `randomize`
-    // and 1 = Physical Disability IAT and 2 = Developmental Disability IAT.
+    // Figure out which IAT they're taking—which is stored as `randomize`,
+    // and 1 = Physical Disability IAT and 2 = Developmental Disability IAT—
+    // and get the client's IP address.
     $data = array(
         'token' => $API_TOKEN,
         'content' => 'record',
@@ -11,7 +12,7 @@
         'type' => 'flat',
         'csvDelimiter' => '',
         'records' => array($redcap_uid),
-        'fields' => array('randomize'),
+        'fields' => array('randomize', 'client_ip'),
         'rawOrLabel' => 'raw',
         'rawOrLabelHeaders' => 'raw',
         'exportCheckboxLabel' => 'false',
@@ -34,8 +35,7 @@
     $json = curl_exec($request);
     curl_close($request);
     $arr = json_decode($json, true);
-    $which_iat = $arr[0]['randomize'];
-    return $which_iat;
+    return $arr[0];
   }
 
 
