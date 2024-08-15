@@ -6,6 +6,7 @@
   require('get_token.php');
   require('api_calls.php');
   require('utilities.php');
+
   if (isset($_GET) and isset($_GET['uuid']) and isset($_GET['code'])) {
     $redcap_uid = $_GET['uuid'];
   } else {
@@ -27,7 +28,6 @@
     echo '401. You are forbidden from accessing this resource. <br />';
     echo 'If you believe you are receiving this message in error, please ';
     echo '<a href="mailto:patrick.georgeiii@einsteinmed.edu">contact Patrick George</a>.';
-
     exit();
   }
   if (!isset($which_iat) || empty($which_iat)) {
