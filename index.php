@@ -9,18 +9,23 @@
 
   if (isset($_GET) and isset($_GET['uuid']) and isset($_GET['code'])) {
     $redcap_uid = $_GET['uuid'];
+    $url_code = $_GET['code'];
   } else {
     http_response_code(401);
     echo '401. You are forbidden from accessing this resource.';
     exit();
   }
-  if ($_GET['code'] != $VALIDATION_CODE) {
+  $confirmation_code = get_confirmation_code($API_TOKEN, $redcap_uid);
+  if ($_GET['code'] != $confirmation_code) {
     http_response_code(401);
     echo '401. You are forbidden from accessing this resource.';
+    echo $confirmation_code;
     exit();
   }
+
+
   $redirect_url = get_redirect_url($API_TOKEN, $redcap_uid);
-  $touch_fail_url = "https://redcap.einsteinmed.org/d2r3/index.php?uuid=$redcap_uid&code=$VALIDATION_CODE";
+  $touch_fail_url = "https://redcap.einsteinmed.org/d2r3/index.php?uuid=$redcap_uid&code=$confirmation_code";
   list($which_iat, $client_ip) = get_iat_choice_and_ip_address($API_TOKEN, $redcap_uid);
   if (is_duplicate_id($client_ip)) {
     // Do something
