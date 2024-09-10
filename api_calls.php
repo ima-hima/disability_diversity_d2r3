@@ -1,9 +1,8 @@
 <?php
-  function get_iat_choice_and_ip_address($API_TOKEN, $redcap_uid)
+  function get_iat_choice($API_TOKEN, $redcap_uid)
   {
-    // Figure out which IAT they're taking—which is stored as `randomize`,
-    // and 1 = Physical Disability IAT and 2 = Developmental Disability IAT—
-    // and get the client's IP address.
+    // Figure out which IAT they're taking, which is stored as `randomize`,
+    // and 1 = Physical Disability IAT and 2 = Developmental Disability IAT.
     $data = array(
         'token' => $API_TOKEN,
         'content' => 'record',
@@ -12,7 +11,7 @@
         'type' => 'flat',
         'csvDelimiter' => '',
         'records' => array($redcap_uid),
-        'fields' => array('randomize', 'client_ip'),
+        'fields' => array('randomize'),
         'rawOrLabel' => 'raw',
         'rawOrLabelHeaders' => 'raw',
         'exportCheckboxLabel' => 'false',
@@ -35,7 +34,47 @@
     $json = curl_exec($request);
     curl_close($request);
     $arr = json_decode($json, true);
-    return $arr[0];
+    $which_iat = $arr[0]['randomize'];
+    return $which_iat;
+  }
+
+  function get_ips($API_TOKEN, $redcap_uid)
+  {
+    /*
+    Get the ip address for every participant we've seen so far, i.e. every
+    id < $redcap_uid.
+    */
+    $data = array(
+      'token' => $API_TOKEN,
+      'content' => 'record',
+      'action' => 'export',
+      'format' => 'json',
+      'type' => 'flat',
+      'csvDelimiter' => '',
+      'records' => range(0, $redcap_uid - 1),
+      'fields' => array('record_id', 'client_ip'),
+      'rawOrLabel' => 'raw',
+      'rawOrLabelHeaders' => 'raw',
+      'exportCheckboxLabel' => 'false',
+      'exportSurveyFields' => 'false',
+      'exportDataAccessGroups' => 'false',
+      'returnFormat' => 'json'
+    );
+    $request = curl_init();
+    curl_setopt($request, CURLOPT_URL, 'https://redcap.einsteinmed.org/api/');
+    curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($request, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($request, CURLOPT_VERBOSE, 0);
+    curl_setopt($request, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($request, CURLOPT_AUTOREFERER, true);
+    curl_setopt($request, CURLOPT_MAXREDIRS, 10);
+    curl_setopt($request, CURLOPT_CUSTOMREQUEST, 'POST');
+    curl_setopt($request, CURLOPT_FRESH_CONNECT, 1);
+    curl_setopt($request, CURLOPT_POSTFIELDS, http_build_query($data, '', '&'));
+    $result = curl_exec($request);
+    curl_close($request);
+    $arr = json_decode($result, true);
+    return $arr;
   }
 
   function get_confirmation_code($API_TOKEN, $redcap_uid)
@@ -78,28 +117,29 @@
   function get_redirect_url($API_TOKEN, $redcap_uid)
   {
     // Get necessary url (surveyLink) to resume survey on REDCap.
-      $data = array(
-          'token' => $API_TOKEN,
-          'content' => 'surveyLink',
-          'format' => 'json',
-          'instrument' => 'results',
-          'event' => '',
-          'record' => $redcap_uid,
-          'returnFormat' => 'json'
-      );
-      $request = curl_init();
-      curl_setopt($request, CURLOPT_URL, 'https://redcap.einsteinmed.org/api/');
-      curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
-      curl_setopt($request, CURLOPT_SSL_VERIFYPEER, false);
-      curl_setopt($request, CURLOPT_VERBOSE, 0);
-      curl_setopt($request, CURLOPT_FOLLOWLOCATION, true);
-      curl_setopt($request, CURLOPT_AUTOREFERER, true);
-      curl_setopt($request, CURLOPT_MAXREDIRS, 10);
-      curl_setopt($request, CURLOPT_CUSTOMREQUEST, 'POST');
-      curl_setopt($request, CURLOPT_FRESH_CONNECT, 1);
-      curl_setopt($request, CURLOPT_POSTFIELDS, http_build_query($data, '', '&'));
-      $result = curl_exec($request);
-      return $result;
+    $data = array(
+        'token' => $API_TOKEN,
+        'content' => 'surveyLink',
+        'format' => 'json',
+        'instrument' => 'results',
+        'event' => '',
+        'record' => $redcap_uid,
+        'returnFormat' => 'json'
+    );
+    $request = curl_init();
+    curl_setopt($request, CURLOPT_URL, 'https://redcap.einsteinmed.org/api/');
+    curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($request, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($request, CURLOPT_VERBOSE, 0);
+    curl_setopt($request, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($request, CURLOPT_AUTOREFERER, true);
+    curl_setopt($request, CURLOPT_MAXREDIRS, 10);
+    curl_setopt($request, CURLOPT_CUSTOMREQUEST, 'POST');
+    curl_setopt($request, CURLOPT_FRESH_CONNECT, 1);
+    curl_setopt($request, CURLOPT_POSTFIELDS, http_build_query($data, '', '&'));
+    $result = curl_exec($request);
+    curl_close($request);
+    return $result;
   }
 
   function send_data($API_TOKEN, $redcap_uid, $iat_score)
@@ -129,44 +169,6 @@
     curl_setopt($request, CURLOPT_POSTFIELDS, http_build_query($data, '', '&'));
     $output = curl_exec($request);
     curl_close($request);
-  }
-
-  function get_ips($API_TOKEN, $redcap_uid)
-  {
-    /*
-    Get the ip address for every participant we've seen so far, i.e. every
-    id < $redcap_uid.
-    */
-    $ips = range(0, $redcap_uid - 1);
-    $data = array(
-      'token' => $API_TOKEN,
-      'content' => 'record',
-      'action' => 'export',
-      'format' => 'json',
-      'type' => 'flat',
-      'csvDelimiter' => '',
-      'records' => range(0, $redcap_uid - 1),
-      'fields' => array('record_id', 'client_ip'),
-      'rawOrLabel' => 'raw',
-      'rawOrLabelHeaders' => 'raw',
-      'exportCheckboxLabel' => 'false',
-      'exportSurveyFields' => 'false',
-      'exportDataAccessGroups' => 'false',
-      'returnFormat' => 'json'
-    );
-    curl_setopt($request, CURLOPT_URL, 'https://redcap.einsteinmed.org/api/');
-    curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($request, CURLOPT_SSL_VERIFYPEER, false);
-    curl_setopt($request, CURLOPT_VERBOSE, 0);
-    curl_setopt($request, CURLOPT_FOLLOWLOCATION, true);
-    curl_setopt($request, CURLOPT_AUTOREFERER, true);
-    curl_setopt($request, CURLOPT_MAXREDIRS, 10);
-    curl_setopt($request, CURLOPT_CUSTOMREQUEST, 'POST');
-    curl_setopt($request, CURLOPT_FRESH_CONNECT, 1);
-    curl_setopt($request, CURLOPT_POSTFIELDS, http_build_query($data, '', '&'));
-    $result = curl_exec($request);
-    $arr = json_decode($json, true);
-    return $arr;
   }
 
   function update_dupe_ids($API_TOKEN, $dupes)

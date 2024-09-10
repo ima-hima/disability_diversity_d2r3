@@ -16,13 +16,20 @@
     exit();
   }
   $confirmation_code = get_confirmation_code($API_TOKEN, $redcap_uid);
-  if ($_GET['code'] != $confirmation_code) {
+  if ($_GET['code'] != $VALIDATION_CODE) {
     http_response_code(401);
     echo '401. You are forbidden from accessing this resource.';
     echo $confirmation_code;
     exit();
   }
-
+  // Check if this IP address has already been set in RedCap. If so, fail with
+  // ambiguous message.
+  $are_dupes = find_and_update_dupe_ips($API_TOKEN, $redcap_uid);
+  if ($are_dupes) {
+    http_response_code(401);
+    echo '401. You are forbidden from accessing this resource.';
+    exit();
+  }
 
   $redirect_url = get_redirect_url($API_TOKEN, $redcap_uid);
   $touch_fail_url = "https://redcap.einsteinmed.org/d2r3/index.php?uuid=$redcap_uid&code=$confirmation_code";
