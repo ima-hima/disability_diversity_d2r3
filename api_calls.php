@@ -95,7 +95,6 @@
       'exportDataAccessGroups' => 'false',
       'returnFormat' => 'json'
     );
-
     $request = curl_init();
     curl_setopt($request, CURLOPT_URL, 'https://redcap.einsteinmed.org/api/');
     curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
@@ -110,7 +109,7 @@
     $json = curl_exec($request);
     curl_close($request);
     $arr = json_decode($json, true);
-    return $arr[0]["identity"];
+    return $arr[0]['identity'];
   }
 
 

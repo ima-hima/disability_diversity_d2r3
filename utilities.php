@@ -1,24 +1,34 @@
 <?php
-  function is_duplicate_ip($ip)
-  {
-    // Return true if IP has been seen before, false otherwise.
-    if (!is_dir("results/answers")) {
-        if (!@mkdir("results/answers")) {
-            $error = error_get_last();
-            echo $error['message'];
-        }
-    }
 
-    if (!file_exists("ip_addresses.txt")) {
-      file_put_contents("ip_addresses.txt", "\n$ip", FILE_APPEND);
+  function getUserIpAddr()
+  {
+    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+      $ip = $_SERVER['HTTP_CLIENT_IP'];
+    } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+      $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
     } else {
-      foreach(file("ip_addresses.txt", FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
-        if ($line === $ip) {
-          return true;
-        } else {
-          file_put_contents("ip_addresses.txt", "\n$ip", FILE_APPEND);
-        }
+      $ip = $_SERVER['REMOTE_ADDR'];
+    }
+    return $ip;
+  }
+
+  function find_and_update_dupe_ips($API_TOKEN, $redcap_uid)
+  {
+    $cur_ip = getUserIpAddr();
+    $ips_seen = get_ips($API_TOKEN, $redcap_uid, );
+    foreach ($ips as $_ => $dict) {
+      $dupes = array();
+      $is_dupe = False;
+      $other_ip = (strlen($dict["client_ip"]) == 15) ? $dict["client_ip"] : substr($dict["client_ip"], 5);
+      $other_id = $dict["record_id"];
+      if ($other_ip == $ip and $redcap_uid != $dict["record_id"]) {
+        array_append($dupes, "{\"record_id\": $other_id, \"client_ip\": dupe_$ip}");
+        $is_dupe = True;
       }
     }
+    if ($is_dupe) {
+      array_append($dupes, "{\"record_id\": $redcap_uid, \"client_ip\": dupe_$ip}");
+    }
+    return sizeof($dupes);
   }
 ?>
