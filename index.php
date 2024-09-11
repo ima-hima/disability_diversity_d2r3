@@ -16,7 +16,6 @@
     exit();
   }
   $confirmation_code = get_confirmation_code($API_TOKEN, $redcap_uid);
-  echo $confirmation_code;
   if ($_GET['code'] != $confirmation_code) {
     http_response_code(401);
     echo '401. You are forbidden from accessing this resource.';

@@ -19,15 +19,15 @@
     foreach ($ips as $_ => $dict) {
       $dupes = array();
       $is_dupe = False;
-      $other_ip = (strlen($dict["client_ip"]) == 15) ? $dict["client_ip"] : substr($dict["client_ip"], 5);
+      $other_ip = (strlen($dict["client_ip"]) == 15) ? $dict["client_ip"] : substr($dict["client_ip"], 10);
       $other_id = $dict["record_id"];
       if ($other_ip == $ip and $redcap_uid != $dict["record_id"]) {
-        array_append($dupes, "{\"record_id\": $other_id, \"client_ip\": dupe_$ip}");
+        array_append($dupes, "{\"record_id\": $other_id, \"client_ip\": duplicate_$ip}");
         $is_dupe = True;
       }
     }
     if ($is_dupe) {
-      array_append($dupes, "{\"record_id\": $redcap_uid, \"client_ip\": dupe_$ip}");
+      array_append($dupes, "{\"record_id\": $redcap_uid, \"client_ip\": duplicate_$ip}");
     }
     return sizeof($dupes);
   }
