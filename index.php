@@ -4,8 +4,11 @@
 <!--[if gt IE 8]><!--> <html class="no-js" > <!--<![endif]-->
 <?php
   require('get_token.php');
+  // echo "Token imported<br />";
   require('api_calls.php');
+  // echo "API calls imported<br />";
   require('utilities.php');
+  // echo "All imported<br />";
 
   if (isset($_GET) and isset($_GET['uuid']) and isset($_GET['code'])) {
     $redcap_uid = $_GET['uuid'];
@@ -16,6 +19,7 @@
     exit();
   }
   $confirmation_code = get_confirmation_code($API_TOKEN, $redcap_uid);
+  echo "confirmation_code: $confirmation_code<br />";
   if ($_GET['code'] != $confirmation_code) {
     http_response_code(401);
     echo '401. You are forbidden from accessing this resource.';
@@ -24,6 +28,7 @@
   // Check if this IP address has already been set in RedCap. If so, fail with
   // ambiguous message.
   $are_dupes = find_and_update_dupe_ips($API_TOKEN, $redcap_uid);
+  // echo "$are_dupes<br />";
   if ($are_dupes) {
     http_response_code(401);
     echo '401. You are forbidden from accessing this resource. <br />';
