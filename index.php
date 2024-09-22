@@ -4,22 +4,43 @@
 <!--[if gt IE 8]><!--> <html class="no-js" > <!--<![endif]-->
 <?php
   require('get_token.php');
+  // echo "Token imported<br />";
   require('api_calls.php');
+  // echo "API calls imported<br />";
+  require('utilities.php');
+  // echo "All imported<br />";
+
   if (isset($_GET) and isset($_GET['uuid']) and isset($_GET['code'])) {
     $redcap_uid = $_GET['uuid'];
+    $url_code = $_GET['code'];
   } else {
     http_response_code(401);
     echo '401. You are forbidden from accessing this resource.';
     exit();
   }
-  if ($_GET['code'] != $VALIDATION_CODE) {
+  $confirmation_code = get_confirmation_code($API_TOKEN, $redcap_uid);
+  echo "confirmation_code: $confirmation_code<br />";
+  if ($_GET['code'] != $confirmation_code) {
     http_response_code(401);
     echo '401. You are forbidden from accessing this resource.';
     exit();
   }
+  // Check if this IP address has already been set in RedCap. If so, fail with
+  // ambiguous message.
+  $are_dupes = find_and_update_dupe_ips($API_TOKEN, $redcap_uid);
+  // echo "$are_dupes<br />";
+  if ($are_dupes) {
+    http_response_code(401);
+    echo '401. You are forbidden from accessing this resource. <br />';
+    echo 'If you believe you are receiving this message in error, please ';
+    echo '<a href="mailto:patrick.georgeiii@einsteinmed.edu">contact Patrick George</a>.';
+    exit();
+  }
+
   $redirect_url = get_redirect_url($API_TOKEN, $redcap_uid);
-  $touch_fail_url = "https://redcap.einsteinmed.org/d2r3/index.php?uuid=$redcap_uid&code=$VALIDATION_CODE";
+  $touch_fail_url = "https://redcap.einsteinmed.org/d2r3/index.php?uuid=$redcap_uid&code=$confirmation_code";
   $which_iat = get_iat_choice($API_TOKEN, $redcap_uid);
+
   if (!isset($which_iat) || empty($which_iat)) {
       // If REDCap's allocation table for this location gets entirely consumed, then
       // it won't assign an IAT for the participant, in which case there will be an error.
