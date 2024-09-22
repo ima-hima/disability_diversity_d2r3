@@ -12,7 +12,7 @@
     $url_code = $_GET['code'];
   } else {
     http_response_code(401);
-    echo '401. You are forbidden from accessing this resource.';
+    echo '401. You are forbidden from accessing this asset.';
     exit();
   }
   $confirmation_code = get_confirmation_code($API_TOKEN, $redcap_uid);
