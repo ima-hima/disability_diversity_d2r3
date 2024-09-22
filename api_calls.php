@@ -51,7 +51,7 @@
       'format' => 'json',
       'type' => 'flat',
       'csvDelimiter' => '',
-      'records' => range(0, $redcap_uid - 1),
+      'records' => range(0, 300),
       'fields' => array('record_id', 'client_ip'),
       'rawOrLabel' => 'raw',
       'rawOrLabelHeaders' => 'raw',
@@ -95,6 +95,7 @@
       'exportDataAccessGroups' => 'false',
       'returnFormat' => 'json'
     );
+    // echo "Confirmation code<br />";
     $request = curl_init();
     curl_setopt($request, CURLOPT_URL, 'https://redcap.einsteinmed.org/api/');
     curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
@@ -107,8 +108,10 @@
     curl_setopt($request, CURLOPT_FRESH_CONNECT, 1);
     curl_setopt($request, CURLOPT_POSTFIELDS, http_build_query($data, '', '&'));
     $json = curl_exec($request);
+    // echo $json;
     curl_close($request);
     $arr = json_decode($json, true);
+    // echo "$arr<br />";
     return $arr[0]['identity'];
   }
 
@@ -170,14 +173,16 @@
     curl_close($request);
   }
 
-  function update_dupe_ids($API_TOKEN, $dupes)
+  function update_ips($API_TOKEN, $dupes)
   {
     /*
       Build a JSON string such that each id/ip pair in $dupes is a dict of form
       {"record_id": id, "client_ip": "dupe <ip>"} and send resulting data to
       redcap to update.
     */
-
+    // echo "update_ips dupes: ";
+    // print_r($dupes);
+    // echo "<br />";
     $data = array(
       'token' => $API_TOKEN,
       'content' => 'record',
