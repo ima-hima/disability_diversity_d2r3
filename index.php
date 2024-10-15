@@ -12,13 +12,13 @@
     $url_code = $_GET['code'];
   } else {
     http_response_code(401);
-    echo '401. You are forbidden from accessing this asset.';
+    echo '401. Error 101: You are forbidden from accessing this resource.';
     exit();
   }
   $confirmation_code = get_confirmation_code($API_TOKEN, $redcap_uid);
   if ($_GET['code'] != $confirmation_code) {
     http_response_code(401);
-    echo '401. You are forbidden from accessing this resource.';
+    echo '401. Error 102: You are forbidden from accessing this resource.';
     exit();
   }
   // Check if this IP address has already been set in RedCap. If so, fail with
@@ -26,7 +26,7 @@
   $are_dupes = find_and_update_dupe_ips($API_TOKEN, $redcap_uid);
   if ($are_dupes) {
     http_response_code(401);
-    echo '401. You are forbidden from accessing this resource. <br />';
+    echo '401. Error 103: You are forbidden from accessing this resource.<br />';
     echo 'If you believe you are receiving this message in error, please ';
     echo '<a href="mailto:patrick.georgeiii@einsteinmed.edu">contact Patrick George</a>.';
     exit();
@@ -60,7 +60,7 @@
     <!-- <script src="./js/jQuery_3-6-0.js" type="text/javascript"></script> -->
     <link rel="stylesheet" href="minno-css/main.css" />
     <link rel="stylesheet" href="minno-css/mine.css" />
-    <!-- direct link to glyphicons because CORS is not allowing us to download from PI-->
+    <!-- direct link to glyphicons because CORS is not allowing us to download from PI -->
         <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 
     <style type="text/css">

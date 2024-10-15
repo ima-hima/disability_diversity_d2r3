@@ -18,6 +18,8 @@
     $dupes = array();
     $is_dupe = False;
     foreach ($ips_seen as $_ => $dict) {
+      // If the other IP address starts with "dup" then get last 10 chars, else just
+      // use the entire other ID string.
       $other_ip = (substr($dict["client_ip"], 3) === 'dup') ? substr($dict["client_ip"], 10) : $dict["client_ip"];
       $other_id = $dict["record_id"];
       if ($other_ip === $this_ip and $redcap_uid !== $other_id) {
