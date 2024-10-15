@@ -73,6 +73,7 @@
     curl_setopt($request, CURLOPT_POSTFIELDS, http_build_query($data, '', '&'));
     $result = curl_exec($request);
     curl_close($request);
+    echo("IP request result: $result <br />");
     $arr = json_decode($result, true);
     return $arr;
   }
@@ -189,6 +190,7 @@
       'returnContent' => 'count',
       'returnFormat' => 'json'
     );
+    echo("<br />Data to server:<br />");
     print_r($data);
     $request = curl_init();
     curl_setopt($request, CURLOPT_URL, 'https://redcap.einsteinmed.org/api/');
@@ -202,6 +204,8 @@
     curl_setopt($request, CURLOPT_FRESH_CONNECT, 1);
     curl_setopt($request, CURLOPT_POSTFIELDS, http_build_query($data, '', '&'));
     $output = curl_exec($request);
+    echo("<br />Update IP return: <br />");
+    echo(json_decode($output, true));
     curl_close($request);
   }
 ?>
