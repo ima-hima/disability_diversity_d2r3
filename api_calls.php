@@ -204,8 +204,9 @@
     curl_setopt($request, CURLOPT_FRESH_CONNECT, 1);
     curl_setopt($request, CURLOPT_POSTFIELDS, http_build_query($data, '', '&'));
     $output = curl_exec($request);
-    echo("<br />Update IP return: <br />");
-    echo(json_decode($output, true));
+    echo("<br />Records changed: ");
+    echo(json_decode($output, true)["count"]);
+    echo('<br /><br />');
     curl_close($request);
   }
 ?>
