@@ -15,8 +15,6 @@
   {
     $this_ip = getUserIpAddr();
     $ips_seen = get_ips($API_TOKEN, $redcap_uid);
-    echo("IPs seen:<br />");
-    print_r($ips_seen);
     $dupes = array();
     $is_dupe = False;
     foreach ($ips_seen as $_ => $dict) {
@@ -25,7 +23,6 @@
       // Recall that the first number in `substr()` is offset and if last argument
       // is left empty it will include through end of string.
       $other_ip = (substr($dict["client_ip"], 0, 3) === 'dup') ? substr($dict["client_ip"], 10) : $dict["client_ip"];
-      echo("Other IP: $other_ip<br />");
       $other_id = $dict["record_id"];
       if ($other_ip === $this_ip and $redcap_uid !== $other_id) {
         # Push JSON dict string with IP prepended with "duplicate_".
@@ -40,8 +37,6 @@
       // If there are no duplicates we just add this record.
       $dupes[0] = "{\"record_id\": \"$redcap_uid\", \"client_ip\": \"$this_ip\"}";
     }
-    echo("Dupes were generated:< br\>");
-    print_r($dupes);
     update_ips($API_TOKEN, $dupes);
     return sizeof($dupes) > 1;
   }
