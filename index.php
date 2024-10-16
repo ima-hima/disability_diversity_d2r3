@@ -12,13 +12,13 @@
     $url_code = $_GET['code'];
   } else {
     http_response_code(401);
-    echo '401. Error 101: You are forbidden from accessing this resource.';
+    echo '<h2>401</h2> <strong>Error 101</strong>: You are forbidden from accessing this resource.';
     exit();
   }
   $confirmation_code = get_confirmation_code($API_TOKEN, $redcap_uid);
   if ($_GET['code'] != $confirmation_code) {
     http_response_code(401);
-    echo '401. Error 102: You are forbidden from accessing this resource.';
+    echo '<h2>401</h2> <strong>Error 102</strong>: You are forbidden from accessing this resource.';
     exit();
   }
   // Check if this IP address has already been set in RedCap. If so, fail with
@@ -26,24 +26,25 @@
   $are_dupes = find_and_update_dupe_ips($API_TOKEN, $redcap_uid);
   if ($are_dupes) {
     http_response_code(401);
-    echo '401. Error 103: You are forbidden from accessing this resource.<br />';
+    echo '<h2>401</h2> <strong>Error 103</strong>: You are forbidden from accessing this resource.<br />';
     echo 'If you believe you are receiving this message in error, please ';
-    echo '<a href="mailto:patrick.georgeiii@einsteinmed.edu">contact Patrick George</a>.';
+    echo '<a href="mailto:patrick.georgeiii@einsteinmed.edu">contact Patrick George</a> and ';
+    echo 'report error code 103.';
     exit();
   }
 
   $redirect_url = get_redirect_url($API_TOKEN, $redcap_uid);
-  $touch_fail_url = "https://redcap.einsteinmed.org/d2r3/index.php?uuid=$redcap_uid&code=$confirmation_code";
+  $touch_fail_url = "https://redcap.einsteinmed.org/d2r3v2/index.php?uuid=$redcap_uid&code=$confirmation_code";
   $which_iat = get_iat_choice($API_TOKEN, $redcap_uid);
 
   if (!isset($which_iat) || empty($which_iat)) {
       // If REDCap's allocation table for this location gets entirely consumed, then
       // it won't assign an IAT for the participant, in which case there will be an error.
-    http_response_code(500);
-    echo '<p>We’re sorry, but we cannot accomodate any more participants from your institution.<br />';
-    echo 'If you think you’re getting this message in error, please ';
-    echo '<a href="mailto:patrick.georgeiii@einsteinmed.edu">contact Patrick George</a> and explain ';
-    echo 'that you received this message. Please include the name of your institution.</p>';
+    http_response_code(401);
+    echo '<h2>401</h2><strong>Error 104</strong>We’re sorry, but we cannot accomodate any more participants ';
+    echo 'from your institution.<br />If you think you’re getting this message in error, please ';
+    echo '<a href="mailto:patrick.georgeiii@einsteinmed.edu">contact Patrick George</a>, report ';
+    echo 'error 104 and explain that you received this message. Please include the name of your institution.';
     exit();
   }
 ?>
