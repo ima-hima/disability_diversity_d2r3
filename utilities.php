@@ -13,6 +13,7 @@
   function find_and_update_dupe_ips($API_TOKEN, $redcap_uid)
   {
     $this_ip = getUserIpAddr();
+    echo("IP: $this_ip<br />");
     $ips_seen = get_ips($API_TOKEN, $redcap_uid);
     $dupes = array();
     $is_dupe = False;

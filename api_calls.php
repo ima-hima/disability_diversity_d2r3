@@ -191,6 +191,7 @@
       'returnContent' => 'count',
       'returnFormat' => 'json'
     );
+    // print_r($data);
     $request = curl_init();
     curl_setopt($request, CURLOPT_URL, 'https://redcap.einsteinmed.org/api/');
     curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
