@@ -11,12 +11,14 @@
     $redcap_uid = $_GET['uuid'];
     $url_code = $_GET['code'];
   } else {
+    // Missing uuid or a code.
     http_response_code(401);
     echo '<h2>401</h2> <strong>Error 101</strong>: You are forbidden from accessing this resource.';
     exit();
   }
   $confirmation_code = get_confirmation_code($API_TOKEN, $redcap_uid);
   if ($_GET['code'] != $confirmation_code) {
+    // Confirmation code does not match code in url parameter.
     http_response_code(401);
     echo '<h2>401</h2> <strong>Error 102</strong>: You are forbidden from accessing this resource.';
     exit();
@@ -25,6 +27,7 @@
   // ambiguous message.
   $are_dupes = find_and_update_dupe_ips($API_TOKEN, $redcap_uid);
   if ($are_dupes) {
+    // This IP has been logged before.
     http_response_code(401);
     echo '<h2>401</h2> <strong>Error 103</strong>: You are forbidden from accessing this resource.<br />';
     echo 'If you believe you are receiving this message in error, please ';
