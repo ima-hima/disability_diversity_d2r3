@@ -109,6 +109,8 @@
     $json = curl_exec($request);
     curl_close($request);
     $arr = json_decode($json, true);
+    // echo($arr[0]['identity']);
+    // echo("<br />");
     return $arr[0]['identity'];
   }
 

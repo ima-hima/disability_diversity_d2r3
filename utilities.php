@@ -2,13 +2,12 @@
   function getUserIpAddr()
   {
     if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-      $ip = $_SERVER['HTTP_CLIENT_IP'];
-    } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-      $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-    } else {
-      $ip = $_SERVER['REMOTE_ADDR'];
+      return $_SERVER['HTTP_CLIENT_IP'];
     }
-    return $ip;
+    if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+      return $_SERVER['HTTP_X_FORWARDED_FOR'];
+    }
+    return $_SERVER['REMOTE_ADDR'];
   }
 
   function find_and_update_dupe_ips($API_TOKEN, $redcap_uid)
@@ -23,10 +22,10 @@
       // Recall that the first number in `substr()` is offset and if last argument
       // is left empty it will include through end of string.
       $other_ip = (substr($dict["client_ip"], 0, 3) === 'dup') ? substr($dict["client_ip"], 10) : $dict["client_ip"];
-      $other_id = $dict["record_id"];
-      if ($other_ip === $this_ip and $redcap_uid !== $other_id) {
+      $other_uid = $dict["record_id"];
+      if ($other_ip === $this_ip and $redcap_uid !== $other_uid) {
         # Push JSON dict string with IP prepended with "duplicate_".
-        array_push($dupes, "{\"record_id\": $other_id, \"client_ip\": \"duplicate_$this_ip\"}");
+        array_push($dupes, "{\"record_id\": $other_uid, \"client_ip\": \"duplicate_$this_ip\"}");
         $is_dupe = True;
       }
     }
